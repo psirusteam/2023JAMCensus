@@ -35,7 +35,7 @@ output:
 # Workshop Materials {-}
 
 In the following link, you will find the R routines developed for the workshop..
-[Descargar](https://github.com/psirusteam/2023CHLsae/tree/main/Recursos)
+[Descargar](https://github.com/psirusteam/2023JAMCensus/tree/main/Recursos/)
 
 
 

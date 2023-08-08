@@ -1,17 +1,6 @@
----
-title: "Installation of Libraries and Required Software for Bayesian Area Models."
-subtitle: "ECLAC - Social Statistics Unit"
-author: "Andrés Gutiérrez - Stalyn Guerrero"
-format: pdf
----
 
-```{r setup, include=FALSE, message=FALSE, error=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      message = FALSE,
-                      warning = FALSE,
-                      cache = TRUE)
 
-```
+# Installation of Libraries and Required Software for Bayesian Area Models.
 
 ## Step 1: Installing Software
 
@@ -70,7 +59,8 @@ Below is a list of the necessary software for the proper development of the trai
 
 To install each package, use the command `install.packages("package_name")`.
 
-```{r, eval=FALSE}
+
+```r
 install.packages("patchwork")
 install.packages("lme4")
 install.packages("tidyverse")
@@ -103,13 +93,35 @@ install.packages("printr")
 install.packages("remotes")
 install.packages("latex2exp")
 install.packages("gtsummary")
-install.packages("rstan", repos=c("https://mc-stan.org/r-packages/", getOption("repos")))
 ```
+
+## Step-by-Step Guide to Install rstan
+
+Follow these steps to install the `rstan` package:
+
+1. Install Rtools (if using Windows):
+   - Download and install Rtools.
+
+2. Install `StanHeaders`:
+   - Open R or RStudio.
+   - Run the command: `install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))`.
+
+3. Install `rstan`:
+   - Run the command: `install.packages("rstan", repos=c("https://mc-stan.org/r-packages/", getOption("repos")))`.
+
+4. Verify the installation:
+   - Load the package using: `library(rstan)`.
+
+5. Validate the installation:
+   - Run a simple model to ensure that `rstan` is working properly. You can use the example code provided in the documentation.
+
+Remember to follow these steps carefully to ensure a successful installation of `rstan` and its dependencies.
 
 ## Step 3: Validation of Installation - Ensuring Proper `rstan` Installation
 
 
-```{r,eval=FALSE}
+
+```r
 library(rstan)
 library(posterior)
 library(bayesplot)
@@ -141,28 +153,25 @@ Next, we demonstrate fitting the model further (`fit2`) with more iterations (`i
 
 Make sure to evaluate this code in an R environment after installing the required packages to verify that `rstan` has been installed correctly and is functioning as expected.
 
+## Step 4: Creating a Google Earth Engine Account:
 
-## Paso 4: Crear cuenta en Google Earth Engine:  <https://developers.google.com/earth-engine/datasets/>
+<https://developers.google.com/earth-engine/datasets/>
 
-Después de crear la cuenta, debe realizar las siguientes acciones para validar que todo este correcto: 
+After successfully creating your account, it's important to follow these steps to ensure everything is set up correctly:
 
-  1.    Ingrese al link (<https://developers.google.com/earth-engine/datasets/catalog/WHRC_biomass_tropical>). 
-  
-  2.  Desplácese hasta el final de la pagina e identifique el código que se muestra en la imagen. 
-```{r}
-knitr::include_graphics("Validar cuenta.png")
-```
+1. Access the provided link: <https://developers.google.com/earth-engine/datasets/catalog/WHRC_biomass_tropical>.
 
-  3.    De clic en **Open in Code Editor**, esto abrirá una nueva pestaña en el navegador, siga las instrucciones hasta obtener la siguiente imagen. 
-  
-```{r}
-knitr::include_graphics("Validar cuenta2.png")
-```  
+2. Scroll down to the bottom of the page and locate the code displayed in the image below:
 
-  4.   En la pestaña anterior, identifique el botón **Run**, presiona para obtener la imagen. 
-  
-```{r}
-knitr::include_graphics("Validar cuenta3.png")
-```  
-  
-**Nota**: Repetir el proceso hasta obterner el resultado indicado.   
+
+<img src="Recursos/00_Instalar_rstan/Validar cuenta.png" width="476" />
+
+3. Click on the **Open in Code Editor** option, which will open a new browser tab. Follow the instructions provided until you achieve the result shown in the image below:
+
+<img src="Recursos/00_Instalar_rstan/Validar cuenta2.png" width="788" />
+
+4. In the previous tab, find and click the **Run** button to obtain the outcome displayed in the image below:
+
+<img src="Recursos/00_Instalar_rstan/Validar cuenta3.png" width="958" />
+
+**Note**: Repeat the process as needed to ensure you achieve the desired outcome.

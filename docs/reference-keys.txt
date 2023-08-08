@@ -1,0 +1,13 @@
+installation-of-libraries-and-required-software-for-bayesian-area-models.
+step-1-installing-software
+step-2-installing-the-following-libraries-in-r.
+data-visualization-and-manipulation
+statistical-modeling
+survey-analysis
+data-manipulation-and-transformation
+bayesian-analysis
+geospatial-analysis
+miscellaneous
+step-by-step-guide-to-install-rstan
+step-3-validation-of-installation---ensuring-proper-rstan-installation
+step-4-creating-a-google-earth-engine-account

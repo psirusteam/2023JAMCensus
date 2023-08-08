@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop Materials | Area-Model-Methodologies-for-Census-Person-Count-Imputation</title>
+  <title>1.4 Step 3: Validation of Installation - Ensuring Proper rstan Installation | Area-Model-Methodologies-for-Census-Person-Count-Imputation</title>
   <meta name="description" content="Workshop on Capacity Building Installation" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop Materials | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
+  <meta property="og:title" content="1.4 Step 3: Validation of Installation - Ensuring Proper rstan Installation | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Workshop on Capacity Building Installation" />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop Materials | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
+  <meta name="twitter:title" content="1.4 Step 3: Validation of Installation - Ensuring Proper rstan Installation | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
   
   <meta name="twitter:description" content="Workshop on Capacity Building Installation" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="installation-of-libraries-and-required-software-for-bayesian-area-models..html"/>
+<link rel="prev" href="step-by-step-guide-to-install-rstan.html"/>
+<link rel="next" href="step-4-creating-a-google-earth-engine-account.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -177,21 +177,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<!--bookdown:title:end-->
-<!--bookdown:title:start-->
-<div id="workshop-materials" class="section level1 unnumbered hasAnchor">
-<h1>Workshop Materials<a href="index.html#workshop-materials" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In the following link, you will find the R routines developed for the workshop..
-<a href="https://github.com/psirusteam/2023JAMCensus/tree/main/Recursos/">Descargar</a></p>
-
+<div id="step-3-validation-of-installation---ensuring-proper-rstan-installation" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Step 3: Validation of Installation - Ensuring Proper <code>rstan</code> Installation<a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#step-3-validation-of-installation---ensuring-proper-rstan-installation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
+<span id="cb2-2"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb2-3"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb2-4"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-5" tabindex="-1"></a><span class="co"># Example Stan code</span></span>
+<span id="cb2-6"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-6" tabindex="-1"></a>stan_code <span class="ot">&lt;-</span> <span class="st">&quot;</span></span>
+<span id="cb2-7"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-7" tabindex="-1"></a><span class="st">parameters {</span></span>
+<span id="cb2-8"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-8" tabindex="-1"></a><span class="st">  real y[2]; </span></span>
+<span id="cb2-9"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-9" tabindex="-1"></a><span class="st">} </span></span>
+<span id="cb2-10"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-10" tabindex="-1"></a><span class="st">model {</span></span>
+<span id="cb2-11"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-11" tabindex="-1"></a><span class="st">  y[1] ~ normal(0, 1);</span></span>
+<span id="cb2-12"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-12" tabindex="-1"></a><span class="st">  y[2] ~ double_exponential(0, 2);</span></span>
+<span id="cb2-13"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-13" tabindex="-1"></a><span class="st">} </span></span>
+<span id="cb2-14"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-14" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb2-15"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-15" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb2-16"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-16" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">stan</span>(<span class="at">model_code =</span> stan_code, <span class="at">iter =</span> <span class="dv">10</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb2-17"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-18" tabindex="-1"></a><span class="co"># Print the fit1 object</span></span>
+<span id="cb2-19"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-19" tabindex="-1"></a><span class="fu">print</span>(fit1)</span>
+<span id="cb2-20"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-20" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-21" tabindex="-1"></a><span class="co"># Further fitting and summarizing</span></span>
+<span id="cb2-22"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-22" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">stan</span>(<span class="at">fit =</span> fit1, <span class="at">iter =</span> <span class="dv">10000</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb2-23"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html#cb2-23" tabindex="-1"></a><span class="fu">summary</span>(fit2)<span class="sc">$</span>summary </span></code></pre></div>
+<p>In this section, we validate the correct installation of <code>rstan</code> by running a simple Bayesian model. We load the required packages, including <code>rstan</code>, <code>posterior</code>, and <code>bayesplot</code>. We then define a basic Stan model using the Stan code provided. We fit this model using <code>stan()</code> with a small number of iterations (<code>iter = 10</code>) to quickly verify the installation.</p>
+<p>Next, we demonstrate fitting the model further (<code>fit2</code>) with more iterations (<code>iter = 10000</code>) to show how to perform a more comprehensive analysis. The summary of the fitted model is printed using the <code>summary()</code> function.</p>
+<p>Make sure to evaluate this code in an R environment after installing the required packages to verify that <code>rstan</code> has been installed correctly and is functioning as expected.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="installation-of-libraries-and-required-software-for-bayesian-area-models..html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="step-by-step-guide-to-install-rstan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="step-4-creating-a-google-earth-engine-account.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -222,7 +243,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/index.Rmd",
+"link": "https://github.com/psirusteam/2021ASDA/00_Installing_rstan.qmd",
 "text": "Edit"
 },
 "history": {
