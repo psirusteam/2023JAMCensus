@@ -1,0 +1,31 @@
+book_filename: "Area Model Methodologies for Census Person Count Imputation"
+delete_merged_file: true
+output_dir: "docs"
+new_session: yes
+
+rmd_files: [
+  "index.Rmd"
+]
+
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Equación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    cor: 'Corolario '
+    prp: 'Resultado '
+    cnj: 'Conjectura '
+    def: 'Definición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    hyp: 'Hipótesis '
+    proof: 'Prueba. '
+    remark: 'Comentario. '
+    solution: 'Solución. '
+  ui:
+    edit: Edit
+    chapter_name: 'Capítulo '
+    appendix_name: 'Apéndice '
+    refs_names: 'Referencias '
