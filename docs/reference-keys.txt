@@ -11,3 +11,10 @@ miscellaneous
 step-by-step-guide-to-install-rstan
 step-3-validation-of-installation---ensuring-proper-rstan-installation
 step-4-creating-a-google-earth-engine-account
+standardization-and-validation-of-available-census-data-variables
+assigning-missing-values-to-the-h01a_total_personas-variable
+descriptive-values-of-the-census-data
+organizing-results-in-a-database
+updating-the-dataset-based-on-report-results
+dataset-refinement-and-analysis
+summary-and-analysis-of-data

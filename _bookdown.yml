@@ -5,7 +5,8 @@ new_session: yes
 
 rmd_files: [
   "index.Rmd",
-  "00_Installing_rstan.qmd"
+  "00_Installing_rstan.qmd",
+  "01_Standardizing_the_Census.qmd"
 ]
 
 language:
@@ -27,6 +28,4 @@ language:
     solution: 'Solución. '
   ui:
     edit: Edit
-    chapter_name: 'Capítulo '
-    appendix_name: 'Apéndice '
     refs_names: 'Referencias '

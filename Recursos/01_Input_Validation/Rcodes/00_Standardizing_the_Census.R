@@ -21,20 +21,39 @@ library(RColorBrewer)
 select<- dplyr::select
 cat("\f")
 
-## Lectura de la base censo 
-censo <- readRDS("Modelo_unidad/Data/b_hh_filled_V12023-06-12.rds") %>% 
+## Reading the Census Data ##
+# Reading the census data from the specified RDS file
+# and excluding the 'geometry' column. Converting it to a data frame.
+
+censo <- readRDS("Recursos/01_Input_Validation/Data/Data_census_V2023-06-12.rds") %>%
   select(-geometry) %>% as.data.frame()
 
+# Creating a summary data frame for column names and their respective data types.
 
 resumen <- data.frame(Nombre_Columna = names(censo))
-resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(censo[[x]])))
+resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x) class(censo[[x]])))
+saveRDS(resumen, "Recursos/01_Input_Validation/RecurseBooks/resumen1.rds")
+## Assigning Missing Values to the 'H01A_TOTAL_PERSONAS' Variable
 
-## Asignación de Nas a la variable H01A_TOTAL_PERSONAS
-# - las viviendas que no fueron visitadas (categoría 9), 
-# - las viviendas que rechazaron o pendientes (clasificación 2)
-# - las viviendas que tienen otro motivo (categoría 8)
-
-## Conteo de caso antes y despues de la asignación 
+# In this section, actions related to the 'H01A_TOTAL_PERSONAS' variable are performed.
+# Missing values (NA) are assigned to this variable based on specific conditions,
+# which include:
+#   
+# - Dwellings that were not visited (category 9).
+# - Dwellings that rejected the visit or are pending (classification 2).
+# - Dwellings with other reasons (category 8).
+# 
+# Next, a count of cases before and after the assignment of missing values is 
+# conducted. The 'mutate' function is used to create a new temporary column 
+# 'H01A_TOTAL_PERSONAS_temp' in which NA values are assigned according to the 
+# specified conditions. The information is then grouped by the 'V02_OCUPACION_VIVIENDA'
+# variable, and the number of missing values ('nas') before and after the 
+# assignment is calculated, along with the total count of missing values after
+# the assignment.
+# 
+# Subsequently, another assignment of missing values is performed directly to 
+# the 'H01A_TOTAL_PERSONAS' variable within the 'censo' dataset. This is done 
+# following the same conditions mentioned earlier.
 
 censo %>% mutate(
   H01A_TOTAL_PERSONAS_temp = case_when(
@@ -48,7 +67,7 @@ censo %>% mutate(
             nas_despues = sum(is.na(H01A_TOTAL_PERSONAS_temp))) %>%
   mutate(total_nas_despues = sum(nas_despues))
 
-## Asignación de los NAs
+## Assignment of Missing Values
 
 censo %<>% mutate(
   H01A_TOTAL_PERSONAS = case_when(
@@ -59,9 +78,10 @@ censo %<>% mutate(
   )
 ) 
 
-## Valores descriptivos del censo 
+## Descriptive Values of the Census Data
 
-## Variable Númericas 
+### Numeric Variables
+
 max_values <- censo %>%
   summarise(across(where(is.numeric) | where(is.integer), max)) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Maximo")
@@ -99,7 +119,11 @@ nas_values_char <- censo %>%
   summarise(across(where(is.character) , function(x)sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 
-## Organizando en una base de datos resultados. 
+## Organizing Results in a Database
+
+# In this section, the collected descriptive statistics are organized and combined
+# into a comprehensive summary database named 'resumen2'.
+
 resumen2 <- reduce(
   list(
     nas_values_char,
@@ -120,10 +144,19 @@ resumen2 <- reduce(
             by = join_by(Nombre_Columna))
 
 # Guardando reporte  
-openxlsx::write.xlsx(resumen2,
-                     file = "Modelo_unidad/Data/Estado_base22062023.xlsx")
 
-## Realizando cambios según los resultados obtenidos en el reporte. 
+openxlsx::write.xlsx(resumen2,
+                     file = "Recursos/01_Input_Validation/Data/Estado_base.xlsx")
+
+saveRDS(resumen2,
+        file = "Recursos/01_Input_Validation/RecurseBooks/Estado_base.xlsx")
+
+
+## Updating the Dataset Based on Report Results
+
+# In this part of the code, the 'censo' dataset is updated based on the results
+# obtained from the report.
+
 Nombre_Columna <-  c(
   "un_ID" , 
   "PROV_ID" , 
@@ -212,18 +245,26 @@ map2(Nombre_Columna, Tipo_actualizar, function(nom,tipo){
 })
 
 censo2 <- censo %>% select(all_of(Nombre_Columna))
+# Saving the updated dataset to the specified directory
+saveRDS(censo2, 
+        file = "Recursos/01_Input_Validation/RecurseBooks/censo_updated.rds")
 
 ## Resumen de variables
 censo2 %>% distinct(UGM_ID, wpop_sum) %>% 
   summarise(n = sum(wpop_sum))
 
-## conteo de ugm_viviendas_totales_censo == 0 
+## Count of ugm_viviendas_totales_censo == 0
 
-ugm_cero_viviendas <- censo2 %>%
-  distinct(UGM_ID, ugm_viviendas_totales_censo) %>% 
-  filter(ugm_viviendas_totales_censo == 0)
-dim(ugm_cero_viviendas)
-## Comparando con el numero de registros por ugm
+censo2 %>%
+  distinct(UGM_ID, ugm_viviendas_totales_censo) %>%
+  mutate(categoria = cut(ugm_viviendas_totales_censo,
+                         breaks = c(
+                           -1:5, 10, 20, 50,
+                           max(ugm_viviendas_totales_censo)
+                         ))) %>% group_by(categoria) %>% tally()
+ugm_cero_viviendas
+
+## Comparing with the number of records per UGM
 
 cont_registros_ugm <- censo2 %>% group_by(UGM_ID) %>% 
   tally(name = "Total_vivienda_ugm")
@@ -241,12 +282,11 @@ censo2 %>% filter(V02_OCUPACION_VIVIENDA == "8") %>%
             max = max(H01A_TOTAL_PERSONAS),
             mediana = median(H01A_TOTAL_PERSONAS))
 
-
-
-
-
+# Creating a summary of the column names and their data types
 resumen <- data.frame(Nombre_Columna = names(censo2))
 resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(censo2[[x]])))
+
+# Checking for character variables and ensuring consistent character length
 tipo_char <- resumen$Nombre_Columna[resumen$tipo == "character"]
 
 for(ii in tipo_char) {
@@ -257,6 +297,7 @@ for(ii in tipo_char) {
             pad = "0")
 }
 
+# Summarizing character variables
 max_char <- censo2 %>%
   summarise(across(where(is.character), function(x)max(nchar(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "leng_max")
@@ -269,6 +310,7 @@ nas_values_char <- censo2 %>%
   summarise(across(where(is.character) , function(x)sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 
+# Summarizing numeric variables
 max_values <- censo2 %>%
   summarise(across(where(is.numeric) | where(is.integer), max)) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Maximo")
@@ -293,16 +335,18 @@ nas_values <- censo2 %>%
   summarise(across(where(is.numeric) | where(is.integer), function(x)sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 
-
-
+# Combining all the summary information
 resumen2 <- reduce(
-  list(nas_values_char, min_char,max_char,
-       nas_values, SD_values, mediana_values, media_values,min_values, max_values),
+  list(nas_values_char, min_char, max_char,
+       nas_values, SD_values, mediana_values, media_values, min_values, max_values),
   full_join, by = join_by(Nombre_Columna)) %>% 
   full_join(x = resumen, y = ., by = join_by(Nombre_Columna))
 
-openxlsx::write.xlsx(resumen2,
-                     file = "Modelo_unidad/Data/Estado_base_despues_22062023.xlsx")
 
-saveRDS(censo2, file = "Modelo_unidad/Data/censo_estandarizado_22062023.rds")
+# Saving the summary results to an Excel file
+openxlsx::write.xlsx(resumen2,
+                     file = "Recursos/01_Input_Validation/Data/Estado_base_despues.xlsx")
+
+# Saving the standardized dataset
+saveRDS(censo2, file = "Recursos/01_Input_Validation/Data/censo_estandarizado.rds")
 

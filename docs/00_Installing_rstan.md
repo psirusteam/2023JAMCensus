@@ -95,7 +95,7 @@ install.packages("latex2exp")
 install.packages("gtsummary")
 ```
 
-## Step-by-Step Guide to Install rstan
+### Step-by-Step Guide to Install rstan
 
 Follow these steps to install the `rstan` package:
 
