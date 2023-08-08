@@ -1,8 +1,7 @@
 ###############################################################
-# Modelos de estimación de áreas pequeñas para la estimación  #
-# del total población                                         #
-# Lectura y preparación de las bases de datos                 #
-# Autor: Stalyn Guerrero & Andrés Gutiérrez                   #
+# Small Area Estimation Models for Total Population Estimation #
+# Reading and Preparation of Database                          #
+# Author: Stalyn Guerrero & Andrés Gutiérrez                   #
 ###############################################################
 
 ### Cleaning R environment ###
