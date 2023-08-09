@@ -28,4 +28,6 @@ language:
     solution: 'Solución. '
   ui:
     edit: Edit
+    chapter_name: 'Chapter'
+    appendix_name: 'Apéndice '
     refs_names: 'Referencias '
