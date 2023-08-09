@@ -6,7 +6,8 @@ new_session: yes
 rmd_files: [
   "index.Rmd",
   "00_Installing_rstan.qmd",
-  "01_Standardizing_the_Census.qmd"
+  "01_Standardizing_the_Census.qmd",
+  "02_Housing_Census_Filters.qmd"
 ]
 
 language:

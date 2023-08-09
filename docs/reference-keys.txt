@@ -18,3 +18,14 @@ organizing-results-in-a-database
 updating-the-dataset-based-on-report-results
 dataset-refinement-and-analysis
 summary-and-analysis-of-data
+filtering-and-refining-census-data
+reading-libraries-databases-and-other-inputs
+inner-join-to-add-the-age-sex-base
+applying-filters-and-analyzing-the-data
+applying-the-first-filter-categorizing-households-with-residents-and-determining-greenpoint-status
+applying-the-second-filter-worldpop-criterion
+summary-of-statistics-based-on-greenpoint2
+defining-the-third-filter
+combining-non-coordinated-houses
+aggregating-statistics-and-summaries
+extracting-and-saving-subset

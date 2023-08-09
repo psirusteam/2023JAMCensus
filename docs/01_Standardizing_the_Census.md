@@ -7,6 +7,15 @@ In the following code set, a series of processes are carried out for data cleani
 
 
 ```r
+library(tidyverse)
+library(data.table)
+library(openxlsx)
+library(DataExplorer)
+library(magrittr)
+library(RColorBrewer)
+select<- dplyr::select
+cat("\f")
+
 censo <- readRDS("Recursos/01_Input_Validation/Data/Data_census_V2023-06-12.rds") %>%
   select(-geometry) %>% as.data.frame()
 

@@ -23,6 +23,15 @@ tba <- function(dat, cap = NA){
 In the following code set, a series of processes are carried out for data cleaning and preparation. These steps include removing objects from the workspace, loading necessary libraries, reading census data, assigning missing values based on certain conditions, and calculating descriptive statistics for numeric and character variables. Additionally, adjustments are made to character variables to ensure consistent length. The final results are summarized in a data structure and saved in files for further analysis and reference.
 
 ```{r,eval=FALSE}
+library(tidyverse)
+library(data.table)
+library(openxlsx)
+library(DataExplorer)
+library(magrittr)
+library(RColorBrewer)
+select<- dplyr::select
+cat("\f")
+
 censo <- readRDS("Recursos/01_Input_Validation/Data/Data_census_V2023-06-12.rds") %>%
   select(-geometry) %>% as.data.frame()
 
