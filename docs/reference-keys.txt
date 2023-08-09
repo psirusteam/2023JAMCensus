@@ -29,3 +29,8 @@ defining-the-third-filter
 combining-non-coordinated-houses
 aggregating-statistics-and-summaries
 extracting-and-saving-subset
+standardization-and-validation-of-covariates
+environment-preparation-and-library-loading
+descriptive-values-of-the-ugms-base
+standardizing-variables-and-joining-datasets
+standardize-numeric-variables-using-z-score-scaling

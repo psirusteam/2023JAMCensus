@@ -1,0 +1,242 @@
+###################################################################
+# Standardization and validation of covariates                    #
+# Author: Stalyn Guerrero & Andrés Gutiérrez                      #
+# Description: In this section, the consolidation of aggregated   #
+# information from UGMs (Minimal Geographical Units) along with   #
+# corresponding covariates is carried out.                        #
+###################################################################
+
+### Cleaning R environment ###
+# Clear the workspace by removing all variables
+rm(list = ls())
+
+#################
+### Libraries ###
+#################
+# Load required libraries
+library(tidyverse)
+library(data.table)
+library(openxlsx)
+library(magrittr)
+
+# Clear the console
+cat("\f")
+
+## Reading census data.
+# Load the 'censo_viviendas.rds' file containing census data
+censo1 <- readRDS("Recursos/03_Input_Validation_Cov/Data/censo_viviendas.rds") 
+
+## Reading UGMS bases.
+# Load the 'ugm_merged.rds' file containing UGMS base data
+Base_ugms <- readRDS("Recursos/03_Input_Validation_Cov/Data/ugm_merged.rds") 
+
+# Count distinct UGM_ID values in census data
+n_distinct(censo1$UGM_ID)
+
+# Count distinct UGM_ID values in UGMS base data
+n_distinct(Base_ugms$UGM_ID) # Not all UGMs have houses
+
+## Descriptive values of the UGMS base
+
+# Create a summary dataframe with column names and their data types
+resumen <- data.frame(Nombre_Columna = names(Base_ugms))
+resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(Base_ugms[[x]])))
+
+## Numeric Variables 
+# Calculate maximum values for numeric and integer columns
+max_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), max)) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Maximo")
+
+# Calculate minimum values for numeric and integer columns
+min_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), min)) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Minimo")
+
+# Calculate mean values for numeric and integer columns
+media_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), mean)) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Media")
+
+# Calculate median values for numeric and integer columns
+mediana_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), median)) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_Mediana")
+
+# Calculate standard deviation values for numeric and integer columns
+SD_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), sd)) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_sd")
+
+# Calculate the number of missing values for numeric and integer columns
+nas_values <- Base_ugms %>%
+  summarise(across(where(is.numeric) | where(is.integer), function(x)sum(is.na(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
+
+# Character Variables
+# Calculate maximum lengths of characters for character columns
+max_char <- Base_ugms %>%
+  summarise(across(where(is.character), function(x)max(nchar(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "leng_max")
+
+# Calculate minimum lengths of characters for character columns
+min_char <- Base_ugms %>%
+  summarise(across(where(is.character), function(x)min(nchar(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "leng_min")
+
+# Calculate the number of missing values for character columns
+nas_values_char <- Base_ugms %>%
+  summarise(across(where(is.character) , function(x)sum(is.na(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
+
+## Organizing results in a database.
+# Combine all results into a single dataframe
+resumen2 <- reduce(
+  list(
+    nas_values_char,
+    min_char,
+    max_char,
+    nas_values,
+    SD_values,
+    mediana_values,
+    media_values,
+    min_values,
+    max_values
+  ),
+  full_join,
+  by = join_by(Nombre_Columna)
+) %>%
+  full_join(x = resumen,
+            y = .,
+            by = join_by(Nombre_Columna))
+
+# Variables of interest
+
+Nombre_Columna <- c(
+  "un_id",
+  "PROV_ID",
+  "CANT_ID",
+  "DIST_ID",
+  "UGM_ID",
+  "ugm_viviendas_totales_censo",
+  "ugm_viviendas_ocupadas_censo",
+  "ugm_viviendas_desocupadas_censo",
+  "ugm_peligrosidad",
+  "ugm_problema_de_acceso",
+  "ugm_riesgos_amenazas",
+  "ugm_cobertura_telecomunicaciones",
+  "ugm_area_m2",
+  "asent",
+  "ppp_CRI_v2",
+  "elev",
+  "indig",
+  "aprot",
+  "dist_permisos_de_construccion_2011_2022",
+  "dist_poblacion_proyeccion_ajustada_2022",
+  "dist_poblacion_rup",
+  "dist_poblacion_ccss_abril_2023",
+  "dist_matricula_educacion_primaria_2021",
+  "dist_matricula_educacion_secundaria_2021",
+  "dist_codigo_urbanidad",
+  "GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI",
+  "urban_coverfraction",
+  "crops_coverfraction",
+  "ebais_tt",
+  "escu_tt",
+  "igl_tt",
+  "prov_nl_mean",
+  "cant_nl_mean",
+  "dist_nl_mean",
+  "wpop_sum",
+  "ugm_sin_info")
+
+Tipo_actualizar <- c(
+  as.character,
+  as.character,
+  as.character,
+  as.character,
+  as.character,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.character,
+  as.character,
+  as.character,
+  as.character,
+  as.numeric,
+  as.character,
+  as.numeric,
+  as.numeric,
+  as.character,
+  as.character,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.character,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.numeric,
+  as.character)
+
+# Update column types based on Nombre_Columna and Tipo_actualizar
+map2(Nombre_Columna, Tipo_actualizar, function(nom, tipo) {
+  Base_ugms[[nom]] <<- tipo(Base_ugms[[nom]])
+})
+
+# Create a summary dataframe with column names and their data types
+resumen <- data.frame(Nombre_Columna = names(Base_ugms))
+resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x) class(Base_ugms[[x]])))
+
+# Extract character columns
+tipo_char <- resumen$Nombre_Columna[resumen$tipo == "character"]
+
+# Select and display character columns from Base_ugms
+Base_ugms[, tipo_char]
+
+# Standardizing Variables and Joining Datasets
+
+# Loop through character variables
+for (ii in tipo_char) {
+  max_char <- max(nchar(Base_ugms[[ii]]), na.rm = TRUE)
+  Base_ugms[[ii]] <- str_pad(string = Base_ugms[[ii]],
+                             width = max_char,
+                             pad = "0")
+}
+
+# Join the UGM_censo and Base_ugms datasets
+Base_ugms_censo <- inner_join(UGM_censo, Base_ugms)
+Base_ugms_censo[, tipo_char]
+
+# Calculate the counts of missing values for numeric variables
+nas_values <- Base_ugms_censo %>%
+  summarise(across(where(is.numeric) | where(is.integer), function(x) sum(is.na(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
+
+# Calculate the counts of missing values for character variables
+nas_values2 <- Base_ugms_censo %>%
+  summarise(across(where(is.character), function(x) sum(is.na(x)))) %>%
+  pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
+
+# Remove specific columns from the dataset
+Base_ugms_censo$dist_poblacion_rup <- NULL
+Base_ugms_censo$dist_matricula_educacion_secundaria_2021 <- NULL
+
+# Create a table of values in the 'dist_codigo_urbanidad' column
+table(Base_ugms_censo$dist_codigo_urbanidad, useNA = "a")
+
+# Standardize numeric variables using z-score scaling
+Base_ugms_censo <- Base_ugms_censo %>% 
+  mutate_if(is.numeric, function(x) as.numeric(scale(x)))
+
+# Save the standardized dataset
+saveRDS(Base_ugms_censo, "Recursos/03_Input_Validation_Cov/Data/Base_ugms_estandarizada.rds")
