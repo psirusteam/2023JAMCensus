@@ -1,0 +1,166 @@
+
+
+
+# Estimation of the number of people per household
+
+
+
+```r
+### Cleaning R environment ###
+# Clear the workspace by removing all variables
+rm(list = ls())
+
+### Libraries ###
+# Load required libraries
+library(tidyverse)  # For data manipulation and visualization
+library(data.table)  # For efficient data manipulation
+library(openxlsx)  # For reading Excel files
+library(magrittr)  # For data manipulation using pipe operators
+library(lme4)  # For fitting linear mixed-effects models
+library(rstan)  # For Bayesian data analysis using Stan
+library(rstanarm)  # For fitting Bayesian regression models
+cat("\f")  # Clear the console
+```
+
+## Reading the census data.
+
+```r
+# Read census data from the 'censo_viviendas.rds' file
+censo_vivienda <- readRDS("Recursos/05_Model_for_people/Data/censo_viviendas.rds") 
+# Read UGM covariates from the 'Base_ugms_estandarizada.rds' file
+Base_ugms <- readRDS("Recursos/05_Model_for_people/Data/Base_ugms_estandarizada.rds")
+```
+
+## Preparing data for Model 1 
+
+
+
+```r
+# Calculate the mean of total persons per UGM, excluding specific conditions
+base_ugm_estima_todas <- censo_vivienda %>% 
+  filter( !greenpoint2 %in% c("Sin informacion pero  n>0", 
+                              "Sin informacion pero n>=0")) %>% 
+  group_by(UGM_ID) %>% 
+  summarise(media_personas = mean(H01A_TOTAL_PERSONAS,  na.rm = TRUE) )
+
+# Check the number of rows and missing values
+nrow(base_ugm_estima_todas)
+sum(is.na(base_ugm_estima_todas$media_personas))
+
+# Join the UGM mean total persons with UGM covariates
+base_ugm_estima_todas <-
+  inner_join(base_ugm_estima_todas, Base_ugms, by = "UGM_ID") 
+
+# Check the number of rows after joining
+nrow(base_ugm_estima_todas)
+```
+
+-   Fit a Stan GLM model to estimate total population means
+
+
+```r
+# Estimated time of 2 to 3 hours
+modelo_todas  <- stan_glm(
+  media_personas ~ 1 +
+    PROV_ID +
+    CANT_ID +
+    DIST_ID +
+    dist_codigo_urbanidad +
+    ugm_peligrosidad +                        
+    ugm_problema_de_acceso +                  
+    ugm_riesgos_amenazas +                    
+    ugm_cobertura_telecomunicaciones +        
+    dist_permisos_de_construccion_2011_2022 + 
+    dist_poblacion_proyeccion_ajustada_2022 + 
+    dist_poblacion_ccss_abril_2023 +          
+    dist_matricula_educacion_primaria_2021 +  
+    GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI + 
+    urban_coverfraction +                     
+    crops_coverfraction +                     
+    asent +                                   
+    ppp_CRI_v2 +                              
+    elev +                                    
+    indig +                                   
+    aprot +  
+    ebais_tt +                                
+    escu_tt +                                 
+    igl_tt +                                  
+    dist_nl_mean ,
+  data = base_ugm_estima_todas,
+  iter = 5000,            # total number of iterations per chain
+  cores = 4
+  
+)
+
+  
+# Save the fitted model to a file
+saveRDS(modelo_todas,
+        "Recursos/05_Model_for_people/Data/fit_lmer_todas.rds")
+```
+
+## Preparing data for Model 2 
+
+
+```r
+# Calculate the mean of total persons per UGM for occupied households
+base_ugm_estima_ocupadas <- censo_vivienda %>% 
+  filter( greenpoint2 %in% c("Censado con informacion n>0",
+                             "Papel n>0")) %>% 
+  group_by(UGM_ID) %>% 
+  summarise(media_personas = mean(H01A_TOTAL_PERSONAS,  na.rm = TRUE) )
+
+# Check the number of rows and missing values
+nrow(base_ugm_estima_ocupadas)
+sum(is.na(base_ugm_estima_ocupadas$media_personas))
+
+# Join the UGM mean total persons for occupied households with UGM covariates
+base_ugm_estima_ocupadas <-
+  inner_join(base_ugm_estima_ocupadas, Base_ugms, by = "UGM_ID") 
+
+# Check the number of rows after joining
+nrow(base_ugm_estima_ocupadas)
+```
+
+-   Fit a Stan GLM model for occupied households
+
+
+```r
+modelo_ocupadas  <- stan_glm(
+  media_personas ~ 1 +
+    PROV_ID +
+    CANT_ID +
+    DIST_ID +
+    dist_codigo_urbanidad +
+    ugm_peligrosidad +                        
+    ugm_problema_de_acceso +                  
+    ugm_riesgos_amenazas +                    
+    ugm_cobertura_telecomunicaciones +        
+    dist_permisos_de_construccion_2011_2022 + 
+    dist_poblacion_proyeccion_ajustada_2022 + 
+    dist_poblacion_ccss_abril_2023 +          
+    dist_matricula_educacion_primaria_2021 +  
+    dist_codigo_urbanidad +                   
+    GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI + 
+    urban_coverfraction +                     
+    crops_coverfraction +                     
+    asent +                                   
+    ppp_CRI_v2 +                              
+    elev +                                    
+    indig +                                   
+    aprot +  
+    ebais_tt +                                
+    escu_tt +                                 
+    igl_tt +                                  
+    dist_nl_mean ,
+  data = base_ugm_estima_ocupadas,
+  iter = 5000,            # total number of iterations per chain
+  cores = 4
+  
+)
+
+# Save the fitted model for occupied households to a file
+saveRDS(modelo_ocupadas,
+        "Recursos/05_Model_for_people/Data/fit_lmer_ocupadas.rds")
+```
+
+

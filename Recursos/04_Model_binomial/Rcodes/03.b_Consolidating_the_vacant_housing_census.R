@@ -62,20 +62,20 @@ sum(colMeans(pred_unoccupied) > 1)
 # Summarize the means of predicted values
 summary(colMeans(pred_unoccupied))
 
-# Calculate the 2.5th and 97.5th percentiles of predicted values
-q0.025 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.025))
-q0.975 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.975))
+# Calculate the 5th and 95th percentiles of predicted values
+q0.05 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.05))
+q0.95 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.95))
 
 # Calculate the standard deviation of predicted values
 sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
-
+summary(sd_pred)
 # Create a data frame with prediction intervals
 intervalos <- data.frame(UGM_ID = Base_ugms$UGM_ID,
                          Pred_unoccupied = colMeans(pred_unoccupied),
                          UpperLim_unoccupied = colMeans(pred_unoccupied) + 3 * sd_pred * q0.975,
-                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.975
+                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.025
 )
 
 # Inner join between censo_vivienda and intervalos based on UGM_ID
@@ -87,9 +87,9 @@ censo_vivienda %<>%
     Desocupada2  = case_when(is.na(Desocupada) ~ Pred_unoccupied,
                              TRUE ~ Desocupada),
     LimInf_desocupadas  = case_when(is.na(Desocupada) ~ LowerLim_unoccupied,
-                                    TRUE ~ LimInf_desocupadas),
+                                    TRUE ~ Desocupada),
     LimSup_desocupadas  = case_when(is.na(Desocupada) ~ UpperLim_unoccupied,
-                                    TRUE ~ LimSup_desocupadas)
+                                    TRUE ~ Desocupada)
   )
 
 # Calculate means and sums of different variables
@@ -170,8 +170,8 @@ dist_summary <- censo_vivienda %>% group_by(DIST_ID) %>%
 
 saveRDS(dist_summary, "Recursos/04_Model_binomial/RecurseBooks/dist_summary.rds")
 
-# Save modified censo_vivienda without Pred_desocupadas column
-censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_desocupadas)
+# Save modified censo_vivienda without Pred_unoccupied column
+censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_unoccupied)
 saveRDS(censo_vivienda_modified,
         file = "Recursos/04_Model_binomial/Data/01_censo_vivienda_desocupadas.rds")
 

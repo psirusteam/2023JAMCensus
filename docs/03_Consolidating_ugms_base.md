@@ -1,7 +1,6 @@
 
 
 
-
 # Standardization and validation of covariates                    
 
 Similarly, just as the census variables underwent a validation process, the covariates dataset is subject to a similar procedure. This involves ensuring uniformity in the length of identifiers such as UGM, Cantos, regions, etc. Additionally, a validation is conducted to identify any missing values (NAs) in the dataset. Following this, a descriptive analysis is performed on the data.

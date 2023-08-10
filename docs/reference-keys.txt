@@ -41,3 +41,8 @@ counting-combinations-of-occupancy-status-and-greenpoint-values
 consolidation-of-census-housing-databases
 defining-occupied-and-unoccupied-houses.
 summary-measures-and-results-validation
+estimation-of-the-number-of-people-per-household
+reading-the-census-data.
+preparing-data-for-model-1
+preparing-data-for-model-2
+consolidating-the-number-of-people-per-household

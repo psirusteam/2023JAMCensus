@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-08-09" />
+<meta name="date" content="2023-08-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -215,6 +215,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1" data-path="defining-occupied-and-unoccupied-houses..html"><a href="defining-occupied-and-unoccupied-houses..html"><i class="fa fa-check"></i><b>6.1</b> Defining occupied and unoccupied houses.</a></li>
 <li class="chapter" data-level="6.2" data-path="summary-measures-and-results-validation.html"><a href="summary-measures-and-results-validation.html"><i class="fa fa-check"></i><b>6.2</b> Summary Measures and Results Validation</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="estimation-of-the-number-of-people-per-household.html"><a href="estimation-of-the-number-of-people-per-household.html"><i class="fa fa-check"></i><b>7</b> Estimation of the number of people per household</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="reading-the-census-data..html"><a href="reading-the-census-data..html"><i class="fa fa-check"></i><b>7.1</b> Reading the census data.</a></li>
+<li class="chapter" data-level="7.2" data-path="preparing-data-for-model-1.html"><a href="preparing-data-for-model-1.html"><i class="fa fa-check"></i><b>7.2</b> Preparing data for Model 1</a></li>
+<li class="chapter" data-level="7.3" data-path="preparing-data-for-model-2.html"><a href="preparing-data-for-model-2.html"><i class="fa fa-check"></i><b>7.3</b> Preparing data for Model 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="consolidating-the-number-of-people-per-household.html"><a href="consolidating-the-number-of-people-per-household.html"><i class="fa fa-check"></i><b>8</b> consolidating the number of people per household</a></li>
 <li class="divider"></li>
 <li><a Workshop on Capacity Building Installation </a></li>
 
@@ -268,20 +275,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Calculate the 2.5th and 97.5th percentiles of predicted values</li>
 </ul>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="defining-occupied-and-unoccupied-houses..html#cb83-1" tabindex="-1"></a>q0<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>,</span>
-<span id="cb83-2"><a href="defining-occupied-and-unoccupied-houses..html#cb83-2" tabindex="-1"></a>                <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.025</span>))</span>
-<span id="cb83-3"><a href="defining-occupied-and-unoccupied-houses..html#cb83-3" tabindex="-1"></a>q0<span class="fl">.975</span> <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>,</span>
-<span id="cb83-4"><a href="defining-occupied-and-unoccupied-houses..html#cb83-4" tabindex="-1"></a>                <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.975</span>))</span>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="defining-occupied-and-unoccupied-houses..html#cb83-1" tabindex="-1"></a>q0<span class="fl">.05</span> <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>,</span>
+<span id="cb83-2"><a href="defining-occupied-and-unoccupied-houses..html#cb83-2" tabindex="-1"></a>                <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.05</span>))</span>
+<span id="cb83-3"><a href="defining-occupied-and-unoccupied-houses..html#cb83-3" tabindex="-1"></a>q0<span class="fl">.95</span> <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>,</span>
+<span id="cb83-4"><a href="defining-occupied-and-unoccupied-houses..html#cb83-4" tabindex="-1"></a>                <span class="cf">function</span>(x) <span class="fu">quantile</span>(x, <span class="fl">0.95</span>))</span>
 <span id="cb83-5"><a href="defining-occupied-and-unoccupied-houses..html#cb83-5" tabindex="-1"></a></span>
 <span id="cb83-6"><a href="defining-occupied-and-unoccupied-houses..html#cb83-6" tabindex="-1"></a><span class="co"># Calculate the standard deviation of predicted values</span></span>
-<span id="cb83-7"><a href="defining-occupied-and-unoccupied-houses..html#cb83-7" tabindex="-1"></a>sd_pred <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>, sd)</span></code></pre></div>
+<span id="cb83-7"><a href="defining-occupied-and-unoccupied-houses..html#cb83-7" tabindex="-1"></a>sd_pred <span class="ot">&lt;-</span> <span class="fu">apply</span>(pred_unoccupied, <span class="at">MARGIN =</span> <span class="dv">2</span>, sd)</span>
+<span id="cb83-8"><a href="defining-occupied-and-unoccupied-houses..html#cb83-8" tabindex="-1"></a><span class="fu">summary</span>(sd_pred)</span></code></pre></div>
 <ul>
 <li>Create a data frame with prediction intervals</li>
 </ul>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="defining-occupied-and-unoccupied-houses..html#cb84-1" tabindex="-1"></a>intervalos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">UGM_ID =</span> Base_ugms<span class="sc">$</span>UGM_ID,</span>
 <span id="cb84-2"><a href="defining-occupied-and-unoccupied-houses..html#cb84-2" tabindex="-1"></a>                         <span class="at">Pred_unoccupied =</span> <span class="fu">colMeans</span>(pred_unoccupied),</span>
 <span id="cb84-3"><a href="defining-occupied-and-unoccupied-houses..html#cb84-3" tabindex="-1"></a>                         <span class="at">UpperLim_unoccupied =</span> <span class="fu">colMeans</span>(pred_unoccupied) <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sd_pred <span class="sc">*</span> q0<span class="fl">.975</span>,</span>
-<span id="cb84-4"><a href="defining-occupied-and-unoccupied-houses..html#cb84-4" tabindex="-1"></a>                         <span class="at">LowerLim_unoccupied =</span> <span class="fu">colMeans</span>(pred_unoccupied) <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_pred <span class="sc">*</span> q0<span class="fl">.975</span></span>
+<span id="cb84-4"><a href="defining-occupied-and-unoccupied-houses..html#cb84-4" tabindex="-1"></a>                         <span class="at">LowerLim_unoccupied =</span> <span class="fu">colMeans</span>(pred_unoccupied) <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_pred <span class="sc">*</span> q0<span class="fl">.025</span></span>
 <span id="cb84-5"><a href="defining-occupied-and-unoccupied-houses..html#cb84-5" tabindex="-1"></a>)</span></code></pre></div>
 <ul>
 <li>Inner join between censo_vivienda and intervalos based on UGM_ID</li>

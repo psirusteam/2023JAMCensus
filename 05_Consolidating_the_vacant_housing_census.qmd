@@ -86,13 +86,14 @@ summary(colMeans(pred_unoccupied))
 -   Calculate the 2.5th and 97.5th percentiles of predicted values
 
 ```{r, eval=FALSE}
-q0.025 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.025))
-q0.975 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.975))
+q0.05 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.05))
+q0.95 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.95))
 
 # Calculate the standard deviation of predicted values
 sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
+summary(sd_pred)
 ```
 
 -   Create a data frame with prediction intervals
@@ -101,8 +102,9 @@ sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
 intervalos <- data.frame(UGM_ID = Base_ugms$UGM_ID,
                          Pred_unoccupied = colMeans(pred_unoccupied),
                          UpperLim_unoccupied = colMeans(pred_unoccupied) + 3 * sd_pred * q0.975,
-                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.975
+                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.025
 )
+
 ```
 
 -   Inner join between censo_vivienda and intervalos based on UGM_ID
@@ -229,9 +231,9 @@ readRDS("Recursos/04_Model_binomial/RecurseBooks/dist_summary.rds") %>%
 ```
 
 
--   Save modified censo_vivienda without Pred_desocupadas column
+-   Save modified censo_vivienda without Pred_unoccupied column
 
 ```{r, eval=FALSE}
-censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_desocupadas)
+censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_unoccupied)
 saveRDS(censo_vivienda_modified,
         file = "Recursos/04_Model_binomial/Data/01_censo_vivienda_desocupadas.rds")

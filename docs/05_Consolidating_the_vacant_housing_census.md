@@ -74,13 +74,14 @@ summary(colMeans(pred_unoccupied))
 
 
 ```r
-q0.025 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.025))
-q0.975 <- apply(pred_unoccupied, MARGIN = 2,
-                function(x) quantile(x, 0.975))
+q0.05 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.05))
+q0.95 <- apply(pred_unoccupied, MARGIN = 2,
+                function(x) quantile(x, 0.95))
 
 # Calculate the standard deviation of predicted values
 sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
+summary(sd_pred)
 ```
 
 -   Create a data frame with prediction intervals
@@ -90,7 +91,7 @@ sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
 intervalos <- data.frame(UGM_ID = Base_ugms$UGM_ID,
                          Pred_unoccupied = colMeans(pred_unoccupied),
                          UpperLim_unoccupied = colMeans(pred_unoccupied) + 3 * sd_pred * q0.975,
-                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.975
+                         LowerLim_unoccupied = colMeans(pred_unoccupied) - 3 * sd_pred * q0.025
 )
 ```
 
@@ -155,10 +156,10 @@ result_summary <- censo_vivienda %>%
  </thead>
 <tbody>
   <tr>
-   <td style="text-align:right;"> 220951.2 </td>
-   <td style="text-align:right;"> 12.4978 </td>
-   <td style="text-align:right;"> 12.4978 </td>
-   <td style="text-align:right;"> 12.4979 </td>
+   <td style="text-align:right;"> 220936.2 </td>
+   <td style="text-align:right;"> 12.497 </td>
+   <td style="text-align:right;"> 12.4969 </td>
+   <td style="text-align:right;"> 12.497 </td>
   </tr>
 </tbody>
 </table>
@@ -197,58 +198,58 @@ prov_summary <- censo_vivienda %>% group_by(PROV_ID) %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> 1 </td>
-   <td style="text-align:right;"> 45527.58 </td>
-   <td style="text-align:right;"> 8.5831 </td>
-   <td style="text-align:right;"> 8.5830 </td>
-   <td style="text-align:right;"> 8.5831 </td>
+   <td style="text-align:right;"> 45529.82 </td>
+   <td style="text-align:right;"> 8.5835 </td>
+   <td style="text-align:right;"> 8.5835 </td>
+   <td style="text-align:right;"> 8.5835 </td>
    <td style="text-align:right;"> 0.0001 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 2 </td>
-   <td style="text-align:right;"> 41170.38 </td>
-   <td style="text-align:right;"> 11.1458 </td>
-   <td style="text-align:right;"> 11.1457 </td>
-   <td style="text-align:right;"> 11.1459 </td>
-   <td style="text-align:right;"> 0.0002 </td>
+   <td style="text-align:right;"> 41160.36 </td>
+   <td style="text-align:right;"> 11.1431 </td>
+   <td style="text-align:right;"> 11.1430 </td>
+   <td style="text-align:right;"> 11.1431 </td>
+   <td style="text-align:right;"> 0.0001 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 3 </td>
-   <td style="text-align:right;"> 17471.04 </td>
-   <td style="text-align:right;"> 9.4608 </td>
-   <td style="text-align:right;"> 9.4607 </td>
-   <td style="text-align:right;"> 9.4608 </td>
+   <td style="text-align:right;"> 17470.38 </td>
+   <td style="text-align:right;"> 9.4604 </td>
+   <td style="text-align:right;"> 9.4604 </td>
+   <td style="text-align:right;"> 9.4605 </td>
    <td style="text-align:right;"> 0.0001 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 4 </td>
-   <td style="text-align:right;"> 13335.66 </td>
-   <td style="text-align:right;"> 7.6901 </td>
-   <td style="text-align:right;"> 7.6900 </td>
-   <td style="text-align:right;"> 7.6901 </td>
-   <td style="text-align:right;"> 0.0002 </td>
+   <td style="text-align:right;"> 13329.65 </td>
+   <td style="text-align:right;"> 7.6866 </td>
+   <td style="text-align:right;"> 7.6866 </td>
+   <td style="text-align:right;"> 7.6867 </td>
+   <td style="text-align:right;"> 0.0001 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 5 </td>
-   <td style="text-align:right;"> 32033.49 </td>
-   <td style="text-align:right;"> 21.4337 </td>
-   <td style="text-align:right;"> 21.4330 </td>
-   <td style="text-align:right;"> 21.4343 </td>
-   <td style="text-align:right;"> 0.0013 </td>
+   <td style="text-align:right;"> 32031.88 </td>
+   <td style="text-align:right;"> 21.4326 </td>
+   <td style="text-align:right;"> 21.4321 </td>
+   <td style="text-align:right;"> 21.4333 </td>
+   <td style="text-align:right;"> 0.0012 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 6 </td>
-   <td style="text-align:right;"> 45353.84 </td>
-   <td style="text-align:right;"> 23.4434 </td>
-   <td style="text-align:right;"> 23.4432 </td>
-   <td style="text-align:right;"> 23.4436 </td>
+   <td style="text-align:right;"> 45351.21 </td>
+   <td style="text-align:right;"> 23.4420 </td>
+   <td style="text-align:right;"> 23.4418 </td>
+   <td style="text-align:right;"> 23.4423 </td>
    <td style="text-align:right;"> 0.0005 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 7 </td>
-   <td style="text-align:right;"> 26059.18 </td>
-   <td style="text-align:right;"> 15.5944 </td>
-   <td style="text-align:right;"> 15.5943 </td>
-   <td style="text-align:right;"> 15.5945 </td>
+   <td style="text-align:right;"> 26062.89 </td>
+   <td style="text-align:right;"> 15.5966 </td>
+   <td style="text-align:right;"> 15.5965 </td>
+   <td style="text-align:right;"> 15.5967 </td>
    <td style="text-align:right;"> 0.0002 </td>
   </tr>
 </tbody>
@@ -287,83 +288,83 @@ cant_summary <- censo_vivienda %>% group_by(CANT_ID) %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> 101 </td>
-   <td style="text-align:right;"> 7167.090 </td>
-   <td style="text-align:right;"> 7.3052 </td>
-   <td style="text-align:right;"> 7.3052 </td>
-   <td style="text-align:right;"> 7.3053 </td>
-   <td style="text-align:right;"> 0.0001 </td>
+   <td style="text-align:right;"> 7171.275 </td>
+   <td style="text-align:right;"> 7.3095 </td>
+   <td style="text-align:right;"> 7.3095 </td>
+   <td style="text-align:right;"> 7.3095 </td>
+   <td style="text-align:right;"> 1e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 102 </td>
-   <td style="text-align:right;"> 1331.140 </td>
-   <td style="text-align:right;"> 5.5780 </td>
-   <td style="text-align:right;"> 5.5780 </td>
-   <td style="text-align:right;"> 5.5781 </td>
-   <td style="text-align:right;"> 0.0001 </td>
+   <td style="text-align:right;"> 1330.895 </td>
+   <td style="text-align:right;"> 5.5770 </td>
+   <td style="text-align:right;"> 5.5770 </td>
+   <td style="text-align:right;"> 5.5771 </td>
+   <td style="text-align:right;"> 1e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 103 </td>
-   <td style="text-align:right;"> 3421.247 </td>
-   <td style="text-align:right;"> 4.9177 </td>
-   <td style="text-align:right;"> 4.9176 </td>
-   <td style="text-align:right;"> 4.9178 </td>
-   <td style="text-align:right;"> 0.0001 </td>
+   <td style="text-align:right;"> 3419.079 </td>
+   <td style="text-align:right;"> 4.9146 </td>
+   <td style="text-align:right;"> 4.9145 </td>
+   <td style="text-align:right;"> 4.9147 </td>
+   <td style="text-align:right;"> 1e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 104 </td>
-   <td style="text-align:right;"> 1902.283 </td>
-   <td style="text-align:right;"> 12.7739 </td>
-   <td style="text-align:right;"> 12.7737 </td>
-   <td style="text-align:right;"> 12.7740 </td>
-   <td style="text-align:right;"> 0.0003 </td>
+   <td style="text-align:right;"> 1902.457 </td>
+   <td style="text-align:right;"> 12.7750 </td>
+   <td style="text-align:right;"> 12.7749 </td>
+   <td style="text-align:right;"> 12.7752 </td>
+   <td style="text-align:right;"> 3e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 105 </td>
-   <td style="text-align:right;"> 1791.283 </td>
-   <td style="text-align:right;"> 24.9587 </td>
-   <td style="text-align:right;"> 24.9576 </td>
-   <td style="text-align:right;"> 24.9597 </td>
-   <td style="text-align:right;"> 0.0021 </td>
+   <td style="text-align:right;"> 1791.999 </td>
+   <td style="text-align:right;"> 24.9686 </td>
+   <td style="text-align:right;"> 24.9677 </td>
+   <td style="text-align:right;"> 24.9697 </td>
+   <td style="text-align:right;"> 2e-03 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 106 </td>
-   <td style="text-align:right;"> 1782.314 </td>
-   <td style="text-align:right;"> 8.0368 </td>
-   <td style="text-align:right;"> 8.0366 </td>
-   <td style="text-align:right;"> 8.0370 </td>
-   <td style="text-align:right;"> 0.0004 </td>
+   <td style="text-align:right;"> 1778.785 </td>
+   <td style="text-align:right;"> 8.0209 </td>
+   <td style="text-align:right;"> 8.0207 </td>
+   <td style="text-align:right;"> 8.0211 </td>
+   <td style="text-align:right;"> 3e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 107 </td>
-   <td style="text-align:right;"> 1844.362 </td>
-   <td style="text-align:right;"> 14.1569 </td>
-   <td style="text-align:right;"> 14.1566 </td>
-   <td style="text-align:right;"> 14.1572 </td>
-   <td style="text-align:right;"> 0.0006 </td>
+   <td style="text-align:right;"> 1844.608 </td>
+   <td style="text-align:right;"> 14.1588 </td>
+   <td style="text-align:right;"> 14.1586 </td>
+   <td style="text-align:right;"> 14.1591 </td>
+   <td style="text-align:right;"> 5e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 108 </td>
-   <td style="text-align:right;"> 2024.503 </td>
-   <td style="text-align:right;"> 4.8761 </td>
-   <td style="text-align:right;"> 4.8761 </td>
-   <td style="text-align:right;"> 4.8761 </td>
-   <td style="text-align:right;"> 0.0001 </td>
+   <td style="text-align:right;"> 2024.655 </td>
+   <td style="text-align:right;"> 4.8765 </td>
+   <td style="text-align:right;"> 4.8764 </td>
+   <td style="text-align:right;"> 4.8765 </td>
+   <td style="text-align:right;"> 1e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 109 </td>
-   <td style="text-align:right;"> 1212.657 </td>
-   <td style="text-align:right;"> 5.3105 </td>
-   <td style="text-align:right;"> 5.3104 </td>
-   <td style="text-align:right;"> 5.3106 </td>
-   <td style="text-align:right;"> 0.0003 </td>
+   <td style="text-align:right;"> 1212.172 </td>
+   <td style="text-align:right;"> 5.3084 </td>
+   <td style="text-align:right;"> 5.3083 </td>
+   <td style="text-align:right;"> 5.3085 </td>
+   <td style="text-align:right;"> 2e-04 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 110 </td>
-   <td style="text-align:right;"> 1621.001 </td>
-   <td style="text-align:right;"> 6.3187 </td>
-   <td style="text-align:right;"> 6.3186 </td>
-   <td style="text-align:right;"> 6.3188 </td>
-   <td style="text-align:right;"> 0.0002 </td>
+   <td style="text-align:right;"> 1620.085 </td>
+   <td style="text-align:right;"> 6.3151 </td>
+   <td style="text-align:right;"> 6.3151 </td>
+   <td style="text-align:right;"> 6.3152 </td>
+   <td style="text-align:right;"> 2e-04 </td>
   </tr>
 </tbody>
 </table>
@@ -402,93 +403,93 @@ dist_summary <- censo_vivienda %>% group_by(DIST_ID) %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> 10101 </td>
-   <td style="text-align:right;"> 379.9948 </td>
-   <td style="text-align:right;"> 26.1344 </td>
-   <td style="text-align:right;"> 26.1309 </td>
-   <td style="text-align:right;"> 26.1380 </td>
-   <td style="text-align:right;"> 0.0070 </td>
+   <td style="text-align:right;"> 379.6071 </td>
+   <td style="text-align:right;"> 26.1078 </td>
+   <td style="text-align:right;"> 26.1054 </td>
+   <td style="text-align:right;"> 26.1108 </td>
+   <td style="text-align:right;"> 0.0054 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10102 </td>
-   <td style="text-align:right;"> 416.2242 </td>
-   <td style="text-align:right;"> 8.6569 </td>
-   <td style="text-align:right;"> 8.6565 </td>
-   <td style="text-align:right;"> 8.6573 </td>
-   <td style="text-align:right;"> 0.0009 </td>
+   <td style="text-align:right;"> 416.0615 </td>
+   <td style="text-align:right;"> 8.6535 </td>
+   <td style="text-align:right;"> 8.6532 </td>
+   <td style="text-align:right;"> 8.6540 </td>
+   <td style="text-align:right;"> 0.0008 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10103 </td>
-   <td style="text-align:right;"> 490.6836 </td>
-   <td style="text-align:right;"> 7.7006 </td>
-   <td style="text-align:right;"> 7.7004 </td>
-   <td style="text-align:right;"> 7.7009 </td>
-   <td style="text-align:right;"> 0.0005 </td>
+   <td style="text-align:right;"> 490.3833 </td>
+   <td style="text-align:right;"> 7.6959 </td>
+   <td style="text-align:right;"> 7.6957 </td>
+   <td style="text-align:right;"> 7.6962 </td>
+   <td style="text-align:right;"> 0.0004 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10104 </td>
-   <td style="text-align:right;"> 800.4298 </td>
-   <td style="text-align:right;"> 15.3251 </td>
-   <td style="text-align:right;"> 15.3244 </td>
-   <td style="text-align:right;"> 15.3258 </td>
-   <td style="text-align:right;"> 0.0014 </td>
+   <td style="text-align:right;"> 801.3848 </td>
+   <td style="text-align:right;"> 15.3434 </td>
+   <td style="text-align:right;"> 15.3428 </td>
+   <td style="text-align:right;"> 15.3441 </td>
+   <td style="text-align:right;"> 0.0013 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10105 </td>
-   <td style="text-align:right;"> 901.9284 </td>
-   <td style="text-align:right;"> 13.3106 </td>
-   <td style="text-align:right;"> 13.3104 </td>
-   <td style="text-align:right;"> 13.3108 </td>
+   <td style="text-align:right;"> 902.0885 </td>
+   <td style="text-align:right;"> 13.3130 </td>
+   <td style="text-align:right;"> 13.3128 </td>
+   <td style="text-align:right;"> 13.3132 </td>
    <td style="text-align:right;"> 0.0004 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10106 </td>
-   <td style="text-align:right;"> 430.7183 </td>
-   <td style="text-align:right;"> 6.2288 </td>
-   <td style="text-align:right;"> 6.2287 </td>
-   <td style="text-align:right;"> 6.2288 </td>
+   <td style="text-align:right;"> 430.8623 </td>
+   <td style="text-align:right;"> 6.2308 </td>
+   <td style="text-align:right;"> 6.2308 </td>
+   <td style="text-align:right;"> 6.2309 </td>
    <td style="text-align:right;"> 0.0001 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10107 </td>
-   <td style="text-align:right;"> 226.8546 </td>
-   <td style="text-align:right;"> 2.0129 </td>
-   <td style="text-align:right;"> 2.0129 </td>
-   <td style="text-align:right;"> 2.0129 </td>
+   <td style="text-align:right;"> 226.6559 </td>
+   <td style="text-align:right;"> 2.0111 </td>
+   <td style="text-align:right;"> 2.0111 </td>
+   <td style="text-align:right;"> 2.0112 </td>
    <td style="text-align:right;"> 0.0000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10108 </td>
-   <td style="text-align:right;"> 555.5816 </td>
-   <td style="text-align:right;"> 13.3393 </td>
-   <td style="text-align:right;"> 13.3388 </td>
-   <td style="text-align:right;"> 13.3397 </td>
+   <td style="text-align:right;"> 555.6962 </td>
+   <td style="text-align:right;"> 13.3420 </td>
+   <td style="text-align:right;"> 13.3417 </td>
+   <td style="text-align:right;"> 13.3425 </td>
    <td style="text-align:right;"> 0.0009 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10109 </td>
-   <td style="text-align:right;"> 1108.8313 </td>
-   <td style="text-align:right;"> 5.2467 </td>
-   <td style="text-align:right;"> 5.2466 </td>
-   <td style="text-align:right;"> 5.2468 </td>
+   <td style="text-align:right;"> 1110.6140 </td>
+   <td style="text-align:right;"> 5.2551 </td>
+   <td style="text-align:right;"> 5.2550 </td>
+   <td style="text-align:right;"> 5.2552 </td>
    <td style="text-align:right;"> 0.0002 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> 10110 </td>
-   <td style="text-align:right;"> 1077.4863 </td>
-   <td style="text-align:right;"> 6.6767 </td>
-   <td style="text-align:right;"> 6.6766 </td>
-   <td style="text-align:right;"> 6.6768 </td>
+   <td style="text-align:right;"> 1078.2147 </td>
+   <td style="text-align:right;"> 6.6812 </td>
+   <td style="text-align:right;"> 6.6812 </td>
+   <td style="text-align:right;"> 6.6813 </td>
    <td style="text-align:right;"> 0.0001 </td>
   </tr>
 </tbody>
 </table>
 
 
--   Save modified censo_vivienda without Pred_desocupadas column
+-   Save modified censo_vivienda without Pred_unoccupied column
 
 
 ```r
-censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_desocupadas)
+censo_vivienda_modified <- censo_vivienda %>% dplyr::select(-Pred_unoccupied)
 saveRDS(censo_vivienda_modified,
         file = "Recursos/04_Model_binomial/Data/01_censo_vivienda_desocupadas.rds")
 ```

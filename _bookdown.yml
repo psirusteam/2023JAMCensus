@@ -10,7 +10,9 @@ rmd_files: [
   "02_Housing_Census_Filters.qmd",
   "03_Consolidating_ugms_base.qmd",
   "04_Binomial_Housing_Model.qmd",
-  "05_Consolidating_the_vacant_housing_census.qmd"
+  "05_Consolidating_the_vacant_housing_census.qmd",
+  "06_Model_number_Person.qmd",
+  "07_Consolidated_Person_Number.qmd"
 ]
 
 language:

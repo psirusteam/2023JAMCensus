@@ -1,7 +1,7 @@
 --- 
 Title: "Area Model Methodologies for Census Person Count Imputation"
 Author: "Andrés Gutiérrez^[Regional Expert in Social Statistics - Economic Commission for Latin America and the Caribbean (ECLAC) - andres.gutierrez@cepal.org], Stalyn Guerrero^[Consultant - Economic Commission for Latin America and the Caribbean (ECLAC) - guerrerostalyn@gmail.com]"
-date: "2023-08-09"
+date: "2023-08-10"
 documentclass: book
 # bibliography: [CEPAL.bib]
 biblio-style: apalike
