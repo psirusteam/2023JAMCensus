@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.2 Summary Measures and Results Validation | Area-Model-Methodologies-for-Census-Person-Count-Imputation</title>
+  <meta name="description" content="Workshop on Capacity Building Installation" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.2 Summary Measures and Results Validation | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Workshop on Capacity Building Installation" />
+  <meta name="github-repo" content="psirusteam/HHS-Handbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.2 Summary Measures and Results Validation | Area-Model-Methodologies-for-Census-Person-Count-Imputation" />
+  
+  <meta name="twitter:description" content="Workshop on Capacity Building Installation" />
+  
+
+
+
+<meta name="date" content="2023-08-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="defining-occupied-and-unoccupied-houses..html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Workshop on Capacity Building Installation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Materials</a></li>
+<li class="chapter" data-level="1" data-path="installation-of-libraries-and-required-software-for-bayesian-area-models..html"><a href="installation-of-libraries-and-required-software-for-bayesian-area-models..html"><i class="fa fa-check"></i><b>1</b> Installation of Libraries and Required Software for Bayesian Area Models.</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="step-1-installing-software.html"><a href="step-1-installing-software.html"><i class="fa fa-check"></i><b>1.1</b> Step 1: Installing Software</a></li>
+<li class="chapter" data-level="1.2" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html"><i class="fa fa-check"></i><b>1.2</b> Step 2: Installing the following libraries in <em>R.</em></a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#data-visualization-and-manipulation"><i class="fa fa-check"></i><b>1.2.1</b> Data Visualization and Manipulation:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#statistical-modeling"><i class="fa fa-check"></i><b>1.2.2</b> Statistical Modeling:</a></li>
+<li class="chapter" data-level="1.2.3" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#survey-analysis"><i class="fa fa-check"></i><b>1.2.3</b> Survey Analysis:</a></li>
+<li class="chapter" data-level="1.2.4" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#data-manipulation-and-transformation"><i class="fa fa-check"></i><b>1.2.4</b> Data Manipulation and Transformation:</a></li>
+<li class="chapter" data-level="1.2.5" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#bayesian-analysis"><i class="fa fa-check"></i><b>1.2.5</b> Bayesian Analysis:</a></li>
+<li class="chapter" data-level="1.2.6" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#geospatial-analysis"><i class="fa fa-check"></i><b>1.2.6</b> Geospatial Analysis:</a></li>
+<li class="chapter" data-level="1.2.7" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#miscellaneous"><i class="fa fa-check"></i><b>1.2.7</b> Miscellaneous:</a></li>
+<li class="chapter" data-level="1.2.8" data-path="step-2-installing-the-following-libraries-in-r..html"><a href="step-2-installing-the-following-libraries-in-r..html#step-by-step-guide-to-install-rstan"><i class="fa fa-check"></i><b>1.2.8</b> Step-by-Step Guide to Install rstan</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="step-3-validation-of-installation---ensuring-proper-rstan-installation.html"><a href="step-3-validation-of-installation---ensuring-proper-rstan-installation.html"><i class="fa fa-check"></i><b>1.3</b> Step 3: Validation of Installation - Ensuring Proper <code>rstan</code> Installation</a></li>
+<li class="chapter" data-level="1.4" data-path="step-4-creating-a-google-earth-engine-account.html"><a href="step-4-creating-a-google-earth-engine-account.html"><i class="fa fa-check"></i><b>1.4</b> Step 4: Creating a Google Earth Engine Account:</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="standardization-and-validation-of-available-census-data-variables.html"><a href="standardization-and-validation-of-available-census-data-variables.html"><i class="fa fa-check"></i><b>2</b> Standardization and Validation of Available Census Data Variables</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="assigning-missing-values-to-the-h01a_total_personas-variable.html"><a href="assigning-missing-values-to-the-h01a_total_personas-variable.html"><i class="fa fa-check"></i><b>2.1</b> Assigning Missing Values to the ‘H01A_TOTAL_PERSONAS’ Variable</a></li>
+<li class="chapter" data-level="2.2" data-path="descriptive-values-of-the-census-data.html"><a href="descriptive-values-of-the-census-data.html"><i class="fa fa-check"></i><b>2.2</b> Descriptive Values of the Census Data</a>
+<ul>
+<li class="chapter" data-level="" data-path="descriptive-values-of-the-census-data.html"><a href="descriptive-values-of-the-census-data.html#numeric-variables"><i class="fa fa-check"></i>Numeric Variables</a></li>
+<li class="chapter" data-level="" data-path="descriptive-values-of-the-census-data.html"><a href="descriptive-values-of-the-census-data.html#character-variables"><i class="fa fa-check"></i>Character Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="organizing-results-in-a-database.html"><a href="organizing-results-in-a-database.html"><i class="fa fa-check"></i><b>2.3</b> Organizing Results in a Database</a></li>
+<li class="chapter" data-level="2.4" data-path="updating-the-dataset-based-on-report-results.html"><a href="updating-the-dataset-based-on-report-results.html"><i class="fa fa-check"></i><b>2.4</b> Updating the Dataset Based on Report Results</a></li>
+<li class="chapter" data-level="2.5" data-path="dataset-refinement-and-analysis.html"><a href="dataset-refinement-and-analysis.html"><i class="fa fa-check"></i><b>2.5</b> Dataset Refinement and Analysis</a></li>
+<li class="chapter" data-level="2.6" data-path="summary-and-analysis-of-data.html"><a href="summary-and-analysis-of-data.html"><i class="fa fa-check"></i><b>2.6</b> Summary and Analysis of Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="filtering-and-refining-census-data.html"><a href="filtering-and-refining-census-data.html"><i class="fa fa-check"></i><b>3</b> Filtering and Refining Census Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html"><i class="fa fa-check"></i><b>3.1</b> Reading Libraries, Databases, and Other Inputs</a>
+<ul>
+<li class="chapter" data-level="" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html#reading-housing-data-without-coordinates."><i class="fa fa-check"></i>Reading Housing Data without Coordinates.</a></li>
+<li class="chapter" data-level="" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html#changing-ugm-codes-in-the-housing-data."><i class="fa fa-check"></i>Changing UGM Codes in the Housing Data.</a></li>
+<li class="chapter" data-level="" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html#read-the-standardized-census-data."><i class="fa fa-check"></i>Read the Standardized Census Data.</a></li>
+<li class="chapter" data-level="" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html#adding-the-age-sex-base."><i class="fa fa-check"></i>Adding the Age-Sex Base.</a></li>
+<li class="chapter" data-level="3.1.1" data-path="reading-libraries-databases-and-other-inputs.html"><a href="reading-libraries-databases-and-other-inputs.html#inner-join-to-add-the-age-sex-base"><i class="fa fa-check"></i><b>3.1.1</b> Inner Join to Add the Age-Sex Base</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html"><i class="fa fa-check"></i><b>3.2</b> Applying filters and analyzing the data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#applying-the-first-filter-categorizing-households-with-residents-and-determining-greenpoint-status"><i class="fa fa-check"></i><b>3.2.1</b> Applying the first filter: categorizing households with residents and determining greenpoint status</a></li>
+<li class="chapter" data-level="3.2.2" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#applying-the-second-filter-worldpop-criterion"><i class="fa fa-check"></i><b>3.2.2</b> Applying the second filter: WorldPop criterion</a></li>
+<li class="chapter" data-level="3.2.3" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#summary-of-statistics-based-on-greenpoint2"><i class="fa fa-check"></i><b>3.2.3</b> Summary of Statistics Based on ‘greenpoint2’</a></li>
+<li class="chapter" data-level="3.2.4" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#defining-the-third-filter"><i class="fa fa-check"></i><b>3.2.4</b> Defining the Third Filter</a></li>
+<li class="chapter" data-level="3.2.5" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#combining-non-coordinated-houses"><i class="fa fa-check"></i><b>3.2.5</b> Combining non-coordinated houses</a></li>
+<li class="chapter" data-level="3.2.6" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#aggregating-statistics-and-summaries"><i class="fa fa-check"></i><b>3.2.6</b> Aggregating statistics and summaries</a></li>
+<li class="chapter" data-level="3.2.7" data-path="applying-filters-and-analyzing-the-data.html"><a href="applying-filters-and-analyzing-the-data.html#extracting-and-saving-subset"><i class="fa fa-check"></i><b>3.2.7</b> Extracting and Saving Subset</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="standardization-and-validation-of-covariates.html"><a href="standardization-and-validation-of-covariates.html"><i class="fa fa-check"></i><b>4</b> Standardization and validation of covariates</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="environment-preparation-and-library-loading.html"><a href="environment-preparation-and-library-loading.html"><i class="fa fa-check"></i><b>4.1</b> Environment Preparation and Library Loading</a></li>
+<li class="chapter" data-level="4.2" data-path="descriptive-values-of-the-ugms-base.html"><a href="descriptive-values-of-the-ugms-base.html"><i class="fa fa-check"></i><b>4.2</b> Descriptive values of the UGMS base</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="descriptive-values-of-the-ugms-base.html"><a href="descriptive-values-of-the-ugms-base.html#standardizing-variables-and-joining-datasets"><i class="fa fa-check"></i><b>4.2.1</b> Standardizing Variables and Joining Datasets</a></li>
+<li class="chapter" data-level="4.2.2" data-path="descriptive-values-of-the-ugms-base.html"><a href="descriptive-values-of-the-ugms-base.html#standardize-numeric-variables-using-z-score-scaling"><i class="fa fa-check"></i><b>4.2.2</b> Standardize numeric variables using z-score scaling</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="binomial-unit-model-for-occupied-dwellings.html"><a href="binomial-unit-model-for-occupied-dwellings.html"><i class="fa fa-check"></i><b>5</b> Binomial unit model for occupied dwellings</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preparing-the-environment-and-data.html"><a href="preparing-the-environment-and-data.html"><i class="fa fa-check"></i><b>5.1</b> Preparing the Environment and Data</a></li>
+<li class="chapter" data-level="5.2" data-path="defining-desocupada-column-classifying-occupancy-status.html"><a href="defining-desocupada-column-classifying-occupancy-status.html"><i class="fa fa-check"></i><b>5.2</b> Defining ‘Desocupada’ Column: Classifying Occupancy Status</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="defining-desocupada-column-classifying-occupancy-status.html"><a href="defining-desocupada-column-classifying-occupancy-status.html#counting-combinations-of-occupancy-status-and-greenpoint-values"><i class="fa fa-check"></i><b>5.2.1</b> Counting Combinations of Occupancy Status and Greenpoint Values</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="consolidation-of-census-housing-databases.html"><a href="consolidation-of-census-housing-databases.html"><i class="fa fa-check"></i><b>6</b> Consolidation of CENSUS housing databases</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="defining-occupied-and-unoccupied-houses..html"><a href="defining-occupied-and-unoccupied-houses..html"><i class="fa fa-check"></i><b>6.1</b> Defining occupied and unoccupied houses.</a></li>
+<li class="chapter" data-level="6.2" data-path="summary-measures-and-results-validation.html"><a href="summary-measures-and-results-validation.html"><i class="fa fa-check"></i><b>6.2</b> Summary Measures and Results Validation</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a Workshop on Capacity Building Installation </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="summary-measures-and-results-validation" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Summary Measures and Results Validation<a href="summary-measures-and-results-validation.html#summary-measures-and-results-validation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we calculate various summary measures to validate the results of our model. We calculate the mean and sum of different variables for the original unoccupied dwellings, the updated unoccupied dwellings, and the predicted unoccupied dwellings. We also proceed to calculate the mean estimation, confidence intervals, and percentages of unoccupied dwellings.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="summary-measures-and-results-validation.html#cb86-1" tabindex="-1"></a><span class="co"># Calculate means and sums of different variables</span></span>
+<span id="cb86-2"><a href="summary-measures-and-results-validation.html#cb86-2" tabindex="-1"></a>mean_original_desocupada <span class="ot">&lt;-</span> <span class="fu">mean</span>(censo_vivienda<span class="sc">$</span>Desocupada, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb86-3"><a href="summary-measures-and-results-validation.html#cb86-3" tabindex="-1"></a>mean_updated_desocupada <span class="ot">&lt;-</span> <span class="fu">mean</span>(censo_vivienda<span class="sc">$</span>Desocupada2)</span>
+<span id="cb86-4"><a href="summary-measures-and-results-validation.html#cb86-4" tabindex="-1"></a>mean_predicted_desocupada <span class="ot">&lt;-</span> <span class="fu">mean</span>(censo_vivienda<span class="sc">$</span>Pred_unoccupied)</span>
+<span id="cb86-5"><a href="summary-measures-and-results-validation.html#cb86-5" tabindex="-1"></a></span>
+<span id="cb86-6"><a href="summary-measures-and-results-validation.html#cb86-6" tabindex="-1"></a>sum_original_desocupada <span class="ot">&lt;-</span> <span class="fu">sum</span>(censo_vivienda<span class="sc">$</span>Desocupada, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb86-7"><a href="summary-measures-and-results-validation.html#cb86-7" tabindex="-1"></a>sum_updated_desocupada <span class="ot">&lt;-</span> <span class="fu">sum</span>(censo_vivienda<span class="sc">$</span>Desocupada2)</span>
+<span id="cb86-8"><a href="summary-measures-and-results-validation.html#cb86-8" tabindex="-1"></a>sum_predicted_desocupada <span class="ot">&lt;-</span> <span class="fu">sum</span>(censo_vivienda<span class="sc">$</span>Pred_unoccupied)</span></code></pre></div>
+<ul>
+<li>Calculate mean estimation, confidence intervals, and percentages</li>
+</ul>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="summary-measures-and-results-validation.html#cb87-1" tabindex="-1"></a>result_summary <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="summary-measures-and-results-validation.html#cb87-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MEInf_desocupadas =</span> Desocupada2 <span class="sc">-</span> LimInf_desocupadas,</span>
+<span id="cb87-3"><a href="summary-measures-and-results-validation.html#cb87-3" tabindex="-1"></a>         <span class="at">MESup_desocupadas =</span> LimSup_desocupadas <span class="sc">-</span> Desocupada2) <span class="sc">%&gt;%</span> </span>
+<span id="cb87-4"><a href="summary-measures-and-results-validation.html#cb87-4" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb87-5"><a href="summary-measures-and-results-validation.html#cb87-5" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(Desocupada2),</span>
+<span id="cb87-6"><a href="summary-measures-and-results-validation.html#cb87-6" tabindex="-1"></a>    <span class="at">Porcen =</span> <span class="fu">mean</span>(Desocupada2) ,</span>
+<span id="cb87-7"><a href="summary-measures-and-results-validation.html#cb87-7" tabindex="-1"></a>    <span class="at">LimInf_desocupadas =</span> (Porcen <span class="sc">-</span> (<span class="fu">mean</span>(MEInf_desocupadas)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb87-8"><a href="summary-measures-and-results-validation.html#cb87-8" tabindex="-1"></a>    <span class="at">LimSup_desocupadas =</span> (Porcen  <span class="sc">+</span> (<span class="fu">mean</span>(MESup_desocupadas)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb87-9"><a href="summary-measures-and-results-validation.html#cb87-9" tabindex="-1"></a>    <span class="at">Porcen =</span> Porcen <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb87-10"><a href="summary-measures-and-results-validation.html#cb87-10" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+Porcen
+</th>
+<th style="text-align:right;">
+LimInf_desocupadas
+</th>
+<th style="text-align:right;">
+LimSup_desocupadas
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+220951.2
+</td>
+<td style="text-align:right;">
+12.4978
+</td>
+<td style="text-align:right;">
+12.4978
+</td>
+<td style="text-align:right;">
+12.4979
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Group by PROV_ID and calculate MEInf_desocupadas and MESup_desocupadas</li>
+</ul>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="summary-measures-and-results-validation.html#cb88-1" tabindex="-1"></a>prov_summary <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(PROV_ID) <span class="sc">%&gt;%</span>   </span>
+<span id="cb88-2"><a href="summary-measures-and-results-validation.html#cb88-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-3"><a href="summary-measures-and-results-validation.html#cb88-3" tabindex="-1"></a>    <span class="at">MEInf_desocupadas =</span> Desocupada2 <span class="sc">-</span> LimInf_desocupadas,</span>
+<span id="cb88-4"><a href="summary-measures-and-results-validation.html#cb88-4" tabindex="-1"></a>    <span class="at">MESup_desocupadas =</span> LimSup_desocupadas <span class="sc">-</span> Desocupada2</span>
+<span id="cb88-5"><a href="summary-measures-and-results-validation.html#cb88-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb88-6"><a href="summary-measures-and-results-validation.html#cb88-6" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb88-7"><a href="summary-measures-and-results-validation.html#cb88-7" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(Desocupada2),</span>
+<span id="cb88-8"><a href="summary-measures-and-results-validation.html#cb88-8" tabindex="-1"></a>    <span class="at">Porcen =</span> <span class="fu">mean</span>(Desocupada2),</span>
+<span id="cb88-9"><a href="summary-measures-and-results-validation.html#cb88-9" tabindex="-1"></a>    <span class="at">LimInf_desocupadas =</span> (Porcen <span class="sc">-</span> (<span class="fu">mean</span>(MEInf_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb88-10"><a href="summary-measures-and-results-validation.html#cb88-10" tabindex="-1"></a>    <span class="at">LimSup_desocupadas =</span> (Porcen  <span class="sc">+</span> (<span class="fu">mean</span>(MESup_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb88-11"><a href="summary-measures-and-results-validation.html#cb88-11" tabindex="-1"></a>    <span class="at">Porcen =</span> Porcen <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb88-12"><a href="summary-measures-and-results-validation.html#cb88-12" tabindex="-1"></a>    <span class="at">Leng_IC =</span> LimSup_desocupadas <span class="sc">-</span> LimInf_desocupadas</span>
+<span id="cb88-13"><a href="summary-measures-and-results-validation.html#cb88-13" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+PROV_ID
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+Porcen
+</th>
+<th style="text-align:right;">
+LimInf_desocupadas
+</th>
+<th style="text-align:right;">
+LimSup_desocupadas
+</th>
+<th style="text-align:right;">
+Leng_IC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+45527.58
+</td>
+<td style="text-align:right;">
+8.5831
+</td>
+<td style="text-align:right;">
+8.5830
+</td>
+<td style="text-align:right;">
+8.5831
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+41170.38
+</td>
+<td style="text-align:right;">
+11.1458
+</td>
+<td style="text-align:right;">
+11.1457
+</td>
+<td style="text-align:right;">
+11.1459
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+17471.04
+</td>
+<td style="text-align:right;">
+9.4608
+</td>
+<td style="text-align:right;">
+9.4607
+</td>
+<td style="text-align:right;">
+9.4608
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+13335.66
+</td>
+<td style="text-align:right;">
+7.6901
+</td>
+<td style="text-align:right;">
+7.6900
+</td>
+<td style="text-align:right;">
+7.6901
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+32033.49
+</td>
+<td style="text-align:right;">
+21.4337
+</td>
+<td style="text-align:right;">
+21.4330
+</td>
+<td style="text-align:right;">
+21.4343
+</td>
+<td style="text-align:right;">
+0.0013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+45353.84
+</td>
+<td style="text-align:right;">
+23.4434
+</td>
+<td style="text-align:right;">
+23.4432
+</td>
+<td style="text-align:right;">
+23.4436
+</td>
+<td style="text-align:right;">
+0.0005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+26059.18
+</td>
+<td style="text-align:right;">
+15.5944
+</td>
+<td style="text-align:right;">
+15.5943
+</td>
+<td style="text-align:right;">
+15.5945
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Group by CANT_ID and calculate MEInf_desocupadas and MESup_desocupadas</li>
+</ul>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="summary-measures-and-results-validation.html#cb89-1" tabindex="-1"></a>cant_summary <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(CANT_ID) <span class="sc">%&gt;%</span>   </span>
+<span id="cb89-2"><a href="summary-measures-and-results-validation.html#cb89-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb89-3"><a href="summary-measures-and-results-validation.html#cb89-3" tabindex="-1"></a>    <span class="at">MEInf_desocupadas =</span> Desocupada2 <span class="sc">-</span> LimInf_desocupadas,</span>
+<span id="cb89-4"><a href="summary-measures-and-results-validation.html#cb89-4" tabindex="-1"></a>    <span class="at">MESup_desocupadas =</span> LimSup_desocupadas <span class="sc">-</span> Desocupada2</span>
+<span id="cb89-5"><a href="summary-measures-and-results-validation.html#cb89-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb89-6"><a href="summary-measures-and-results-validation.html#cb89-6" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb89-7"><a href="summary-measures-and-results-validation.html#cb89-7" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(Desocupada2),</span>
+<span id="cb89-8"><a href="summary-measures-and-results-validation.html#cb89-8" tabindex="-1"></a>    <span class="at">Porcen =</span> <span class="fu">mean</span>(Desocupada2),</span>
+<span id="cb89-9"><a href="summary-measures-and-results-validation.html#cb89-9" tabindex="-1"></a>    <span class="at">LimInf_desocupadas =</span> (Porcen <span class="sc">-</span> (<span class="fu">mean</span>(MEInf_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb89-10"><a href="summary-measures-and-results-validation.html#cb89-10" tabindex="-1"></a>    <span class="at">LimSup_desocupadas =</span> (Porcen  <span class="sc">+</span> (<span class="fu">mean</span>(MESup_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb89-11"><a href="summary-measures-and-results-validation.html#cb89-11" tabindex="-1"></a>    <span class="at">Porcen =</span> Porcen <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb89-12"><a href="summary-measures-and-results-validation.html#cb89-12" tabindex="-1"></a>    <span class="at">Leng_IC =</span> LimSup_desocupadas <span class="sc">-</span> LimInf_desocupadas</span>
+<span id="cb89-13"><a href="summary-measures-and-results-validation.html#cb89-13" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+CANT_ID
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+Porcen
+</th>
+<th style="text-align:right;">
+LimInf_desocupadas
+</th>
+<th style="text-align:right;">
+LimSup_desocupadas
+</th>
+<th style="text-align:right;">
+Leng_IC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:right;">
+7167.090
+</td>
+<td style="text-align:right;">
+7.3052
+</td>
+<td style="text-align:right;">
+7.3052
+</td>
+<td style="text-align:right;">
+7.3053
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+102
+</td>
+<td style="text-align:right;">
+1331.140
+</td>
+<td style="text-align:right;">
+5.5780
+</td>
+<td style="text-align:right;">
+5.5780
+</td>
+<td style="text-align:right;">
+5.5781
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+103
+</td>
+<td style="text-align:right;">
+3421.247
+</td>
+<td style="text-align:right;">
+4.9177
+</td>
+<td style="text-align:right;">
+4.9176
+</td>
+<td style="text-align:right;">
+4.9178
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+104
+</td>
+<td style="text-align:right;">
+1902.283
+</td>
+<td style="text-align:right;">
+12.7739
+</td>
+<td style="text-align:right;">
+12.7737
+</td>
+<td style="text-align:right;">
+12.7740
+</td>
+<td style="text-align:right;">
+0.0003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+105
+</td>
+<td style="text-align:right;">
+1791.283
+</td>
+<td style="text-align:right;">
+24.9587
+</td>
+<td style="text-align:right;">
+24.9576
+</td>
+<td style="text-align:right;">
+24.9597
+</td>
+<td style="text-align:right;">
+0.0021
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+106
+</td>
+<td style="text-align:right;">
+1782.314
+</td>
+<td style="text-align:right;">
+8.0368
+</td>
+<td style="text-align:right;">
+8.0366
+</td>
+<td style="text-align:right;">
+8.0370
+</td>
+<td style="text-align:right;">
+0.0004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+107
+</td>
+<td style="text-align:right;">
+1844.362
+</td>
+<td style="text-align:right;">
+14.1569
+</td>
+<td style="text-align:right;">
+14.1566
+</td>
+<td style="text-align:right;">
+14.1572
+</td>
+<td style="text-align:right;">
+0.0006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+108
+</td>
+<td style="text-align:right;">
+2024.503
+</td>
+<td style="text-align:right;">
+4.8761
+</td>
+<td style="text-align:right;">
+4.8761
+</td>
+<td style="text-align:right;">
+4.8761
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+109
+</td>
+<td style="text-align:right;">
+1212.657
+</td>
+<td style="text-align:right;">
+5.3105
+</td>
+<td style="text-align:right;">
+5.3104
+</td>
+<td style="text-align:right;">
+5.3106
+</td>
+<td style="text-align:right;">
+0.0003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+110
+</td>
+<td style="text-align:right;">
+1621.001
+</td>
+<td style="text-align:right;">
+6.3187
+</td>
+<td style="text-align:right;">
+6.3186
+</td>
+<td style="text-align:right;">
+6.3188
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Group by DIST_ID and calculate MEInf_desocupadas and MESup_desocupadas</li>
+</ul>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="summary-measures-and-results-validation.html#cb90-1" tabindex="-1"></a>dist_summary <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(DIST_ID) <span class="sc">%&gt;%</span>   </span>
+<span id="cb90-2"><a href="summary-measures-and-results-validation.html#cb90-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb90-3"><a href="summary-measures-and-results-validation.html#cb90-3" tabindex="-1"></a>    <span class="at">MEInf_desocupadas =</span> Desocupada2 <span class="sc">-</span> LimInf_desocupadas,</span>
+<span id="cb90-4"><a href="summary-measures-and-results-validation.html#cb90-4" tabindex="-1"></a>    <span class="at">MESup_desocupadas =</span> LimSup_desocupadas <span class="sc">-</span> Desocupada2</span>
+<span id="cb90-5"><a href="summary-measures-and-results-validation.html#cb90-5" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb90-6"><a href="summary-measures-and-results-validation.html#cb90-6" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb90-7"><a href="summary-measures-and-results-validation.html#cb90-7" tabindex="-1"></a>    <span class="at">total =</span> <span class="fu">sum</span>(Desocupada2),</span>
+<span id="cb90-8"><a href="summary-measures-and-results-validation.html#cb90-8" tabindex="-1"></a>    <span class="at">Porcen =</span> <span class="fu">mean</span>(Desocupada2),</span>
+<span id="cb90-9"><a href="summary-measures-and-results-validation.html#cb90-9" tabindex="-1"></a>    <span class="at">LimInf_desocupadas =</span> (Porcen <span class="sc">-</span> (<span class="fu">mean</span>(MEInf_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb90-10"><a href="summary-measures-and-results-validation.html#cb90-10" tabindex="-1"></a>    <span class="at">LimSup_desocupadas =</span> (Porcen  <span class="sc">+</span> (<span class="fu">mean</span>(MESup_desocupadas) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()))) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb90-11"><a href="summary-measures-and-results-validation.html#cb90-11" tabindex="-1"></a>    <span class="at">Porcen =</span> Porcen <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb90-12"><a href="summary-measures-and-results-validation.html#cb90-12" tabindex="-1"></a>    <span class="at">Leng_IC =</span> LimSup_desocupadas <span class="sc">-</span> LimInf_desocupadas</span>
+<span id="cb90-13"><a href="summary-measures-and-results-validation.html#cb90-13" tabindex="-1"></a>  )</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+DIST_ID
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+Porcen
+</th>
+<th style="text-align:right;">
+LimInf_desocupadas
+</th>
+<th style="text-align:right;">
+LimSup_desocupadas
+</th>
+<th style="text-align:right;">
+Leng_IC
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:right;">
+379.9948
+</td>
+<td style="text-align:right;">
+26.1344
+</td>
+<td style="text-align:right;">
+26.1309
+</td>
+<td style="text-align:right;">
+26.1380
+</td>
+<td style="text-align:right;">
+0.0070
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10102
+</td>
+<td style="text-align:right;">
+416.2242
+</td>
+<td style="text-align:right;">
+8.6569
+</td>
+<td style="text-align:right;">
+8.6565
+</td>
+<td style="text-align:right;">
+8.6573
+</td>
+<td style="text-align:right;">
+0.0009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10103
+</td>
+<td style="text-align:right;">
+490.6836
+</td>
+<td style="text-align:right;">
+7.7006
+</td>
+<td style="text-align:right;">
+7.7004
+</td>
+<td style="text-align:right;">
+7.7009
+</td>
+<td style="text-align:right;">
+0.0005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10104
+</td>
+<td style="text-align:right;">
+800.4298
+</td>
+<td style="text-align:right;">
+15.3251
+</td>
+<td style="text-align:right;">
+15.3244
+</td>
+<td style="text-align:right;">
+15.3258
+</td>
+<td style="text-align:right;">
+0.0014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10105
+</td>
+<td style="text-align:right;">
+901.9284
+</td>
+<td style="text-align:right;">
+13.3106
+</td>
+<td style="text-align:right;">
+13.3104
+</td>
+<td style="text-align:right;">
+13.3108
+</td>
+<td style="text-align:right;">
+0.0004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10106
+</td>
+<td style="text-align:right;">
+430.7183
+</td>
+<td style="text-align:right;">
+6.2288
+</td>
+<td style="text-align:right;">
+6.2287
+</td>
+<td style="text-align:right;">
+6.2288
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10107
+</td>
+<td style="text-align:right;">
+226.8546
+</td>
+<td style="text-align:right;">
+2.0129
+</td>
+<td style="text-align:right;">
+2.0129
+</td>
+<td style="text-align:right;">
+2.0129
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10108
+</td>
+<td style="text-align:right;">
+555.5816
+</td>
+<td style="text-align:right;">
+13.3393
+</td>
+<td style="text-align:right;">
+13.3388
+</td>
+<td style="text-align:right;">
+13.3397
+</td>
+<td style="text-align:right;">
+0.0009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10109
+</td>
+<td style="text-align:right;">
+1108.8313
+</td>
+<td style="text-align:right;">
+5.2467
+</td>
+<td style="text-align:right;">
+5.2466
+</td>
+<td style="text-align:right;">
+5.2468
+</td>
+<td style="text-align:right;">
+0.0002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10110
+</td>
+<td style="text-align:right;">
+1077.4863
+</td>
+<td style="text-align:right;">
+6.6767
+</td>
+<td style="text-align:right;">
+6.6766
+</td>
+<td style="text-align:right;">
+6.6768
+</td>
+<td style="text-align:right;">
+0.0001
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Save modified censo_vivienda without Pred_desocupadas column</li>
+</ul>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="summary-measures-and-results-validation.html#cb91-1" tabindex="-1"></a>censo_vivienda_modified <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Pred_desocupadas)</span>
+<span id="cb91-2"><a href="summary-measures-and-results-validation.html#cb91-2" tabindex="-1"></a><span class="fu">saveRDS</span>(censo_vivienda_modified,</span>
+<span id="cb91-3"><a href="summary-measures-and-results-validation.html#cb91-3" tabindex="-1"></a>        <span class="at">file =</span> <span class="st">&quot;Recursos/04_Model_binomial/Data/01_censo_vivienda_desocupadas.rds&quot;</span>)</span></code></pre></div>
+
+</div>
+<!-- </div> -->
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="defining-occupied-and-unoccupied-houses..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/psirusteam/2021ASDA/05_Consolidating_the_vacant_housing_census.qmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Area Model Methodologies for Census Person Count Imputation.pdf", "Area Model Methodologies for Census Person Count Imputation.epub", "Area Model Methodologies for Census Person Count Imputation.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

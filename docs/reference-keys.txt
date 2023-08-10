@@ -34,3 +34,10 @@ environment-preparation-and-library-loading
 descriptive-values-of-the-ugms-base
 standardizing-variables-and-joining-datasets
 standardize-numeric-variables-using-z-score-scaling
+binomial-unit-model-for-occupied-dwellings
+preparing-the-environment-and-data
+defining-desocupada-column-classifying-occupancy-status
+counting-combinations-of-occupancy-status-and-greenpoint-values
+consolidation-of-census-housing-databases
+defining-occupied-and-unoccupied-houses.
+summary-measures-and-results-validation

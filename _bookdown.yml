@@ -8,7 +8,9 @@ rmd_files: [
   "00_Installing_rstan.qmd",
   "01_Standardizing_the_Census.qmd",
   "02_Housing_Census_Filters.qmd",
-  "03_Consolidating_ugms_base.qmd"
+  "03_Consolidating_ugms_base.qmd",
+  "04_Binomial_Housing_Model.qmd",
+  "05_Consolidating_the_vacant_housing_census.qmd"
 ]
 
 language:
