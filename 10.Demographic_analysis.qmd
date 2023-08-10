@@ -1,0 +1,219 @@
+```{r setup, include=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE)
+library(kableExtra)
+library(tidyverse)
+library(magrittr)
+rstan::rstan_options(auto_write = TRUE) # speed up running time 
+tba <- function(dat, cap = NA){
+  kable(dat,
+      format = "html", digits =  4,
+      caption = cap) %>% 
+     kable_styling(bootstrap_options = "striped", full_width = F)%>%
+         kable_classic(full_width = F, html_font = "Arial Narrow")
+}
+```
+
+
+
+# Aggregated Estimations
+
+In this section, we illustrate the methodology employed to derive estimations for various aggregation levels, utilizing a set of custom functions tailored to this specific dataset. These functions facilitate the process of generating predictions and visualizations, allowing us to effectively analyze population estimates.
+
+```{r}
+### Cleaning R environment ###
+rm(list = ls())
+
+### Libraries ###
+
+library(tidyverse)
+library(data.table)
+library(openxlsx)
+library(magrittr)
+library(lme4)
+library(rstan)
+library(rstanarm)
+source("Recursos/07_Resultados/Rcodes/01_Agregados.R")
+cat("\f")
+```
+
+-   **plot_densidad**: This function plots the density of a normal distribution with specified mean and standard deviation.
+#' Additionally, it highlights a specific interval of the distribution with shaded area and segments in the plot.
+
+-   **Pred_desocupado**:  This function performs calculations and visualizations related to unemployment data in a census.
+
+-   **Pred_totPob**:  This function performs calculations and visualizations related to total population data in a census.
+
+-   **plot_piramide_pob**: Generates a population pyramid plot with bars and confidence intervals.
+
+-   **piramide_pob**:  Calculates and visualizes the population pyramid from census data.
+
+
+### Reading the census data.{-}
+
+```{r}
+censo_vivienda <- readRDS("Recursos/07_Resultados/Data/05_censo_vivienda_personas_grupo_edad.rds")
+```
+
+## Prediction of the unoccupied household rate 
+
+```{r}
+p1 <-  Pred_desocupado(censo_vivienda,
+                agrega = NULL,
+                Plot = TRUE,
+                filtro = NULL) 
+tba(p1)
+```
+
+
+```{r}
+Pred_desocupado(censo_vivienda, agrega = "PROV_ID") %>% tba()
+```
+
+
+```{r}
+Pred_desocupado(censo_vivienda, agrega = "CANT_ID") %>% 
+  head(20) %>% tba()
+```
+
+
+```{r}
+Pred_desocupado(censo_vivienda, agrega = "DIST_ID") %>% 
+  head(20) %>% tba()
+```
+
+
+```{r}
+p1 <- Pred_desocupado(censo_vivienda,
+                agrega = "DIST_ID",
+                Plot = TRUE,
+                filtro = "10101")
+tba(p1)
+```
+
+## Total Population Prediction
+
+```{r}
+## National level result
+
+p1 <- Pred_totPob(censo_vivienda,
+                     agrega = NULL,
+                     Plot = TRUE)
+
+tba(p1)  
+```
+
+
+```{r}
+## Provincial level result
+
+Pred_totPob(censo_vivienda,
+                     agrega = "PROV_ID",
+                     Plot = FALSE) %>% 
+  tba()
+```
+
+
+```{r}
+p1 <- Pred_totPob(censo_vivienda,
+                     agrega = "PROV_ID",
+                     filtro = "1",
+                     Plot = TRUE)
+
+tba(p1)
+```
+
+
+```{r}
+## Canton level result
+
+Pred_totPob(censo_vivienda,
+                     agrega = "CANT_ID",
+                     Plot = FALSE,
+                     filtro = NULL) %>% 
+head(10)  %>% tba()
+```
+
+
+```{r}
+## District level result
+p1 <- Pred_totPob(censo_vivienda,
+                     agrega = "DIST_ID",
+                     Plot = TRUE,
+                     filtro = "10110")
+tba(p1)
+```
+
+## Prediction of Total Population by Age and Gender
+
+```{r}
+piramide_pob(
+  censo = censo_vivienda,
+  Plot = FALSE,
+  agrega = NULL,
+  filtro = NULL
+) %>% tba()
+```
+
+
+```{r}
+p1 <- piramide_pob(
+  censo = censo_vivienda,
+  Plot = TRUE,
+  agrega = NULL,
+  filtro = NULL)
+```
+
+
+```{r,eval=FALSE}
+p1 <- piramide_pob(
+  censo = censo_vivienda,
+  Plot = FALSE,
+  agrega = "PROV_ID",
+  filtro = NULL
+)
+```
+
+
+```{r}
+p1 <- piramide_pob(
+  censo = censo_vivienda,
+  Plot = TRUE,
+  agrega = "PROV_ID",
+  filtro = "1"
+)
+```
+
+
+```{r}
+p1<- piramide_pob(
+  censo = censo_vivienda,
+  Plot = TRUE,
+  agrega = "PROV_ID",
+  filtro = "2"
+)
+```
+
+
+```{r}
+p1 <- piramide_pob(
+  censo = censo_vivienda,
+  Plot = TRUE,
+  agrega = "CANT_ID",
+  filtro = "101"
+)
+```
+
+
+```{r}
+p1<- piramide_pob(
+  censo = censo_vivienda,
+  Plot = TRUE,
+  agrega = "CANT_ID",
+  filtro = "102"
+)
+```
+

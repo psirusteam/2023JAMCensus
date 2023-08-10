@@ -12,7 +12,10 @@ rmd_files: [
   "04_Binomial_Housing_Model.qmd",
   "05_Consolidating_the_vacant_housing_census.qmd",
   "06_Model_number_Person.qmd",
-  "07_Consolidated_Person_Number.qmd"
+  "07_Consolidated_Person_Number.qmd",
+  "08_Modelo_multinomial.qmd",
+  "09_Multinomial_Model_creating_base.qmd",
+  "10.Demographic_analysis.qmd"
 ]
 
 language:

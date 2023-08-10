@@ -46,3 +46,10 @@ reading-the-census-data.
 preparing-data-for-model-1
 preparing-data-for-model-2
 consolidating-the-number-of-people-per-household
+multinomial-model-for-estimating-people-by-age-range-and-sex
+creating-the-census-base-with-predictions-from-the-multinomial-model
+results-by-provinces
+aggregated-estimations
+prediction-of-the-unoccupied-household-rate
+total-population-prediction
+prediction-of-total-population-by-age-and-gender

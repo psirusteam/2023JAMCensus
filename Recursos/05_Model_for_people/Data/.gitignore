@@ -1,2 +1,4 @@
 fit_poisson_ocupadas.rds
 fit_poisson_todas.rds
+fit_todas_bayes.rds
+fit_ocupadas_bayes.rds
