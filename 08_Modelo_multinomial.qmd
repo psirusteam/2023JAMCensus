@@ -22,7 +22,7 @@ tba <- function(dat, cap = NA){
 
 # Modelo multinomial para estimar personas por rango de edad y sexo
 
-En el paso final, modelamos la estructura demográfica de las Unidades Geográficas Pequeñas (UGMs) a nivel de provincia. Esta estructura consta de 40 subgrupos basados en la combinación de género y grupos de edad. Para estimar la demografía de hogares no observados, utilizamos la predicción condicional basada en los resultados del paso anterior.
+En el paso final, modelamos la estructura demográfica de las Unidades Geográficas Pequeñas a nivel de provincia. Esta estructura consta de 40 subgrupos basados en la combinación de género y grupos de edad. Para estimar la demografía de hogares no observados, utilizamos la predicción condicional basada en los resultados del paso anterior.
 
 Dada la naturaleza del fenómeno en estudio, se considera adecuada una distribución multinomial para el recuento de individuos en los 40 grupos. Aquí tienes una explicación del modelo:
 

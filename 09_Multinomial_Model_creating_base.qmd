@@ -15,7 +15,21 @@ cat("\f")             # Page break in R console
 
 ```
 
--   Reading the census data.
+-   Leer datos del censo.
+
+Este fragmento de código realiza las siguientes acciones:
+
+1. **Lectura de Datos del Censo**: Lee los datos del censo de viviendas y personas desde un archivo en formato RDS llamado "02_censo_vivienda_personas.rds".
+
+2. **Lectura del Modelo Multinomial Previamente Creado**: Lee el modelo multinomial previamente creado desde un archivo en formato RDS llamado "Multinomial_model.rds".
+
+3. **Cálculo de Probabilidades**: Calcula las probabilidades de pertenecer a cada categoría de resultado utilizando el modelo multinomial. Estas probabilidades se almacenan en un nuevo DataFrame llamado "probabilidad".
+
+4. **Copia de los Datos del Censo**: Crea una copia de los datos del censo de viviendas y personas en un nuevo DataFrame llamado "censo_vivienda_pred". Esto se hace para trabajar con una copia de los datos originales sin alterar los datos originales.
+
+5. **Cálculo de la Suma de Recuentos Predichos**: Calcula la suma de los recuentos predichos de personas en el censo y la muestra. Este cálculo utiliza la columna "pred_conteos" en el DataFrame "censo_vivienda_pred".
+
+6. **Identificación de Nombres de Columnas de Grupos de Edad**: Identifica las columnas en el DataFrame "censo_vivienda_pred" que corresponden a los grupos de edad. Estas columnas se almacenan en la variable "var_grupo" para su posterior uso.
 
 ```{r, eval=FALSE}
 censo_vivienda <- readRDS("Recursos/06_Model_Multinomial/Data/02_censo_vivienda_personas.rds") 
@@ -40,6 +54,27 @@ var_grupo <- grep(x = names(censo_vivienda_pred), pattern = "*_GRUPO\\d{,2}_sum$
 ```
 
 ## Resultados por Provincias
+
+Este fragmento de código realiza las siguientes acciones:
+
+1. **Filtrado de Datos del Censo para PROV_ID = 1 y Categorías Específicas de 'greenpoint2'**: Filtra los datos del censo para aquellas observaciones donde el valor de la columna "PROV_ID" es igual a "1" y la columna "greenpoint2" tiene uno de los siguientes valores: "Sin informacion pero n>=0" o "Sin informacion pero n>0". Los resultados de este filtro se almacenan en un nuevo DataFrame llamado "PROV_1".
+
+2. **Cálculo de Recuentos Predichos para Grupos de Edad en PROV_1**: Calcula los recuentos predichos para cada grupo de edad en "PROV_1". Utiliza la matriz de recuentos predichos "pred_conteos" en "PROV_1" y multiplica esta matriz por la matriz de probabilidades de pertenecer a cada grupo de edad específico en la provincia 1. Los resultados se almacenan en las columnas correspondientes a grupos de edad.
+
+3. **Cálculo del Límite Inferior de Recuentos Predichos para Grupos de Edad en PROV_1**: Calcula el límite inferior de los recuentos predichos para cada grupo de edad en "PROV_1". Utiliza la matriz de límites inferiores "MEInf_pred_conteos" en "PROV_1" y realiza una operación similar a la anterior para obtener los recuentos inferiores para cada grupo de edad.
+
+4. **Cálculo del Límite Superior de Recuentos Predichos para Grupos de Edad en PROV_1**: Calcula el límite superior de los recuentos predichos para cada grupo de edad en "PROV_1". Utiliza la matriz de límites superiores "MESup_pred_conteos" en "PROV_1" y realiza una operación similar a la anterior para obtener los recuentos superiores para cada grupo de edad.
+
+5. **Cálculo de la Suma de Recuentos Predichos para Grupos de Edad en PROV_1**: Calcula la suma de los recuentos predichos para cada grupo de edad en "PROV_1". Esto se realiza mediante la función `rowSums`, que suma los valores de cada fila en las columnas correspondientes a grupos de edad.
+
+6. **Cálculo de la Suma de Recuentos Predichos en PROV_1**: Calcula la suma de los recuentos predichos en "PROV_1" sumando la columna "pred_conteos".
+
+7. **Cálculo de la Suma de Límites Inferiores de Recuentos Predichos en PROV_1**: Calcula la suma de los límites inferiores de los recuentos predichos en "PROV_1" sumando la columna "MEInf_pred_conteos".
+
+8. **Cálculo de la Suma de Límites Superiores de Recuentos Predichos en PROV_1**: Calcula la suma de los límites superiores de los recuentos predichos en "PROV_1" sumando la columna "MESup_pred_conteos".
+
+Ten en cuenta que el código está etiquetado se repite para cada una delas provincias.
+
 
 -    PROV_ID = 1
 
@@ -332,6 +367,15 @@ prov_sin_informacion <-
 
 - Algunas validaciones
 
+Este fragmento de código lleva a cabo las siguientes acciones:
+
+1. **Filtrado y Recopilación de Datos para Todas las Provincias con Información Faltante (Missing Information)**: Filtra los datos de censo para todas las provincias donde el valor de la columna "greenpoint2" corresponde a uno de los siguientes: "Sin informacion pero n>=0" o "Sin informacion pero n>0". Los resultados se almacenan en un nuevo DataFrame llamado "PROV_todas".
+
+2. **Cálculo de Sumas por Fila y Suma Total de Recuentos Predichos para Provincias con Información Faltante**: Utiliza la función `rowSums` para calcular las sumas por fila de los valores en las columnas correspondientes a grupos de edad en "PROV_todas". Luego, calcula la suma total de los recuentos predichos sumando la columna "pred_conteos" en "PROV_todas".
+
+3. **Filtrado de Datos para Provincias con Información del Censo Completa (Censada)**: Filtra los datos de censo para todas las provincias donde el valor de la columna "greenpoint2" no corresponde a "Sin informacion pero n>=0" ni "Sin informacion pero n>0". Los resultados se almacenan en un nuevo DataFrame llamado "PROV_censada".
+
+
 ```{r, eval=FALSE}
 # Filter and gather data for all provinces with missing information
 PROV_todas <-
@@ -350,6 +394,16 @@ PROV_censada <-
 ```
 
 - Inicializar columnas para los límites inferior y superior de los recuentos previstos
+
+Este fragmento de código realiza las siguientes acciones:
+
+1. **Inicialización de Columnas para Límites Inferiores y Superiores de Recuentos Predichos en Provincias con Censo Completo**: Asigna valores iniciales de cero a las columnas correspondientes a los límites inferiores (MEInf) y superiores (MESup) de los recuentos predichos en el DataFrame "PROV_censada". Estas columnas se inicializan con ceros.
+
+2. **Combinación de DataFrames para Grupos de Edad**: Combina los DataFrames de "PROV_censada" (provincias con censos completos) y "prov_sin_informacion" (provincias con información faltante) para cada grupo de edad. Los resultados se almacenan en un nuevo DataFrame llamado "censo_vivienda_grupo_edad". Este nuevo DataFrame incluye las columnas "un_ID" (identificador único de vivienda), "var_grupo" (grupo de edad) y las columnas "var_grupo_MEInf" y "var_grupo_MESup" que representan los límites inferior y superior de los recuentos predichos.
+
+3. **Unión Interna de Datos del Censo con Datos Agrupados por Grupos de Edad**: Realiza una unión interna (inner join) entre los datos de censo originales (almacenados en un archivo RDS) y los datos del DataFrame "censo_vivienda_grupo_edad". Esto agrega la información de los límites inferiores y superiores de los recuentos predichos al conjunto de datos del censo original. El resultado de esta unión se almacena en un nuevo archivo RDS llamado "05_censo_vivienda_personas_grupo_edad.rds".
+
+
 
 ```{r, eval=FALSE}
 # in provinces with complete census

@@ -8,9 +8,9 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Workshop on Capacity Building Installation</a></li>
+        <li><a href="./">Modelos multinivel para el conteno de personas</a></li>
       after: |
-        <li><a Workshop on Capacity Building Installation </a></li>
+        <li><a Modelos multinivel para el conteno de personas </a></li>
     download: [pdf, epub, mobi]
     edit: https://github.com/psirusteam/2021ASDA/%s
     sharing:

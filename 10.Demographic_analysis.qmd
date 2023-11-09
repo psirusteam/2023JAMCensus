@@ -41,7 +41,7 @@ library(rstanarm)
 source("Recursos/07_Resultados/Rcodes/01_Agregados.R")
 cat("\f")
 ```
-- **plot_densidad**: Esta función grafica la densidad de una distribución normal con una media y desviación estándar especificadas. Además, resalta un intervalo específico de la distribución con un área sombreada y segmentos en el gráfico.
+- **plot_densidad**: Esta función gráfica la densidad de una distribución normal con una media y desviación estándar especificadas. Además, resalta un intervalo específico de la distribución con un área sombreada y segmentos en el gráfico.
 
 - **Pred_desocupado**: Esta función realiza cálculos y visualizaciones relacionados con los datos de desempleo en un censo.
 
@@ -52,13 +52,13 @@ cat("\f")
 - **piramide_pob**: Calcula y visualiza la pirámide de población a partir de los datos del censo.
 
 
-### Reading the census data.{-}
+### Leyendo la base del censo
 
 ```{r}
 censo_vivienda <- readRDS("Recursos/07_Resultados/Data/05_censo_vivienda_personas_grupo_edad.rds")
 ```
 
-## Prediction of the unoccupied household rate 
+## Predicción del porcentaje de viviendas desocupadas
 
 ```{r}
 p1 <-  Pred_desocupado(censo_vivienda,
@@ -82,7 +82,7 @@ Pred_desocupado(censo_vivienda, agrega = "CANT_ID") %>%
 
 ```{r}
 Pred_desocupado(censo_vivienda, agrega = "DIST_ID") %>% 
-  head(20) %>% tba()
+  head(10) %>% tba()
 ```
 
 
