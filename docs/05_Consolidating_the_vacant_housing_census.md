@@ -1,7 +1,7 @@
 
 
 
-# Consolidation of CENSUS housing databases
+# Consolidación de bases de datos de viviendas del CENSO
 
 
 ```r
@@ -26,7 +26,7 @@ Base_ugms <- readRDS("Recursos/04_Model_binomial/Data/Base_ugms_estandarizada.rd
 modelo_binomial <- readRDS("Recursos/04_Model_binomial/Data/Binomial_bayes_vivienda_desocupadas.rds")
 ```
 
-## Defining occupied and unoccupied houses.
+## Definición de viviendas ocupadas y desocupadas.
 
 
 ```r
@@ -40,7 +40,7 @@ censo_vivienda %<>% mutate(Desocupada = case_when(
 ) )
 ```
 
-The code first calculates the linear predictor using the posterior_linpred function for the modelo_binomial model, based on the Base_ugms data. It then transforms these linear predictions to obtain predicted probabilities of unoccupied dwellings using the logistic function (plogis).
+El código primero calcula el predictor lineal utilizando la función posterior_linpred para el modelo modelo_binomial, basándose en los datos de Base_ugms. Luego, transforma estas predicciones lineales para obtener las probabilidades predichas de viviendas desocupadas utilizando la función logística (plogis).
 
 
 ```r
@@ -51,7 +51,7 @@ pred_linear <- posterior_linpred(modelo_binomial,
 pred_unoccupied <- plogis(pred_linear)
 ```
 
-The next code block (commented out) deals with saving and loading the predicted unoccupied values from a file named "pred_unoccupied.rds." It checks the dimensions of the predicted values and the Base_ugms, and summarizes the means of the predicted values, checking for values below 0 and above 1
+El bloque de código siguiente (comentado) se encarga de guardar y cargar los valores predichos de viviendas desocupadas desde un archivo llamado "pred_unoccupied.rds". Comprueba las dimensiones de los valores predichos y la Base_ugms, y resume las medias de los valores predichos, verificando si hay valores por debajo de 0 y por encima de 1.
 
 
 ```r
@@ -70,7 +70,7 @@ sum(colMeans(pred_unoccupied) > 1)
 summary(colMeans(pred_unoccupied))
 ```
 
--   Calculate the 2.5th and 97.5th percentiles of predicted values
+-   Calcular los percentiles 2,5 y 97,5 de los valores previstos.
 
 
 ```r
@@ -84,7 +84,7 @@ sd_pred <- apply(pred_unoccupied, MARGIN = 2, sd)
 summary(sd_pred)
 ```
 
--   Create a data frame with prediction intervals
+-  Crear un data.frame con intervalos de predicción
 
 
 ```r
@@ -95,7 +95,7 @@ intervalos <- data.frame(UGM_ID = Base_ugms$UGM_ID,
 )
 ```
 
--   Inner join between censo_vivienda and intervalos based on UGM_ID
+-   Unión entre censo_vivienda y la base de intervalos para la UGM_ID
 
 
 ```r
@@ -113,9 +113,10 @@ censo_vivienda %<>%
   )
 ```
 
-## Summary Measures and Results Validation
+## Resumen de medidas y validación de resultados
 
-In this section, we calculate various summary measures to validate the results of our model. We calculate the mean and sum of different variables for the original unoccupied dwellings, the updated unoccupied dwellings, and the predicted unoccupied dwellings. We also proceed to calculate the mean estimation, confidence intervals, and percentages of unoccupied dwellings.
+En esta sección, calculamos varias medidas resumidas para validar los resultados de nuestro modelo. Calculamos la media y la suma de diferentes variables para las viviendas desocupadas originales, las viviendas desocupadas actualizadas y las viviendas desocupadas previstas. También se procede a calcular la estimación media, intervalos de confianza y porcentajes de viviendas desocupadas.
+
 
 
 ```r
@@ -129,7 +130,7 @@ sum_updated_desocupada <- sum(censo_vivienda$Desocupada2)
 sum_predicted_desocupada <- sum(censo_vivienda$Pred_unoccupied)
 ```
 
--   Calculate mean estimation, confidence intervals, and percentages
+- Calcular la estimación media, intervalos de confianza y porcentajes.
 
 
 ```r
@@ -165,7 +166,7 @@ result_summary <- censo_vivienda %>%
 </table>
 
 
--   Group by PROV_ID and calculate MEInf_desocupadas and MESup_desocupadas
+- Agrupar por PROV_ID y calcular MEInf_desocupadas y MESup_desocupadas
 
 
 ```r
@@ -255,7 +256,7 @@ prov_summary <- censo_vivienda %>% group_by(PROV_ID) %>%
 </tbody>
 </table>
 
--   Group by CANT_ID and calculate MEInf_desocupadas and MESup_desocupadas
+- Agrupar por CANT_ID y calcular MEInf_desocupadas y MESup_desocupadas
 
 
 ```r
@@ -370,7 +371,7 @@ cant_summary <- censo_vivienda %>% group_by(CANT_ID) %>%
 </table>
 
 
--   Group by DIST_ID and calculate MEInf_desocupadas and MESup_desocupadas
+- Agrupar por DIST_ID y calcular MEInf_desocupadas y MESup_desocupadas
 
 
 ```r
@@ -484,8 +485,7 @@ dist_summary <- censo_vivienda %>% group_by(DIST_ID) %>%
 </tbody>
 </table>
 
-
--   Save modified censo_vivienda without Pred_unoccupied column
+- Guardar censo_vivienda modificado sin columna Pred_unoccupied
 
 
 ```r

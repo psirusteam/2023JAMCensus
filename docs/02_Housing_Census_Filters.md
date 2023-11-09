@@ -1,15 +1,14 @@
 
 
 
+# Filtrado y Refinamiento de Datos del Censo
 
-# Filtering and Refining Census Data
+En el proceso de mejorar y depurar una base de datos del censo, es imperativo establecer reglas coherentes y replicables. En este contexto, el procedimiento de "Filtrado y Refinamiento de Datos del Censo" se vuelve esencial para mejorar la calidad de los datos y eliminar información irrelevante. A lo largo de los siguientes bloques de código, exploraremos cómo se aplicaron diversos filtros y técnicas de refinamiento a los datos del censo. Estos códigos nos guiarán a través de un proceso crucial para asegurar que los datos sean confiables y adecuados para un análisis posterior. Colectivamente, estos pasos nos permitirán obtener información más precisa y valiosa a partir de los datos del censo.
 
-In the process of enhancing and purifying census database, it is imperative to establish consistent and replicable rules. In this context, the procedure of "Census Data Filtering and Refinement" becomes essential in improving data quality and eliminating irrelevant information. Throughout the following code blocks, we will explore how diverse filters and refinement techniques were applied to census data. These codes will guide us through a crucial process to ensure that the data is reliable and suitable for further analysis. Collectively, these steps will empower us to obtain more precise and valuable insights from census data.
+## Lectura de Bibliotecas, Bases de Datos y Otros Insumos
 
+En esta sección, comenzamos cargando las bibliotecas necesarias utilizadas en todo el procesamiento. Además, definimos las columnas que se conservarán después de aplicar los filtros. También realizamos ajustes necesarios en las bases de datos, considerando actualizaciones en los códigos de las Unidades Geográficas Mínimas (UGM).
 
-## Reading Libraries, Databases, and Other Inputs
-
-In this section, we start by loading the necessary libraries used throughout the processing. Additionally, we define the columns that will be retained after applying the filters. We also make necessary adjustments to the databases, considering updates in the UGM codes.
 
 
 ```r
@@ -35,13 +34,14 @@ Nombre_Columna <-  c(
   "V02_OCUPACION_VIVIENDA" , 
   "H01A_TOTAL_PERSONAS" , 
   "greenpoint2",
-  "Filters"
+  "Filtros"
 ) 
 ```
 
-### Reading Housing Data without Coordinates.  {-}
+### Lectura de Datos de Vivienda sin Coordenadas. {-}
 
-In this section, we read the housing data from a CSV file that does not include coordinates. We then transform the data into the required format, including variables such as province ID, canton ID, and district ID based on the given codes. The resulting dataset will be used for further analysis and processing.
+En esta sección, leemos los datos de vivienda desde un archivo CSV que no incluye coordenadas. Luego transformamos los datos al formato requerido, incluyendo variables como el ID de provincia, el ID de cantón y el ID de distrito basados en los códigos proporcionados. El conjunto de datos resultante se utilizará para análisis y procesamiento adicionales.
+
 
 
 ```r
@@ -57,9 +57,11 @@ Viviendas_sin_coordenadas %<>%
     UGM_ID = paste0(CODIGO_PCD , ID_UGM), 
     H01A_TOTAL_PERSONAS = H01A_TOTAL_RESIDENTES_HAB)
 ```
-### Changing UGM Codes in the Housing Data. {-}
 
-In this section, we modify the UGM (Urban Geographic Micro-data) codes in the housing data to ensure consistency and accuracy. Certain UGM codes are updated according to predefined mappings. This step is crucial for maintaining uniformity in the data for subsequent analysis.
+### Cambio de Códigos UGM en los Datos de Vivienda. {-}
+
+En esta sección, modificamos los códigos UGM en los datos de vivienda para garantizar la consistencia y precisión. Algunos códigos UGM se actualizan de acuerdo con asignaciones predefinidas. Este paso es crucial para mantener la uniformidad de los datos para análisis posteriores.
+
 
 
 ```r
@@ -81,9 +83,9 @@ Viviendas_sin_coordenadas %<>%
            ))
 ```
 
-### Read the Standardized Census Data. {-}
+### Leer los Datos del Censo Estandarizados. {-}
 
-In this section, we read the standardized census data from a stored RDS (R Data Serialization) file. Similar to the previous step, we adjust the UGM codes to maintain data consistency. The standardized census data will serve as the foundation for the subsequent filtering and refinement processes.
+En esta sección, leemos los datos del censo estandarizados desde un archivo RDS (R Data Serialization) almacenado. Al igual que en el paso anterior, ajustamos los códigos UGM para mantener la consistencia de los datos. Los datos del censo estandarizados servirán como base para los procesos posteriores de filtrado y refinamiento.
 
 
 ```r
@@ -105,9 +107,10 @@ censo1 <- readRDS("Recursos/02_Census_Filters/Data/censo_estandarizado.rds") %>%
            ))
 ```
 
-### Adding the Age-Sex Base. {-}
+### Agregando la Base de Edad y Sexo. {-}
 
-In this section, we incorporate the age-sex base into the analysis. The age-sex base is read from a stored RDS file. As in previous steps, we ensure consistency by adjusting the UGM codes. The age-sex base provides valuable demographic information and will be utilized in the subsequent filtering and refinement procedures.
+En esta sección, incorporamos la base de edad y sexo al análisis. La base de edad y sexo se lee desde un archivo RDS almacenado. Al igual que en los pasos anteriores, garantizamos la consistencia ajustando los códigos UGM. La base de edad y sexo proporciona información demográfica valiosa y se utilizará en los procedimientos posteriores de filtrado y refinamiento.
+
 
 
 ```r
@@ -131,9 +134,11 @@ censo_sexo_edad <-
            ))
 ```
 
-### Inner Join to Add the Age-Sex Base
 
-In this section, an inner join operation is performed to integrate the age-sex base with the census data. The difference in row count between the two bases corresponds to paper-censused households that are included later in the process. The number of rows in the age-sex base is compared to the census data and the housing data without coordinates to verify the match.
+### Inner Join  para Agregar la Base de Edad y Sexo
+
+En esta sección, se realiza una operación de unión interna para integrar la base de edad y sexo con los datos censales. La diferencia en el recuento de filas entre las dos bases corresponde a los hogares censados en papel que se incluyen más adelante en el proceso. Se compara el número de filas en la base de edad y sexo con los datos del censo y los datos de viviendas sin coordenadas para verificar la coincidencia.
+
 
 
 ```r
@@ -160,17 +165,17 @@ censo1 <- inner_join(
 )
 ```
 
-The code begins by calculating the difference in row count between the age-sex base (`censo_sexo_edad`) and the existing census data (`censo1`). This difference represents the number of paper-censused households that are not yet included in the census data. Additionally, the number of rows in the housing data without coordinates (`Viviendas_sin_coordenadas`) is determined for reference.
+El código comienza calculando la diferencia en el recuento de filas entre la base de edad y sexo (`censo_sexo_edad`) y los datos censales existentes (`censo1`). Esta diferencia representa el número de hogares censados en papel que aún no se han incluido en los datos del censo. Además, se determina el número de filas en los datos de viviendas sin coordenadas (`Viviendas_sin_coordenadas`) como referencia.
 
-The `inner_join` operation is then applied to merge the age-sex base with the census data. The `join_by` function specifies the columns used for the join operation, ensuring a comprehensive integration of data from both sources. This process enhances the dataset by incorporating important demographic information for further analysis.
+A continuación, se aplica la operación `inner_join` para combinar la base de edad y sexo con los datos censales. La función `join_by` especifica las columnas utilizadas para la operación de unión, asegurando una integración completa de los datos de ambas fuentes. Este proceso mejora el conjunto de datos al incorporar información demográfica importante para un análisis posterior.
 
-## Applying filters and analyzing the data
+## Aplicación de filtros y análisis de datos
 
-In this section, we'll walk through the process of applying various filters and performing data analysis on the refined census data.
+En esta sección, vamos a guiarlo a través del proceso de aplicar varios filtros y realizar análisis de datos en los datos censales refinados.
 
-### Applying the first filter: categorizing households with residents and determining greenpoint status
+### Aplicación del primer filtro: categorización de hogares con residentes y determinación del estado de greenpoint
 
-    In this code block, we introduce the first filter by categorizing households as having residents ('si') or being empty ('no') based on the total number of residents in each household. Additionally, we determine the greenpoint status of each household, considering whether the greenpoint value is '0' and the 'personas' value is 'si'. The 'greenpoint' column is updated accordingly.
+En este bloque de código, introducimos el primer filtro al categorizar los hogares como con residentes ('si') o vacíos ('no') basándonos en el número total de residentes en cada hogar. Además, determinamos el estado de greenpoint de cada hogar, considerando si el valor de greenpoint es '0' y el valor de 'personas' es 'si'. La columna 'greenpoint' se actualiza en consecuencia.
 
 
 ```r
@@ -183,11 +188,12 @@ censo1 %<>%
 censo1 %<>% mutate(greenpoint = if_else(greenpoint == "0" & personas == "si", "1", greenpoint))  
 ```
 
-*greenpoint*: The house is reported as censused on the point map 
+*greenpoint*: La vivienda se reporta como censada en el mapa de puntos.
 
--   Analyzing the greenpoint distribution
+- Analizando la distribución de greenpoint
 
-    This code calculates the distribution of greenpoint status among households. It groups the data by 'greenpoint' status, counts the number of households in each category, and computes the percentage distribution. The results provide insights into the prevalence of greenpoint status among the census data.
+    En este código se calcula la distribución del estado de greenpoint entre los hogares. Agrupa los datos según el estado de 'greenpoint', cuenta el número de hogares en cada categoría y calcula la distribución porcentual. Los resultados ofrecen información sobre la prevalencia del estado de greenpoint entre los datos censales.
+
 
 
 ```r
@@ -225,9 +231,10 @@ greenpoint_distribution
 </tbody>
 </table>
 
--   Summarizing household characteristics by greenpoint status
+- Resumiendo las características de los hogares por estado de greenpoint
 
-    This code block summarizes household characteristics based on their greenpoint status. It calculates minimum and maximum numbers of residents in households, counts missing values for the total number of residents, and provides the total count of households for each greenpoint category.
+    Este bloque de código resume las características de los hogares según su estado de greenpoint. Calcula los números mínimos y máximos de residentes en los hogares, cuenta los valores faltantes para el número total de residentes y proporciona el recuento total de hogares para cada categoría de greenpoint.
+
 
 
 ```r
@@ -276,9 +283,10 @@ household_summary
 </tbody>
 </table>
 
--   Creating a contingency table for occupancy and greenpoint status
+- Creación de una tabla de contingencia para la ocupación y el estado de greenpoint
 
-    Here, a contingency table is generated to explore the relationship between occupancy and greenpoint status. The table cross-tabulates the 'V02_OCUPACION_VIVIENDA' column (occupancy) with the 'greenpoint' column, accounting for missing values as well. This provides a visual representation of how these two variables are distributed among households.
+En esta sección, se genera una tabla de contingencia para explorar la relación entre la ocupación y el estado de greenpoint. La tabla cruza la columna 'V02_OCUPACION_VIVIENDA' (ocupación) con la columna 'greenpoint', teniendo en cuenta los valores faltantes. Esto proporciona una representación visual de cómo se distribuyen estas dos variables entre los hogares.
+
 
 
 ```r
@@ -359,23 +367,26 @@ occupancy_greenpoint_table
   </tr>
 </tbody>
 </table>
--   Applying the Second Filter and Refinement
+- Aplicación del segundo filtro y refinamiento
 
-Continuing with the refinement process, the next filter is applied to further categorize households based on additional criteria. 
+Continuando con el proceso de refinamiento, se aplica el siguiente filtro para categorizar aún más los hogares en función de criterios adicionales.
 
 
 ```r
-censo2 <- censo1 %>% mutate(greenpoint2 = case_when(
-  H01A_TOTAL_PERSONAS > 0 ~ "Censado con informacion n>0",
-  RESUL_ENTREVISTA_VIV %in% c(1) & H01A_TOTAL_PERSONAS == 0 ~ "Censado con informacion n=0",
-  RESUL_ENTREVISTA_VIV %in% c(3,4) ~ "Sin informacion pero  n>0", 
-  is.na(greenpoint) & is.na(personas) ~ "Sin informacion pero n>=0",
-  V02_OCUPACION_VIVIENDA == "8" ~ "Sin informacion pero n>=0", 
-  TRUE ~ "Resto"
-))
+censo2 <- censo1 %>% mutate(
+  greenpoint2 = case_when(
+    H01A_TOTAL_PERSONAS > 0 ~ "Censado con informacion n>0",
+    RESUL_ENTREVISTA_VIV %in% c(1) &
+      H01A_TOTAL_PERSONAS == 0 ~ "Censado con informacion n=0",
+    RESUL_ENTREVISTA_VIV %in% c(3, 4) ~ "Sin informacion pero  n>0",
+    is.na(greenpoint) & is.na(personas) ~ "Sin informacion pero n>=0",
+    V02_OCUPACION_VIVIENDA == "8" ~ "Sin informacion pero n>=0",
+    TRUE ~ "Resto"
+  )
+)
 ```
 
-We introduce the "greenpoint2" status to further categorize households based on various conditions. This is based on a combination of factors such as the number of residents, interview outcomes, and housing occupation. Each household is assigned to a specific category such as "Censado con informacion n>0", "Censado con informacion n=0", and "Sin informacion pero  n>0", among others. This provides a more detailed way to describe the status of households based on different criteria.
+Introducimos el estado "greenpoint2" para categorizar aún más los hogares en función de diversas condiciones. Esto se basa en una combinación de factores como el número de residentes, los resultados de las entrevistas y la ocupación de la vivienda. Cada hogar se asigna a una categoría específica, como "Censado con información n>0", "Censado con información n=0" y "Sin información pero n>0", entre otros. Esto proporciona una forma más detallada de describir el estado de los hogares en función de diferentes criterios.
 
 
 
@@ -384,17 +395,13 @@ readRDS("Recursos/02_Census_Filters/RecurseBooks/census2.rds") %>%
   head(10) %>% tba()
 ```
 
-### Applying the second filter: WorldPop criterion
+### Aplicación del segundo filtro: Criterio WorldPop
 
- Starting from step 1, we also include all households with the 
- WorldPop variable (WP) that are within 1 standard deviation from its
- average value. However, if these households have zero residents in the 
- variable of interest, we mark that variable as "Not Available" (NA).
+A partir del paso 1, también incluimos todos los hogares con la variable WorldPop (WP) que se encuentran dentro de 1 desviación estándar del valor promedio. Sin embargo, si estos hogares tienen cero residentes en la variable de interés, marcamos esa variable como "No Disponible" (NA).
 
+- Calcular estadísticas resumen para la variable 'wpop_sum'
 
--   Calculate summary statistics for the 'wpop_sum' variable
-
-Firstly, we calculate summary statistics for the 'wpop_sum' variable, which is a covariate related to WorldPop. The summary statistics include the mean, standard deviation, minimum, and maximum values of 'wpop_sum'. These statistics help us establish the thresholds for the filter and are saved in a summary file.
+En primer lugar, calculamos estadísticas resumen para la variable 'wpop_sum', que es una covariable relacionada con WorldPop. Las estadísticas resumen incluyen el promedio, la desviación estándar, el valor mínimo y máximo de 'wpop_sum'. Estas estadísticas nos ayudan a establecer los umbrales para el filtro y se guardan en un archivo resumen.
 
 
 
@@ -426,10 +433,9 @@ wpop_summary
   </tr>
 </tbody>
 </table>
--   Calculation of Lower and Upper Thresholds
+- Cálculo de umbrales inferior y superior
 
-We use the summary statistics to calculate the lower and upper thresholds based on one standard deviation from the mean. These thresholds will help us identify households that meet the criteria of the second filter.
-
+Utilizamos las estadísticas resumen para calcular los umbrales inferior y superior basados en una desviación estándar del promedio. Estos umbrales nos ayudarán a identificar los hogares que cumplen con los criterios del segundo filtro.
 
 
 ```r
@@ -438,7 +444,7 @@ li <- 96.96515 - 143.1986 * 1  # Lower threshold
 ls <- 96.96515 + 143.1986 * 1  # Upper threshold
 ```
 
-We identify and count households that meet the criteria of the second filter. We focus on households with zero residents ('H01A_TOTAL_PERSONAS') but have 'wpop_sum' values outside the calculated threshold. We perform this count and group it by the 'V02_OCUPACION_VIVIENDA' variable.
+Identificamos y contamos los hogares que cumplen con los criterios del segundo filtro. Nos centramos en los hogares con cero residentes ('H01A_TOTAL_PERSONAS') pero que tienen valores de 'wpop_sum' fuera del umbral calculado. Realizamos esta cuenta y la agrupamos según la variable 'V02_OCUPACION_VIVIENDA'.
 
 
 ```r
@@ -490,9 +496,10 @@ filter_2_counts
 </tbody>
 </table>
 
--   Application of the Second Filter and Column Updates
+- Aplicación del Segundo Filtro y Actualizaciones de Columnas
 
-We apply the second filter to households and update the 'greenpoint2' and 'Filtros' columns accordingly. The 'greenpoint2' column is updated to reflect the new classification based on the WorldPop Criterion, while the 'Filtros' column indicates the application of the WorldPop Criterion or is set as NA as appropriate.
+Aplicamos el segundo filtro a los hogares y actualizamos las columnas 'greenpoint2' y 'Filtros' en consecuencia. La columna 'greenpoint2' se actualiza para reflejar la nueva clasificación basada en el Criterio WorldPop, mientras que la columna 'Filtros' indica la aplicación del Criterio WorldPop o se establece como NA según corresponda.
+
 
 
 ```r
@@ -1441,9 +1448,10 @@ censo3 <- censo2 %>% mutate(
 </tbody>
 </table>
 
--   Summary of Data Based on 'greenpoint2'
+- Resumen de datos basado en 'greenpoint2'
 
-We summarize the data based on the updated 'greenpoint2' variable. We calculate the distribution and percentages of households in each 'greenpoint2' category. These summaries help us understand the impact of the filter on household classification.
+Resumimos los datos en función de la variable 'greenpoint2' actualizada. Calculamos la distribución y los porcentajes de hogares en cada categoría de 'punto verde2'. Estos resúmenes nos ayudan a comprender el impacto del filtro en la clasificación de los hogares.
+
 
 
 ```r
@@ -1452,7 +1460,6 @@ summary_greenpoint2 <- censo3 %>%
   group_by(greenpoint2) %>%
   tally() %>%
   mutate(percentage = 100 * n / sum(n))
-summary_greenpoint2
 ```
 
 
@@ -1467,8 +1474,8 @@ summary_greenpoint2
 <tbody>
   <tr>
    <td style="text-align:left;"> Censado con informacion n=0 </td>
-   <td style="text-align:right;"> 175921 </td>
-   <td style="text-align:right;"> 10.0916 </td>
+   <td style="text-align:right;"> 212980 </td>
+   <td style="text-align:right;"> 12.2175 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
@@ -1477,20 +1484,20 @@ summary_greenpoint2
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
-   <td style="text-align:right;"> 285810 </td>
-   <td style="text-align:right;"> 16.3953 </td>
+   <td style="text-align:right;"> 341804 </td>
+   <td style="text-align:right;"> 19.6074 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:right;"> 505032 </td>
-   <td style="text-align:right;"> 28.9709 </td>
+   <td style="text-align:right;"> 411979 </td>
+   <td style="text-align:right;"> 23.6329 </td>
   </tr>
 </tbody>
 </table>
 
--   Summary of Data Based on 'greenpoint2' and 'Filtros'
+- Resumen de Datos Basado en 'greenpoint2' y 'Filtros'
 
-We generate an additional summary that considers the combination of the 'greenpoint2' and 'Filtros' variables. This provides more detailed information on how the WorldPop Criterion affects the existing categories.
+Generamos un resumen adicional que considera la combinación de las variables 'greenpoint2' y 'Filtros'. Esto proporciona información más detallada sobre cómo el Criterio WorldPop afecta las categorías existentes.
 
 
 ```r
@@ -1516,48 +1523,43 @@ summary_greenpoint2_filtros
 <tbody>
   <tr>
    <td style="text-align:left;"> Censado con informacion n=0 </td>
-   <td style="text-align:left;"> Entrevista igual a 1 y Número de personas igual a 0 </td>
-   <td style="text-align:right;"> 175921 </td>
-   <td style="text-align:right;"> 10.0916 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 212980 </td>
+   <td style="text-align:right;"> 100.0000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
-   <td style="text-align:left;"> Número de personas mayor a 0 </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 776478 </td>
-   <td style="text-align:right;"> 44.5422 </td>
+   <td style="text-align:right;"> 100.0000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
-   <td style="text-align:left;"> Entrevista  es 3 o 4 </td>
-   <td style="text-align:right;"> 285810 </td>
-   <td style="text-align:right;"> 16.3953 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 341804 </td>
+   <td style="text-align:right;"> 100.0000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
    <td style="text-align:left;"> Criterio WorldPop </td>
-   <td style="text-align:right;"> 135370 </td>
-   <td style="text-align:right;"> 7.7654 </td>
+   <td style="text-align:right;"> 193671 </td>
+   <td style="text-align:right;"> 47.0099 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Fuera de periodo(20 días) </td>
-   <td style="text-align:right;"> 151354 </td>
-   <td style="text-align:right;"> 8.6823 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Sin conteo de personas </td>
+   <td style="text-align:left;"> NA </td>
    <td style="text-align:right;"> 218308 </td>
-   <td style="text-align:right;"> 12.5231 </td>
+   <td style="text-align:right;"> 52.9901 </td>
   </tr>
 </tbody>
 </table>
 
-### Summary of Statistics Based on 'greenpoint2'
+### Resumen de estadísticas basado en 'greenpoint2'
 
-We calculate additional statistics for the 'greenpoint2' categories. These statistics include the minimum, maximum, number of missing values, and the total number of households in each category. This data is essential for understanding the distribution of residents in the filtered households.
+Calculamos estadísticas adicionales para las categorías 'greenpoint2'. Estas estadísticas incluyen el número mínimo, máximo, de valores faltantes y el número total de hogares en cada categoría. Estos datos son esenciales para comprender la distribución de los residentes en los hogares filtrados.
 
-Each of these stages contributes to the process of applying the second filter and refining census data based on the WorldPop Criterion. The generated summaries and data are useful for further analysis and are saved for future reference.
+Cada una de estas etapas contribuye al proceso de aplicar el segundo filtro y refinar los datos del censo con base en el Criterio WorldPop. Los resúmenes y datos generados son útiles para análisis posteriores y se guardan para referencia futura.
+
 
 
 ```r
@@ -1614,13 +1616,13 @@ summary_greenpoint2_stats
 </tbody>
 </table>
 
-### Defining the Third Filter
+### Definición del tercer filtro
 
-In this section, we introduce the implementation of the third filter, building upon the foundation laid by Filters 1 and 2. The third filter addresses households within UGMs that were surveyed after an interval greater than 20 days, and despite being classified as unoccupied, there is a lack of certainty regarding their occupancy status. These households are reclassified as having an unknown status. 
+En esta sección, presentamos la implementación del tercer filtro, basándose en los cimientos establecidos por los Filtros 1 y 2. El tercer filtro se dirige a hogares dentro de las UGM que fueron encuestados después de un intervalo mayor a 20 días y, a pesar de estar clasificados como desocupados, allí existe una falta de certeza sobre su estado de ocupación. Estos hogares se reclasifican como de estatus desconocido.
 
--   Reading the 'Desocupadas fuera periodo.xlsx' File
+- Lectura del Archivo 'Desocupadas fuera periodo.xlsx'
 
-We start by reading the 'Desocupadas fuera periodo.xlsx' file to gather information about households that were vacant but visited outside the standard interval. We specifically extract the 'UGM_ID' column for further analysis.
+Comenzamos leyendo el archivo 'Desocupadas fuera periodo.xlsx' para recopilar información sobre hogares que estaban desocupados pero visitados fuera del intervalo estándar. Extraemos específicamente la columna 'UGM_ID' para un análisis más detallado.
 
 
 
@@ -1632,9 +1634,10 @@ upms_reporte <- openxlsx::read.xlsx(
   select(UGM_ID = ID_UGM)
 ```
 
--   Applying Filters Based on 'upms_reporte' and Specific Conditions
+- Aplicación de filtros basados en 'upms_reporte' y condiciones específicas
 
-Using the gathered information from 'upms_reporte' and considering certain conditions, we apply additional filters to the existing data. We update the 'greenpoint2' and 'Filtros' columns based on the specified criteria.
+Utilizando la información recopilada de 'upms_reporte' y considerando ciertas condiciones, aplicamos filtros adicionales a los datos existentes. Actualizamos las columnas 'greenpoint2' y 'Filtros' según los criterios especificados.
+
 
 
 ```r
@@ -1651,9 +1654,10 @@ censo4 <- censo3 %>% mutate(
 )
 ```
 
--   Applying Additional Filters and Creating 'Filtros' Values
+- Aplicar filtros adicionales y crear valores de 'Filtros'
 
-We proceed by further refining the data by applying additional filters. The 'Filtros' values are updated based on various conditions such as the number of residents, the result of the interview ('RESUL_ENTREVISTA_VIV'), and the occupation of the dwelling ('V02_OCUPACION_VIVIENDA').
+Procedemos a refinar aún más los datos aplicando filtros adicionales. Los valores de 'Filtros' se actualizan en función de diversas condiciones como el número de residentes, el resultado de la entrevista ('RESUL_ENTREVISTA_VIV') y la ocupación de la vivienda ('V02_OCUPACION_VIVIENDA').
+
 
 
 ```r
@@ -1668,9 +1672,9 @@ censo4 %<>% mutate(Filtros = case_when(
 ))
 ```
 
--   Summarizing Data Based on 'greenpoint2' and 'Filtros' Variables
+- Resumir datos basados en las variables 'greenpoint2' y 'Filtros'
 
-We generate a summary of the data based on the updated 'greenpoint2' and 'Filtros' variables. The summary provides insights into the distribution of households across different categories.
+Generamos un resumen de los datos en base a las variables 'greenpoint2' y 'Filtros' actualizadas. El resumen proporciona información sobre la distribución de hogares en diferentes categorías.
 
 
 ```r
@@ -1731,9 +1735,9 @@ summary_greenpoint2_filtros <- censo4 %>%
 </tbody>
 </table>
 
--   Summarizing Data Based on 'greenpoint2' Variable
+- Resumir datos basados en la variable 'greenpoint2'
 
-Similarly, we create another summary of the data, this time focusing solely on the 'greenpoint2' variable. This summary helps us understand the impact of the third filter on the classification of households.
+De manera similar, creamos otro resumen de los datos, esta vez centrándonos únicamente en la variable 'puntoverde2'. Este resumen nos ayuda a comprender el impacto del tercer filtro en la clasificación de los hogares.
 
 
 ```r
@@ -1776,9 +1780,10 @@ summary_greenpoint2 <- censo4 %>%
 </tbody>
 </table>
 
-### Combining non-coordinated houses 
+### Combinando casas no coordinadas
 
-Selecting non-coordinated houses from the 'censo_sexo_edad' dataset and inner joining with 'Viviendas_sin_coordenadas'
+Selección de casas no coordinadas del conjunto de datos 'censo_sexo_edad' y unión interna con 'Viviendas_sin_coordenadas'
+
 
 
 ```r
@@ -1804,7 +1809,7 @@ censo4 %<>% mutate(greenpoint2 = case_when(
 ))
 ```
 
-### Aggregating statistics and summaries
+### Agregación de estadísticas y resúmenes
 
 
 ```r
@@ -1860,7 +1865,7 @@ summary1 <- censo4 %>%
 </tbody>
 </table>
 
--   Summarizing statistics for the 'censo4' dataset based on 'greenpoint2' and 'Filtros' columns
+- Resumir estadísticas para el conjunto de datos 'censo4' basado en las columnas 'greenpoint2' y 'Filtros'
 
 
 ```r
@@ -1935,7 +1940,7 @@ summary2 <- censo4 %>%
 </tbody>
 </table>
 
--   Summarizing statistics for the 'censo4' dataset based on 'greenpoint2' and 'Filtros' columns
+- Resumir estadísticas para el conjunto de datos 'censo4' basado en las columnas 'greenpoint2' y 'Filtros'
 
 
 
@@ -1997,7 +2002,8 @@ summary3 <- censo4 %>%
 </table>
 
 
--   Counting occurrences of 'un_ID' and filtering for duplicates
+- Contar apariciones de 'un_ID' y filtrar duplicados
+
 
 ```r
 duplicated_un_ID <- censo4 %>% 
@@ -2007,13 +2013,13 @@ duplicated_un_ID <- censo4 %>%
 duplicated_un_ID
 ```
 
-### Extracting and Saving Subset
+### Extraer y guardar subconjunto
 
 
 ```r
 # Selecting columns from 'censo4' that match 'Nombre_Columna' and contain 'GRUPO'
 paso <- censo4 %>% select(
-  all_of(Nombre_Columna),
+  all_of(Nombre_Columna[11]),
   matches("GRUPO")
 )
 

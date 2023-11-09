@@ -1,15 +1,11 @@
 
 
 
-# Estimation of the number of people per household
+# Estimación del número de personas por hogar
 
 
 
 ```r
-### Cleaning R environment ###
-# Clear the workspace by removing all variables
-rm(list = ls())
-
 ### Libraries ###
 # Load required libraries
 library(tidyverse)  # For data manipulation and visualization
@@ -22,7 +18,7 @@ library(rstanarm)  # For fitting Bayesian regression models
 cat("\f")  # Clear the console
 ```
 
-## Reading the census data.
+## Lectura de los datos del censo.
 
 
 ```r
@@ -32,7 +28,7 @@ censo_vivienda <- readRDS("Recursos/05_Model_for_people/Data/censo_viviendas.rds
 Base_ugms <- readRDS("Recursos/05_Model_for_people/Data/Base_ugms_estandarizada.rds")
 ```
 
-## Preparing data for Model 1 
+## Preparando datos para el Modelo 1
 
 
 
@@ -56,7 +52,7 @@ base_ugm_estima_todas <-
 nrow(base_ugm_estima_todas)
 ```
 
--   Fit a Stan GLM model to estimate total population means
+- Ajustar un modelo Stan GLM para estimar las medias de la población total
 
 
 ```r
@@ -98,7 +94,7 @@ saveRDS(modelo_todas,
         "Recursos/05_Model_for_people/Data/fit_poisson_todas.rds")
 ```
 
-## Preparing data for Model 2 
+## Preparando datos para el Modelo 2
 
 
 ```r
@@ -121,7 +117,7 @@ base_ugm_estima_ocupadas <-
 nrow(base_ugm_estima_ocupadas)
 ```
 
--   Fit a Stan GLM model for occupied households
+- Instalar un modelo Stan GLM para viviendas ocupadas.
 
 
 ```r

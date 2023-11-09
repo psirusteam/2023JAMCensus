@@ -1,0 +1,4469 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.2 Aplicación de filtros y análisis de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos</title>
+  <meta name="description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.2 Aplicación de filtros y análisis de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  <meta name="github-repo" content="psirusteam/HHS-Handbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.2 Aplicación de filtros y análisis de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  
+  <meta name="twitter:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  
+
+
+
+<meta name="date" content="2023-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"/>
+<link rel="next" href="estandarización-y-validación-de-covariables.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Workshop on Capacity Building Installation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
+<li class="chapter" data-level="1" data-path="instalación-de-bibliotecas-y-software-necesario-para-modelos-de-censo-con-enfoque-bayesiano.html"><a href="instalación-de-bibliotecas-y-software-necesario-para-modelos-de-censo-con-enfoque-bayesiano.html"><i class="fa fa-check"></i><b>1</b> Instalación de bibliotecas y software necesario para modelos de censo con enfoque bayesiano</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="paso-1-instalación-del-software.html"><a href="paso-1-instalación-del-software.html"><i class="fa fa-check"></i><b>1.1</b> Paso 1: Instalación del software</a></li>
+<li class="chapter" data-level="1.2" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><i class="fa fa-check"></i><b>1.2</b> Paso 2: Instalar las siguientes bibliotecas en <em>R.</em></a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#visualización-y-manipulación-de-datos"><i class="fa fa-check"></i><b>1.2.1</b> Visualización y manipulación de datos:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#modelos-estadísticos"><i class="fa fa-check"></i><b>1.2.2</b> Modelos estadísticos:</a></li>
+<li class="chapter" data-level="1.2.3" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#analisis-de-encuestas"><i class="fa fa-check"></i><b>1.2.3</b> Analisis de encuestas:</a></li>
+<li class="chapter" data-level="1.2.4" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#manipulación-y-transformación-de-datos"><i class="fa fa-check"></i><b>1.2.4</b> Manipulación y Transformación de Datos:</a></li>
+<li class="chapter" data-level="1.2.5" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#análisis-bayesiano"><i class="fa fa-check"></i><b>1.2.5</b> Análisis Bayesiano:</a></li>
+<li class="chapter" data-level="1.2.6" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#geospatial-analysis"><i class="fa fa-check"></i><b>1.2.6</b> Geospatial Analysis:</a></li>
+<li class="chapter" data-level="1.2.7" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#misceláneas"><i class="fa fa-check"></i><b>1.2.7</b> Misceláneas:</a></li>
+<li class="chapter" data-level="1.2.8" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#guía-paso-a-paso-para-instalar-rstan"><i class="fa fa-check"></i><b>1.2.8</b> Guía paso a paso para instalar <code>rstan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="paso-3-validación-de-la-instalación-garantizar-una-instalación-adecuada-de-rstan.html"><a href="paso-3-validación-de-la-instalación-garantizar-una-instalación-adecuada-de-rstan.html"><i class="fa fa-check"></i><b>1.3</b> Paso 3: Validación de la instalación: garantizar una instalación adecuada de <code>rstan</code></a></li>
+<li class="chapter" data-level="1.4" data-path="paso-4-crear-una-cuenta-de-google-earth-engine.html"><a href="paso-4-crear-una-cuenta-de-google-earth-engine.html"><i class="fa fa-check"></i><b>1.4</b> Paso 4: Crear una cuenta de Google Earth Engine:</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estandarización-y-validación-de-variables-de-datos-censales-disponibles.html"><a href="estandarización-y-validación-de-variables-de-datos-censales-disponibles.html"><i class="fa fa-check"></i><b>2</b> Estandarización y validación de variables de datos censales disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="asignación-de-valores-faltantes-a-la-variable-h01a_total_personas.html"><a href="asignación-de-valores-faltantes-a-la-variable-h01a_total_personas.html"><i class="fa fa-check"></i><b>2.1</b> Asignación de valores faltantes a la variable <code>H01A_TOTAL_PERSONAS</code></a></li>
+<li class="chapter" data-level="2.2" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html"><i class="fa fa-check"></i><b>2.2</b> Valores Descriptivos de los Datos Censos</a>
+<ul>
+<li class="chapter" data-level="" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html#variables-numéricas"><i class="fa fa-check"></i>Variables numéricas</a></li>
+<li class="chapter" data-level="" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html#variables-de-caracteres"><i class="fa fa-check"></i>Variables de caracteres</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="organización-de-resultados-en-una-base-de-datos.html"><a href="organización-de-resultados-en-una-base-de-datos.html"><i class="fa fa-check"></i><b>2.3</b> Organización de resultados en una base de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html"><a href="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html"><i class="fa fa-check"></i><b>2.4</b> Actualización del conjunto de datos basada en los resultados del informe</a></li>
+<li class="chapter" data-level="2.5" data-path="refinamiento-y-análisis-del-conjunto-de-datos.html"><a href="refinamiento-y-análisis-del-conjunto-de-datos.html"><i class="fa fa-check"></i><b>2.5</b> Refinamiento y Análisis del Conjunto de Datos</a></li>
+<li class="chapter" data-level="2.6" data-path="resumen-y-análisis-de-datos.html"><a href="resumen-y-análisis-de-datos.html"><i class="fa fa-check"></i><b>2.6</b> Resumen y Análisis de Datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="filtrado-y-refinamiento-de-datos-del-censo.html"><a href="filtrado-y-refinamiento-de-datos-del-censo.html"><i class="fa fa-check"></i><b>3</b> Filtrado y Refinamiento de Datos del Censo</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><i class="fa fa-check"></i><b>3.1</b> Lectura de Bibliotecas, Bases de Datos y Otros Insumos</a>
+<ul>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#lectura-de-datos-de-vivienda-sin-coordenadas."><i class="fa fa-check"></i>Lectura de Datos de Vivienda sin Coordenadas.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#cambio-de-códigos-ugm-en-los-datos-de-vivienda."><i class="fa fa-check"></i>Cambio de Códigos UGM en los Datos de Vivienda.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#leer-los-datos-del-censo-estandarizados."><i class="fa fa-check"></i>Leer los Datos del Censo Estandarizados.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#agregando-la-base-de-edad-y-sexo."><i class="fa fa-check"></i>Agregando la Base de Edad y Sexo.</a></li>
+<li class="chapter" data-level="3.1.1" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#inner-join-para-agregar-la-base-de-edad-y-sexo"><i class="fa fa-check"></i><b>3.1.1</b> Inner Join para Agregar la Base de Edad y Sexo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html"><i class="fa fa-check"></i><b>3.2</b> Aplicación de filtros y análisis de datos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-primer-filtro-categorización-de-hogares-con-residentes-y-determinación-del-estado-de-greenpoint"><i class="fa fa-check"></i><b>3.2.1</b> Aplicación del primer filtro: categorización de hogares con residentes y determinación del estado de greenpoint</a></li>
+<li class="chapter" data-level="3.2.2" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-segundo-filtro-criterio-worldpop"><i class="fa fa-check"></i><b>3.2.2</b> Aplicación del segundo filtro: Criterio WorldPop</a></li>
+<li class="chapter" data-level="3.2.3" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#resumen-de-estadísticas-basado-en-greenpoint2"><i class="fa fa-check"></i><b>3.2.3</b> Resumen de estadísticas basado en ‘greenpoint2’</a></li>
+<li class="chapter" data-level="3.2.4" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#definición-del-tercer-filtro"><i class="fa fa-check"></i><b>3.2.4</b> Definición del tercer filtro</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#combinando-casas-no-coordinadas"><i class="fa fa-check"></i><b>3.2.5</b> Combinando casas no coordinadas</a></li>
+<li class="chapter" data-level="3.2.6" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#agregación-de-estadísticas-y-resúmenes"><i class="fa fa-check"></i><b>3.2.6</b> Agregación de estadísticas y resúmenes</a></li>
+<li class="chapter" data-level="3.2.7" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#extraer-y-guardar-subconjunto"><i class="fa fa-check"></i><b>3.2.7</b> Extraer y guardar subconjunto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estandarización-y-validación-de-covariables.html"><a href="estandarización-y-validación-de-covariables.html"><i class="fa fa-check"></i><b>4</b> Estandarización y validación de covariables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="preparación-del-entorno-y-carga-de-bibliotecas.html"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html"><i class="fa fa-check"></i><b>4.1</b> Preparación del entorno y carga de bibliotecas</a></li>
+<li class="chapter" data-level="4.2" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html"><i class="fa fa-check"></i><b>4.2</b> Valores descriptivos de la base de UGMs</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html#estandarización-de-variables-y-unión-de-conjuntos-de-datos."><i class="fa fa-check"></i><b>4.2.1</b> Estandarización de variables y unión de conjuntos de datos.</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html#estandarizar-las-variables-numéricas-utilizando-la-escala-de-puntuación-z-z-score."><i class="fa fa-check"></i><b>4.2.2</b> Estandarizar las variables numéricas utilizando la escala de puntuación z (z-score).</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelo-binomial-de-unidad-para-viviendas-ocupadas.html"><a href="modelo-binomial-de-unidad-para-viviendas-ocupadas.html"><i class="fa fa-check"></i><b>5</b> Modelo binomial de unidad para viviendas ocupadas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preparación-del-entorno-y-los-datos.html"><a href="preparación-del-entorno-y-los-datos.html"><i class="fa fa-check"></i><b>5.1</b> Preparación del entorno y los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><a href="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><i class="fa fa-check"></i><b>5.2</b> Definición de la columna ‘Desocupada’: Clasificación del estado de ocupación</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><a href="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html#conteo-de-combinaciones-de-estado-de-ocupación-y-valores-de-greenpoint"><i class="fa fa-check"></i><b>5.2.1</b> Conteo de Combinaciones de Estado de Ocupación y Valores de ‘Greenpoint’</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="consolidación-de-bases-de-datos-de-viviendas-del-censo.html"><a href="consolidación-de-bases-de-datos-de-viviendas-del-censo.html"><i class="fa fa-check"></i><b>6</b> Consolidación de bases de datos de viviendas del CENSO</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="definición-de-viviendas-ocupadas-y-desocupadas..html"><a href="definición-de-viviendas-ocupadas-y-desocupadas..html"><i class="fa fa-check"></i><b>6.1</b> Definición de viviendas ocupadas y desocupadas.</a></li>
+<li class="chapter" data-level="6.2" data-path="resumen-de-medidas-y-validación-de-resultados.html"><a href="resumen-de-medidas-y-validación-de-resultados.html"><i class="fa fa-check"></i><b>6.2</b> Resumen de medidas y validación de resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimación-del-número-de-personas-por-hogar.html"><a href="estimación-del-número-de-personas-por-hogar.html"><i class="fa fa-check"></i><b>7</b> Estimación del número de personas por hogar</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lectura-de-los-datos-del-censo..html"><a href="lectura-de-los-datos-del-censo..html"><i class="fa fa-check"></i><b>7.1</b> Lectura de los datos del censo.</a></li>
+<li class="chapter" data-level="7.2" data-path="preparando-datos-para-el-modelo-1.html"><a href="preparando-datos-para-el-modelo-1.html"><i class="fa fa-check"></i><b>7.2</b> Preparando datos para el Modelo 1</a></li>
+<li class="chapter" data-level="7.3" data-path="preparando-datos-para-el-modelo-2.html"><a href="preparando-datos-para-el-modelo-2.html"><i class="fa fa-check"></i><b>7.3</b> Preparando datos para el Modelo 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="consolidar-el-número-de-personas-por-hogar.html"><a href="consolidar-el-número-de-personas-por-hogar.html"><i class="fa fa-check"></i><b>8</b> Consolidar el número de personas por hogar</a></li>
+<li class="chapter" data-level="9" data-path="modelo-multinomial-para-estimar-personas-por-rango-de-edad-y-sexo.html"><a href="modelo-multinomial-para-estimar-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>9</b> Modelo multinomial para estimar personas por rango de edad y sexo</a></li>
+<li class="chapter" data-level="10" data-path="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html"><i class="fa fa-check"></i><b>10</b> Creando la base censal con predicciones del modelo multinomial</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="resultados-por-provincias.html"><a href="resultados-por-provincias.html"><i class="fa fa-check"></i><b>10.1</b> Resultados por Provincias</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
+<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
+<li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a Workshop on Capacity Building Installation </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="aplicación-de-filtros-y-análisis-de-datos" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Aplicación de filtros y análisis de datos<a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-de-filtros-y-análisis-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta sección, vamos a guiarlo a través del proceso de aplicar varios filtros y realizar análisis de datos en los datos censales refinados.</p>
+<div id="aplicación-del-primer-filtro-categorización-de-hogares-con-residentes-y-determinación-del-estado-de-greenpoint" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Aplicación del primer filtro: categorización de hogares con residentes y determinación del estado de greenpoint<a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-primer-filtro-categorización-de-hogares-con-residentes-y-determinación-del-estado-de-greenpoint" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En este bloque de código, introducimos el primer filtro al categorizar los hogares como con residentes (‘si’) o vacíos (‘no’) basándonos en el número total de residentes en cada hogar. Además, determinamos el estado de greenpoint de cada hogar, considerando si el valor de greenpoint es ‘0’ y el valor de ‘personas’ es ‘si’. La columna ‘greenpoint’ se actualiza en consecuencia.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-1" tabindex="-1"></a><span class="co"># Create &#39;personas&#39; column to categorize households with or without residents</span></span>
+<span id="cb27-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-2" tabindex="-1"></a>censo1 <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb27-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">personas =</span> <span class="fu">if_else</span>(H01A_TOTAL_PERSONAS <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;si&quot;</span>, <span class="st">&quot;no&quot;</span>)) </span>
+<span id="cb27-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-5" tabindex="-1"></a><span class="co"># Assign greenpoint status based on conditions</span></span>
+<span id="cb27-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb27-7" tabindex="-1"></a>censo1 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">greenpoint =</span> <span class="fu">if_else</span>(greenpoint <span class="sc">==</span> <span class="st">&quot;0&quot;</span> <span class="sc">&amp;</span> personas <span class="sc">==</span> <span class="st">&quot;si&quot;</span>, <span class="st">&quot;1&quot;</span>, greenpoint))  </span></code></pre></div>
+<p><em>greenpoint</em>: La vivienda se reporta como censada en el mapa de puntos.</p>
+<ul>
+<li><p>Analizando la distribución de greenpoint</p>
+<p>En este código se calcula la distribución del estado de greenpoint entre los hogares. Agrupa los datos según el estado de ‘greenpoint’, cuenta el número de hogares en cada categoría y calcula la distribución porcentual. Los resultados ofrecen información sobre la prevalencia del estado de greenpoint entre los datos censales.</p></li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb28-1" tabindex="-1"></a>greenpoint_distribution <span class="ot">&lt;-</span> censo1 <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb28-2" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span>  <span class="co"># Counting households with and without greenpoint</span></span>
+<span id="cb28-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb28-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))  <span class="co"># Calculating the percentage of each category</span></span>
+<span id="cb28-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb28-4" tabindex="-1"></a>greenpoint_distribution</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+471456
+</td>
+<td style="text-align:right;">
+27.0448
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+1053477
+</td>
+<td style="text-align:right;">
+60.4321
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+12.5231
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Resumiendo las características de los hogares por estado de greenpoint</p>
+<p>Este bloque de código resume las características de los hogares según su estado de greenpoint. Calcula los números mínimos y máximos de residentes en los hogares, cuenta los valores faltantes para el número total de residentes y proporciona el recuento total de hogares para cada categoría de greenpoint.</p></li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-1" tabindex="-1"></a>household_summary <span class="ot">&lt;-</span> censo1 <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-2" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(H01A_TOTAL_PERSONAS),  <span class="co"># Minimum number of residents in households</span></span>
+<span id="cb29-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-4" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(H01A_TOTAL_PERSONAS),  <span class="co"># Maximum number of residents in households</span></span>
+<span id="cb29-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-5" tabindex="-1"></a>            <span class="at">num_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(H01A_TOTAL_PERSONAS)),  <span class="co"># Number of missing values for the total number of residents</span></span>
+<span id="cb29-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-6" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())  <span class="co"># Total number of households</span></span>
+<span id="cb29-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb29-7" tabindex="-1"></a>household_summary</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+num_na
+</th>
+<th style="text-align:right;">
+total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+471456
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+261
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1053477
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+218308
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Creación de una tabla de contingencia para la ocupación y el estado de greenpoint</li>
+</ul>
+<p>En esta sección, se genera una tabla de contingencia para explorar la relación entre la ocupación y el estado de greenpoint. La tabla cruza la columna ‘V02_OCUPACION_VIVIENDA’ (ocupación) con la columna ‘greenpoint’, teniendo en cuenta los valores faltantes. Esto proporciona una representación visual de cómo se distribuyen estas dos variables entre los hogares.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb30-1" tabindex="-1"></a>occupancy_greenpoint_table <span class="ot">&lt;-</span> <span class="fu">table</span>(censo1<span class="sc">$</span>V02_OCUPACION_VIVIENDA, censo1<span class="sc">$</span>greenpoint, <span class="at">useNA =</span> <span class="st">&quot;a&quot;</span>)</span>
+<span id="cb30-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb30-2" tabindex="-1"></a>occupancy_greenpoint_table</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0
+</th>
+<th style="text-align:right;">
+1
+</th>
+<th style="text-align:right;">
+NA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+772625
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+471456
+</td>
+<td style="text-align:right;">
+3853
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+92465
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+31187
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+52463
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+23845
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2168
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+74871
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+218308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Aplicación del segundo filtro y refinamiento</li>
+</ul>
+<p>Continuando con el proceso de refinamiento, se aplica el siguiente filtro para categorizar aún más los hogares en función de criterios adicionales.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-1" tabindex="-1"></a>censo2 <span class="ot">&lt;-</span> censo1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb31-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-2" tabindex="-1"></a>  <span class="at">greenpoint2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb31-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-3" tabindex="-1"></a>    H01A_TOTAL_PERSONAS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Censado con informacion n&gt;0&quot;</span>,</span>
+<span id="cb31-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-4" tabindex="-1"></a>    RESUL_ENTREVISTA_VIV <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="sc">&amp;</span></span>
+<span id="cb31-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-5" tabindex="-1"></a>      H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Censado con informacion n=0&quot;</span>,</span>
+<span id="cb31-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-6" tabindex="-1"></a>    RESUL_ENTREVISTA_VIV <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>) <span class="sc">~</span> <span class="st">&quot;Sin informacion pero  n&gt;0&quot;</span>,</span>
+<span id="cb31-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-7" tabindex="-1"></a>    <span class="fu">is.na</span>(greenpoint) <span class="sc">&amp;</span> <span class="fu">is.na</span>(personas) <span class="sc">~</span> <span class="st">&quot;Sin informacion pero n&gt;=0&quot;</span>,</span>
+<span id="cb31-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-8" tabindex="-1"></a>    V02_OCUPACION_VIVIENDA <span class="sc">==</span> <span class="st">&quot;8&quot;</span> <span class="sc">~</span> <span class="st">&quot;Sin informacion pero n&gt;=0&quot;</span>,</span>
+<span id="cb31-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-9" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Resto&quot;</span></span>
+<span id="cb31-10"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-10" tabindex="-1"></a>  )</span>
+<span id="cb31-11"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb31-11" tabindex="-1"></a>)</span></code></pre></div>
+<p>Introducimos el estado “greenpoint2” para categorizar aún más los hogares en función de diversas condiciones. Esto se basa en una combinación de factores como el número de residentes, los resultados de las entrevistas y la ocupación de la vivienda. Cada hogar se asigna a una categoría específica, como “Censado con información n&gt;0”, “Censado con información n=0” y “Sin información pero n&gt;0”, entre otros. Esto proporciona una forma más detallada de describir el estado de los hogares en función de diferentes criterios.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb32-1" tabindex="-1"></a><span class="fu">readRDS</span>(<span class="st">&quot;Recursos/02_Census_Filters/RecurseBooks/census2.rds&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb32-2" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
+</div>
+<div id="aplicación-del-segundo-filtro-criterio-worldpop" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Aplicación del segundo filtro: Criterio WorldPop<a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-segundo-filtro-criterio-worldpop" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A partir del paso 1, también incluimos todos los hogares con la variable WorldPop (WP) que se encuentran dentro de 1 desviación estándar del valor promedio. Sin embargo, si estos hogares tienen cero residentes en la variable de interés, marcamos esa variable como “No Disponible” (NA).</p>
+<ul>
+<li>Calcular estadísticas resumen para la variable ‘wpop_sum’</li>
+</ul>
+<p>En primer lugar, calculamos estadísticas resumen para la variable ‘wpop_sum’, que es una covariable relacionada con WorldPop. Las estadísticas resumen incluyen el promedio, la desviación estándar, el valor mínimo y máximo de ‘wpop_sum’. Estas estadísticas nos ayudan a establecer los umbrales para el filtro y se guardan en un archivo resumen.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-1" tabindex="-1"></a>wpop_summary <span class="ot">&lt;-</span> censo2 <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(UGM_ID,wpop_sum) <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media =</span> <span class="fu">mean</span>(wpop_sum),  <span class="co"># Mean value of &#39;wpop_sum&#39;</span></span>
+<span id="cb33-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-3" tabindex="-1"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(wpop_sum),  <span class="co"># Standard deviation of &#39;wpop_sum&#39;</span></span>
+<span id="cb33-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-4" tabindex="-1"></a>            <span class="at">min =</span> <span class="fu">min</span>(wpop_sum),  <span class="co"># Minimum value of &#39;wpop_sum&#39;</span></span>
+<span id="cb33-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-5" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(wpop_sum))  <span class="co"># Maximum value of &#39;wpop_sum&#39;</span></span>
+<span id="cb33-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb33-6" tabindex="-1"></a>wpop_summary</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+96.9652
+</td>
+<td style="text-align:right;">
+143.1986
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6214.269
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cálculo de umbrales inferior y superior</li>
+</ul>
+<p>Utilizamos las estadísticas resumen para calcular los umbrales inferior y superior basados en una desviación estándar del promedio. Estos umbrales nos ayudarán a identificar los hogares que cumplen con los criterios del segundo filtro.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb34-1" tabindex="-1"></a><span class="co"># Calculate the lower and upper thresholds based on one standard deviation from the mean</span></span>
+<span id="cb34-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb34-2" tabindex="-1"></a>li <span class="ot">&lt;-</span> <span class="fl">96.96515</span> <span class="sc">-</span> <span class="fl">143.1986</span> <span class="sc">*</span> <span class="dv">1</span>  <span class="co"># Lower threshold</span></span>
+<span id="cb34-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb34-3" tabindex="-1"></a>ls <span class="ot">&lt;-</span> <span class="fl">96.96515</span> <span class="sc">+</span> <span class="fl">143.1986</span> <span class="sc">*</span> <span class="dv">1</span>  <span class="co"># Upper threshold</span></span></code></pre></div>
+<p>Identificamos y contamos los hogares que cumplen con los criterios del segundo filtro. Nos centramos en los hogares con cero residentes (‘H01A_TOTAL_PERSONAS’) pero que tienen valores de ‘wpop_sum’ fuera del umbral calculado. Realizamos esta cuenta y la agrupamos según la variable ‘V02_OCUPACION_VIVIENDA’.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-1" tabindex="-1"></a><span class="co"># Identify and count households that meet the criteria for the second filter</span></span>
+<span id="cb35-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-2" tabindex="-1"></a>filter_2_counts <span class="ot">&lt;-</span> censo2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span>,</span>
+<span id="cb35-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-3" tabindex="-1"></a>                                     wpop_sum <span class="sc">&gt;</span> ls <span class="sc">|</span> wpop_sum <span class="sc">&lt;</span> li) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-4" tabindex="-1"></a>  <span class="fu">group_by</span>(V02_OCUPACION_VIVIENDA) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb35-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-5" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb35-6" tabindex="-1"></a>filter_2_counts</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+V02_OCUPACION_VIVIENDA
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+129652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+22968
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+8210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+10514
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+4635
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+532
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:right;">
+17160
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Aplicación del Segundo Filtro y Actualizaciones de Columnas</li>
+</ul>
+<p>Aplicamos el segundo filtro a los hogares y actualizamos las columnas ‘greenpoint2’ y ‘Filtros’ en consecuencia. La columna ‘greenpoint2’ se actualiza para reflejar la nueva clasificación basada en el Criterio WorldPop, mientras que la columna ‘Filtros’ indica la aplicación del Criterio WorldPop o se establece como NA según corresponda.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-1" tabindex="-1"></a><span class="co"># Apply the second filter and update &#39;greenpoint2&#39; and &#39;Filtros&#39; columns</span></span>
+<span id="cb36-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-3" tabindex="-1"></a>censo3 <span class="ot">&lt;-</span> censo2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb36-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-4" tabindex="-1"></a>  <span class="at">greenpoint2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb36-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-5" tabindex="-1"></a>    H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> (wpop_sum <span class="sc">&gt;</span> ls <span class="sc">|</span> wpop_sum <span class="sc">&lt;</span> li)  <span class="sc">~</span> <span class="st">&quot;Sin informacion pero n&gt;=0&quot;</span>,</span>
+<span id="cb36-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-6" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> greenpoint2</span>
+<span id="cb36-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-7" tabindex="-1"></a>  ),</span>
+<span id="cb36-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-8" tabindex="-1"></a>  <span class="at">Filtros =</span> <span class="fu">case_when</span>(</span>
+<span id="cb36-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-9" tabindex="-1"></a>    H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> (wpop_sum <span class="sc">&gt;</span> ls <span class="sc">|</span> wpop_sum <span class="sc">&lt;</span> li)  <span class="sc">~</span> <span class="st">&quot;Criterio WorldPop&quot;</span>,</span>
+<span id="cb36-10"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-10" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb36-11"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-11" tabindex="-1"></a>  )</span>
+<span id="cb36-12"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb36-12" tabindex="-1"></a>)</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+un_ID
+</th>
+<th style="text-align:left;">
+PROV_ID
+</th>
+<th style="text-align:left;">
+CANT_ID
+</th>
+<th style="text-align:left;">
+DIST_ID
+</th>
+<th style="text-align:left;">
+UGM_ID
+</th>
+<th style="text-align:left;">
+LLAVEV
+</th>
+<th style="text-align:left;">
+RESUL_ENTREVISTA_VIV
+</th>
+<th style="text-align:left;">
+TIPO_VIVIENDA_PRECENSO
+</th>
+<th style="text-align:left;">
+V01_TIPO_VIVIENDA
+</th>
+<th style="text-align:left;">
+V02_OCUPACION_VIVIENDA
+</th>
+<th style="text-align:right;">
+H01A_TOTAL_PERSONAS
+</th>
+<th style="text-align:left;">
+greenpoint
+</th>
+<th style="text-align:right;">
+ugm_viviendas_totales_censo
+</th>
+<th style="text-align:right;">
+ugm_viviendas_ocupadas_censo
+</th>
+<th style="text-align:right;">
+ugm_viviendas_desocupadas_censo
+</th>
+<th style="text-align:left;">
+ugm_peligrosidad
+</th>
+<th style="text-align:left;">
+ugm_problema_de_acceso
+</th>
+<th style="text-align:left;">
+ugm_riesgos_amenazas
+</th>
+<th style="text-align:left;">
+ugm_cobertura_telecomunicaciones
+</th>
+<th style="text-align:left;">
+asent
+</th>
+<th style="text-align:right;">
+ppp_CRI_v2
+</th>
+<th style="text-align:right;">
+elev
+</th>
+<th style="text-align:left;">
+indig
+</th>
+<th style="text-align:left;">
+aprot
+</th>
+<th style="text-align:right;">
+dist_permisos_de_construccion_2011_2022
+</th>
+<th style="text-align:right;">
+dist_poblacion_proyeccion_ajustada_2022
+</th>
+<th style="text-align:right;">
+dist_poblacion_ccss_abril_2023
+</th>
+<th style="text-align:right;">
+dist_matricula_educacion_primaria_2021
+</th>
+<th style="text-align:left;">
+dist_codigo_urbanidad
+</th>
+<th style="text-align:right;">
+GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI
+</th>
+<th style="text-align:right;">
+urban_coverfraction
+</th>
+<th style="text-align:right;">
+crops_coverfraction
+</th>
+<th style="text-align:right;">
+ebais_tt
+</th>
+<th style="text-align:right;">
+escu_tt
+</th>
+<th style="text-align:right;">
+igl_tt
+</th>
+<th style="text-align:right;">
+prov_nl_mean
+</th>
+<th style="text-align:right;">
+cant_nl_mean
+</th>
+<th style="text-align:right;">
+dist_nl_mean
+</th>
+<th style="text-align:right;">
+wpop_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO1_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO2_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO3_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO4_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO5_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO6_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO7_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO8_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO9_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO10_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO11_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO12_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO13_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO14_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO15_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO16_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO17_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO18_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO19_sum
+</th>
+<th style="text-align:right;">
+HOMBRES_GRUPO20_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO1_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO2_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO3_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO4_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO5_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO6_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO7_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO8_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO9_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO10_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO11_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO12_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO13_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO14_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO15_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO16_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO17_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO18_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO19_sum
+</th>
+<th style="text-align:right;">
+MUJERES_GRUPO20_sum
+</th>
+<th style="text-align:left;">
+personas
+</th>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:left;">
+Filtros
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+0218491
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101001
+</td>
+<td style="text-align:left;">
+10101001001001
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+VIVIENDA EN APARTAMENT
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+17.4872
+</td>
+<td style="text-align:right;">
+1157.488
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3773
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9933
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+34.5930
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0141265
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101002
+</td>
+<td style="text-align:left;">
+10101001002001
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA EN APARTAMENT
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+17.5313
+</td>
+<td style="text-align:right;">
+1156.738
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+4907
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+9.4928
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+si
+</td>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0151378
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101002
+</td>
+<td style="text-align:left;">
+10101001002002
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+17.5313
+</td>
+<td style="text-align:right;">
+1158.038
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+4907
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.9932
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+9.4928
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+si
+</td>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0218056
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003006
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+00VIVIENDA EN EDIFICIO
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.9573
+</td>
+<td style="text-align:right;">
+1152.401
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+4794
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.9932
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0000
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0217145
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003005
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+09
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.9573
+</td>
+<td style="text-align:right;">
+1156.873
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+4794
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+45.0000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9960
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0216224
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003003
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.8496
+</td>
+<td style="text-align:right;">
+1157.138
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3604
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9933
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0215255
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003001
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA EN APARTAMENT
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.8496
+</td>
+<td style="text-align:right;">
+1157.801
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+4794
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.0000
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0215972
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003002
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.8496
+</td>
+<td style="text-align:right;">
+1157.138
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3604
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9933
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0216229
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+10101001003004
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+15.8496
+</td>
+<td style="text-align:right;">
+1157.138
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3604
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.9933
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.1767
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0925743
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101004
+</td>
+<td style="text-align:left;">
+10101001004002
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+VIVIENDA INDEPENDIENTE
+</td>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+17.4872
+</td>
+<td style="text-align:right;">
+1158.147
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:right;">
+413
+</td>
+<td style="text-align:right;">
+3233
+</td>
+<td style="text-align:right;">
+14597
+</td>
+<td style="text-align:right;">
+1374
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+3773
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+44.0000
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0027
+</td>
+<td style="text-align:right;">
+10.802
+</td>
+<td style="text-align:right;">
+62.9502
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+13.6008
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+no
+</td>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumen de datos basado en ‘greenpoint2’</li>
+</ul>
+<p>Resumimos los datos en función de la variable ‘greenpoint2’ actualizada. Calculamos la distribución y los porcentajes de hogares en cada categoría de ‘punto verde2’. Estos resúmenes nos ayudan a comprender el impacto del filtro en la clasificación de los hogares.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb37-1" tabindex="-1"></a><span class="co"># Summarizing the data based on the &#39;greenpoint2&#39; variable</span></span>
+<span id="cb37-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb37-2" tabindex="-1"></a>summary_greenpoint2 <span class="ot">&lt;-</span> censo3 <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb37-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2) <span class="sc">%&gt;%</span></span>
+<span id="cb37-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb37-4" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb37-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:right;">
+212980
+</td>
+<td style="text-align:right;">
+12.2175
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+<td style="text-align:right;">
+44.5422
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:right;">
+341804
+</td>
+<td style="text-align:right;">
+19.6074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:right;">
+411979
+</td>
+<td style="text-align:right;">
+23.6329
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumen de Datos Basado en ‘greenpoint2’ y ‘Filtros’</li>
+</ul>
+<p>Generamos un resumen adicional que considera la combinación de las variables ‘greenpoint2’ y ‘Filtros’. Esto proporciona información más detallada sobre cómo el Criterio WorldPop afecta las categorías existentes.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-1" tabindex="-1"></a><span class="co"># Summarizing the data based on the combination of &#39;greenpoint2&#39; and &#39;Filtros&#39; variables</span></span>
+<span id="cb38-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-2" tabindex="-1"></a>summary_greenpoint2_filtros <span class="ot">&lt;-</span> censo3 <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2, Filtros) <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-4" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb38-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-6" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb38-7" tabindex="-1"></a>summary_greenpoint2_filtros</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:left;">
+Filtros
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+212980
+</td>
+<td style="text-align:right;">
+100.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+776478
+</td>
+<td style="text-align:right;">
+100.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+341804
+</td>
+<td style="text-align:right;">
+100.0000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Criterio WorldPop
+</td>
+<td style="text-align:right;">
+193671
+</td>
+<td style="text-align:right;">
+47.0099
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+52.9901
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="resumen-de-estadísticas-basado-en-greenpoint2" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Resumen de estadísticas basado en ‘greenpoint2’<a href="aplicación-de-filtros-y-análisis-de-datos.html#resumen-de-estadísticas-basado-en-greenpoint2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Calculamos estadísticas adicionales para las categorías ‘greenpoint2’. Estas estadísticas incluyen el número mínimo, máximo, de valores faltantes y el número total de hogares en cada categoría. Estos datos son esenciales para comprender la distribución de los residentes en los hogares filtrados.</p>
+<p>Cada una de estas etapas contribuye al proceso de aplicar el segundo filtro y refinar los datos del censo con base en el Criterio WorldPop. Los resúmenes y datos generados son útiles para análisis posteriores y se guardan para referencia futura.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-1" tabindex="-1"></a><span class="co"># Summarizing the data for &#39;greenpoint2&#39; variable</span></span>
+<span id="cb39-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-2" tabindex="-1"></a>summary_greenpoint2_stats <span class="ot">&lt;-</span> censo3 <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(H01A_TOTAL_PERSONAS),</span>
+<span id="cb39-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-5" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(H01A_TOTAL_PERSONAS),</span>
+<span id="cb39-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-6" tabindex="-1"></a>            <span class="at">num_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(H01A_TOTAL_PERSONAS)),</span>
+<span id="cb39-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-7" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())</span>
+<span id="cb39-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb39-8" tabindex="-1"></a>summary_greenpoint2_stats</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+num_na
+</th>
+<th style="text-align:right;">
+total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+212980
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+261
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+341804
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+411979
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="definición-del-tercer-filtro" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Definición del tercer filtro<a href="aplicación-de-filtros-y-análisis-de-datos.html#definición-del-tercer-filtro" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En esta sección, presentamos la implementación del tercer filtro, basándose en los cimientos establecidos por los Filtros 1 y 2. El tercer filtro se dirige a hogares dentro de las UGM que fueron encuestados después de un intervalo mayor a 20 días y, a pesar de estar clasificados como desocupados, allí existe una falta de certeza sobre su estado de ocupación. Estos hogares se reclasifican como de estatus desconocido.</p>
+<ul>
+<li>Lectura del Archivo ‘Desocupadas fuera periodo.xlsx’</li>
+</ul>
+<p>Comenzamos leyendo el archivo ‘Desocupadas fuera periodo.xlsx’ para recopilar información sobre hogares que estaban desocupados pero visitados fuera del intervalo estándar. Extraemos específicamente la columna ‘UGM_ID’ para un análisis más detallado.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb40-1" tabindex="-1"></a><span class="co"># Reading the &#39;Desocupadas fuera periodo.xlsx&#39; file and selecting the UGM_ID column</span></span>
+<span id="cb40-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb40-2" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb40-3" tabindex="-1"></a>upms_reporte <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(</span>
+<span id="cb40-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb40-4" tabindex="-1"></a>  <span class="at">xlsxFile =</span> <span class="st">&quot;Recursos/02_Census_Filters/Data/Desocupadas fuera periodo.xlsx&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb40-5" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">UGM_ID =</span> ID_UGM)</span></code></pre></div>
+<ul>
+<li>Aplicación de filtros basados en ‘upms_reporte’ y condiciones específicas</li>
+</ul>
+<p>Utilizando la información recopilada de ‘upms_reporte’ y considerando ciertas condiciones, aplicamos filtros adicionales a los datos existentes. Actualizamos las columnas ‘greenpoint2’ y ‘Filtros’ según los criterios especificados.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-1" tabindex="-1"></a><span class="co"># Creating &#39;censo4&#39; by applying filters based on &#39;upms_reporte&#39; and specific conditions</span></span>
+<span id="cb41-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-2" tabindex="-1"></a>censo4 <span class="ot">&lt;-</span> censo3 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb41-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-3" tabindex="-1"></a>  <span class="at">greenpoint2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb41-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-4" tabindex="-1"></a>    UGM_ID <span class="sc">%in%</span> upms_reporte<span class="sc">$</span>UGM_ID <span class="sc">&amp;</span> H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">&quot;Sin informacion pero n&gt;=0&quot;</span>,</span>
+<span id="cb41-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-5" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> greenpoint2</span>
+<span id="cb41-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-6" tabindex="-1"></a>  ),</span>
+<span id="cb41-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-7" tabindex="-1"></a>  <span class="at">Filtros =</span> <span class="fu">case_when</span>(</span>
+<span id="cb41-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-8" tabindex="-1"></a>    UGM_ID <span class="sc">%in%</span> upms_reporte<span class="sc">$</span>UGM_ID <span class="sc">&amp;</span> H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span>  <span class="sc">~</span> <span class="st">&quot;Fuera de periodo(20 días)&quot;</span>,</span>
+<span id="cb41-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-9" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> Filtros</span>
+<span id="cb41-10"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-10" tabindex="-1"></a>  )</span>
+<span id="cb41-11"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb41-11" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li>Aplicar filtros adicionales y crear valores de ‘Filtros’</li>
+</ul>
+<p>Procedemos a refinar aún más los datos aplicando filtros adicionales. Los valores de ‘Filtros’ se actualizan en función de diversas condiciones como el número de residentes, el resultado de la entrevista (‘RESUL_ENTREVISTA_VIV’) y la ocupación de la vivienda (‘V02_OCUPACION_VIVIENDA’).</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-1" tabindex="-1"></a><span class="co"># Applying additional filters and creating &#39;Filtros&#39; values</span></span>
+<span id="cb42-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-2" tabindex="-1"></a>censo4 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">Filtros =</span> <span class="fu">case_when</span>(</span>
+<span id="cb42-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-3" tabindex="-1"></a>  <span class="fu">is.na</span>(Filtros) <span class="sc">&amp;</span> H01A_TOTAL_PERSONAS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Número de personas mayor a 0&quot;</span>,</span>
+<span id="cb42-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-4" tabindex="-1"></a>  <span class="fu">is.na</span>(Filtros) <span class="sc">&amp;</span> RESUL_ENTREVISTA_VIV <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="sc">&amp;</span> H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Entrevista igual a 1 y Número de personas igual a 0&quot;</span>,</span>
+<span id="cb42-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-5" tabindex="-1"></a>  <span class="fu">is.na</span>(Filtros) <span class="sc">&amp;</span> RESUL_ENTREVISTA_VIV <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>) <span class="sc">~</span> <span class="st">&quot;Entrevista  es 3 o 4&quot;</span>, </span>
+<span id="cb42-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-6" tabindex="-1"></a>  <span class="fu">is.na</span>(Filtros) <span class="sc">&amp;</span> <span class="fu">is.na</span>(greenpoint) <span class="sc">&amp;</span> <span class="fu">is.na</span>(personas) <span class="sc">~</span> <span class="st">&quot;Sin conteo de personas&quot;</span>,</span>
+<span id="cb42-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-7" tabindex="-1"></a>  <span class="fu">is.na</span>(Filtros) <span class="sc">&amp;</span> V02_OCUPACION_VIVIENDA <span class="sc">==</span> <span class="st">&quot;8&quot;</span> <span class="sc">~</span> <span class="st">&quot;Ocupación de la vivienda es 8&quot;</span>, </span>
+<span id="cb42-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-8" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> Filtros</span>
+<span id="cb42-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb42-9" tabindex="-1"></a>))</span></code></pre></div>
+<ul>
+<li>Resumir datos basados en las variables ‘greenpoint2’ y ‘Filtros’</li>
+</ul>
+<p>Generamos un resumen de los datos en base a las variables ‘greenpoint2’ y ‘Filtros’ actualizadas. El resumen proporciona información sobre la distribución de hogares en diferentes categorías.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb43-1" tabindex="-1"></a><span class="co"># Summarizing data based on &#39;greenpoint2&#39; and &#39;Filtros&#39; variables</span></span>
+<span id="cb43-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb43-2" tabindex="-1"></a>summary_greenpoint2_filtros <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb43-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb43-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2, Filtros) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb43-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb43-4" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb43-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb43-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:left;">
+Filtros
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+Entrevista igual a 1 y Número de personas igual a 0
+</td>
+<td style="text-align:right;">
+175921
+</td>
+<td style="text-align:right;">
+10.0916
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+Número de personas mayor a 0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+<td style="text-align:right;">
+44.5422
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+Entrevista es 3 o 4
+</td>
+<td style="text-align:right;">
+285810
+</td>
+<td style="text-align:right;">
+16.3953
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Criterio WorldPop
+</td>
+<td style="text-align:right;">
+135370
+</td>
+<td style="text-align:right;">
+7.7654
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Fuera de periodo(20 días)
+</td>
+<td style="text-align:right;">
+151354
+</td>
+<td style="text-align:right;">
+8.6823
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Sin conteo de personas
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+12.5231
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumir datos basados en la variable ‘greenpoint2’</li>
+</ul>
+<p>De manera similar, creamos otro resumen de los datos, esta vez centrándonos únicamente en la variable ‘puntoverde2’. Este resumen nos ayuda a comprender el impacto del tercer filtro en la clasificación de los hogares.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb44-1" tabindex="-1"></a><span class="co"># Summarizing data based on &#39;greenpoint2&#39; variable</span></span>
+<span id="cb44-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb44-2" tabindex="-1"></a>summary_greenpoint2 <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb44-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2) <span class="sc">%&gt;%</span> <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb44-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb44-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="dv">100</span> <span class="sc">*</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:right;">
+175921
+</td>
+<td style="text-align:right;">
+10.0916
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+<td style="text-align:right;">
+44.5422
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:right;">
+285810
+</td>
+<td style="text-align:right;">
+16.3953
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:right;">
+505032
+</td>
+<td style="text-align:right;">
+28.9709
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="combinando-casas-no-coordinadas" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> Combinando casas no coordinadas<a href="aplicación-de-filtros-y-análisis-de-datos.html#combinando-casas-no-coordinadas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Selección de casas no coordinadas del conjunto de datos ‘censo_sexo_edad’ y unión interna con ‘Viviendas_sin_coordenadas’</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-1" tabindex="-1"></a><span class="co"># Filtering non-coordinated houses from &#39;censo_sexo_edad&#39; dataset</span></span>
+<span id="cb45-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-2" tabindex="-1"></a>Viviendas_sin_coordenadas2 <span class="ot">&lt;-</span> censo_sexo_edad <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-3" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(un_ID)) <span class="sc">%&gt;%</span></span>
+<span id="cb45-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(Viviendas_sin_coordenadas) <span class="sc">%&gt;%</span></span>
+<span id="cb45-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-5" tabindex="-1"></a>  <span class="co"># Adding a unique identifier &#39;un_ID&#39; to the newly joined houses</span></span>
+<span id="cb45-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">un_ID =</span> <span class="fu">paste0</span>(<span class="st">&quot;A&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()))</span>
+<span id="cb45-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-7" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-8" tabindex="-1"></a><span class="co"># Adding the newly joined houses to the &#39;censo4&#39; dataset</span></span>
+<span id="cb45-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-9" tabindex="-1"></a>censo4 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(censo4, Viviendas_sin_coordenadas2)</span>
+<span id="cb45-10"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-10" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-11" tabindex="-1"></a><span class="co"># Modifying &#39;Filtros&#39; column based on &#39;greenpoint2&#39; values</span></span>
+<span id="cb45-12"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-12" tabindex="-1"></a>censo4 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">Filtros =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(greenpoint2),</span>
+<span id="cb45-13"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-13" tabindex="-1"></a>                                    <span class="st">&quot;Censado en papel&quot;</span>, greenpoint2))</span>
+<span id="cb45-14"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-14" tabindex="-1"></a></span>
+<span id="cb45-15"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-15" tabindex="-1"></a><span class="co"># Modifying &#39;greenpoint2&#39; column based on conditions</span></span>
+<span id="cb45-16"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-16" tabindex="-1"></a>censo4 <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">greenpoint2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb45-17"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-17" tabindex="-1"></a>  Filtros <span class="sc">==</span> <span class="st">&quot;Censado en papel&quot;</span> <span class="sc">&amp;</span>  H01A_TOTAL_PERSONAS <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Papel n=0&quot;</span>,</span>
+<span id="cb45-18"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-18" tabindex="-1"></a>  Filtros <span class="sc">==</span> <span class="st">&quot;Censado en papel&quot;</span> <span class="sc">&amp;</span>  H01A_TOTAL_PERSONAS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Papel n&gt;0&quot;</span>,</span>
+<span id="cb45-19"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-19" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span>greenpoint2</span>
+<span id="cb45-20"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb45-20" tabindex="-1"></a>))</span></code></pre></div>
+</div>
+<div id="agregación-de-estadísticas-y-resúmenes" class="section level3 hasAnchor" number="3.2.6">
+<h3><span class="header-section-number">3.2.6</span> Agregación de estadísticas y resúmenes<a href="aplicación-de-filtros-y-análisis-de-datos.html#agregación-de-estadísticas-y-resúmenes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-1" tabindex="-1"></a><span class="co"># Summarizing statistics for the &#39;censo4&#39; dataset based on &#39;greenpoint2&#39; column</span></span>
+<span id="cb46-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-2" tabindex="-1"></a>summary1 <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb46-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-3" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2) <span class="sc">%&gt;%</span> </span>
+<span id="cb46-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-4" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(H01A_TOTAL_PERSONAS), </span>
+<span id="cb46-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-5" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(H01A_TOTAL_PERSONAS),</span>
+<span id="cb46-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-6" tabindex="-1"></a>            <span class="at">num_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(H01A_TOTAL_PERSONAS)),</span>
+<span id="cb46-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb46-7" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+num_na
+</th>
+<th style="text-align:right;">
+total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+175921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+261
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+285810
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+505032
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumir estadísticas para el conjunto de datos ‘censo4’ basado en las columnas ‘greenpoint2’ y ‘Filtros’</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-1" tabindex="-1"></a>summary2 <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-2" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2, Filtros) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">min =</span> <span class="fu">min</span>(H01A_TOTAL_PERSONAS), </span>
+<span id="cb47-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-4" tabindex="-1"></a>            <span class="at">max =</span> <span class="fu">max</span>(H01A_TOTAL_PERSONAS),</span>
+<span id="cb47-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-5" tabindex="-1"></a>            <span class="at">num_na =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(H01A_TOTAL_PERSONAS)),</span>
+<span id="cb47-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb47-6" tabindex="-1"></a>            <span class="at">total =</span> <span class="fu">n</span>())</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:left;">
+Filtros
+</th>
+<th style="text-align:right;">
+min
+</th>
+<th style="text-align:right;">
+max
+</th>
+<th style="text-align:right;">
+num_na
+</th>
+<th style="text-align:right;">
+total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+Entrevista igual a 1 y Número de personas igual a 0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+175921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+Número de personas mayor a 0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+261
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+Entrevista es 3 o 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+285810
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Criterio WorldPop
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+135370
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Fuera de periodo(20 días)
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+151354
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Sin conteo de personas
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+218308
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Resumir estadísticas para el conjunto de datos ‘censo4’ basado en las columnas ‘greenpoint2’ y ‘Filtros’</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb48-1" tabindex="-1"></a>summary3 <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb48-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb48-2" tabindex="-1"></a>  <span class="fu">group_by</span>(greenpoint2, Filtros) <span class="sc">%&gt;%</span> </span>
+<span id="cb48-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb48-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">n</span>(),</span>
+<span id="cb48-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb48-4" tabindex="-1"></a>            <span class="at">nas =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(H01A_TOTAL_PERSONAS)))</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+greenpoint2
+</th>
+<th style="text-align:left;">
+Filtros
+</th>
+<th style="text-align:right;">
+total
+</th>
+<th style="text-align:right;">
+nas
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n=0
+</td>
+<td style="text-align:left;">
+Entrevista igual a 1 y Número de personas igual a 0
+</td>
+<td style="text-align:right;">
+175921
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Censado con informacion n&gt;0
+</td>
+<td style="text-align:left;">
+Número de personas mayor a 0
+</td>
+<td style="text-align:right;">
+776478
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;0
+</td>
+<td style="text-align:left;">
+Entrevista es 3 o 4
+</td>
+<td style="text-align:right;">
+285810
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Criterio WorldPop
+</td>
+<td style="text-align:right;">
+135370
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Fuera de periodo(20 días)
+</td>
+<td style="text-align:right;">
+151354
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sin informacion pero n&gt;=0
+</td>
+<td style="text-align:left;">
+Sin conteo de personas
+</td>
+<td style="text-align:right;">
+218308
+</td>
+<td style="text-align:right;">
+218308
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Contar apariciones de ‘un_ID’ y filtrar duplicados</li>
+</ul>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb49-1" tabindex="-1"></a>duplicated_un_ID <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> </span>
+<span id="cb49-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb49-2" tabindex="-1"></a>  <span class="fu">group_by</span>(un_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb49-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb49-3" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb49-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb49-4" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb49-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb49-5" tabindex="-1"></a>duplicated_un_ID</span></code></pre></div>
+</div>
+<div id="extraer-y-guardar-subconjunto" class="section level3 hasAnchor" number="3.2.7">
+<h3><span class="header-section-number">3.2.7</span> Extraer y guardar subconjunto<a href="aplicación-de-filtros-y-análisis-de-datos.html#extraer-y-guardar-subconjunto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-1" tabindex="-1"></a><span class="co"># Selecting columns from &#39;censo4&#39; that match &#39;Nombre_Columna&#39; and contain &#39;GRUPO&#39;</span></span>
+<span id="cb50-2"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-2" tabindex="-1"></a>paso <span class="ot">&lt;-</span> censo4 <span class="sc">%&gt;%</span> <span class="fu">select</span>(</span>
+<span id="cb50-3"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-3" tabindex="-1"></a>  <span class="fu">all_of</span>(Nombre_Columna[<span class="dv">11</span>]),</span>
+<span id="cb50-4"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-4" tabindex="-1"></a>  <span class="fu">matches</span>(<span class="st">&quot;GRUPO&quot;</span>)</span>
+<span id="cb50-5"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-5" tabindex="-1"></a>)</span>
+<span id="cb50-6"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-6" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-7" tabindex="-1"></a><span class="co"># Saving the &#39;paso&#39; dataset as an RDS file in the specified directory</span></span>
+<span id="cb50-8"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-8" tabindex="-1"></a><span class="fu">saveRDS</span>(paso, </span>
+<span id="cb50-9"><a href="aplicación-de-filtros-y-análisis-de-datos.html#cb50-9" tabindex="-1"></a>        <span class="at">file =</span> <span class="st">&quot;Recursos/02_Census_Filters/data/censo_viviendas.rds&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estandarización-y-validación-de-covariables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/psirusteam/2021ASDA/02_Housing_Census_Filters.qmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.pdf", "Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.epub", "Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 --- 
-Title: "Area Model Methodologies for Census Person Count Imputation"
-Author: "Andrés Gutiérrez^[Regional Expert in Social Statistics - Economic Commission for Latin America and the Caribbean (ECLAC) - andres.gutierrez@cepal.org], Stalyn Guerrero^[Consultant - Economic Commission for Latin America and the Caribbean (ECLAC) - guerrerostalyn@gmail.com]"
-date: "2023-08-10"
+Title: "Modelo de multinivel para la imputación del recuento de personas en Censos"
+Author: "Andrés Gutiérrez^[Experto Regional en Estadísticas Sociales - Comisión Económica para América Latina y el Caribe (CEPAL) - andres.gutierrez@cepal.org], Stalyn Guerrero^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL) - guerrerostalyn@gmail.com]"
+date: "2023-11-09"
 documentclass: book
 # bibliography: [CEPAL.bib]
 biblio-style: apalike
@@ -13,7 +13,7 @@ fontsize: 12pt
 geometry: margin = 3cm
 header-includes: \usepackage[spanish, spanishkw, onelanguage, linesnumbered]{algorithm2e}
 github-repo: psirusteam/HHS-Handbook
-description: "Workshop on Capacity Building Installation"
+description: "Modelo de multinivel para la imputación del recuento de personas en Censos"
 knit: "bookdown::render_book"
 lang: es
 linkcolor: blue
@@ -32,9 +32,9 @@ output:
 
 
 
-# Workshop Materials {-}
+# Material del taller {-}
 
-In the following link, you will find the R routines developed for the workshop..
+En el siguiente enlace encontrarás las rutinas R desarrolladas para el taller..
 [Descargar](https://github.com/psirusteam/2023JAMCensus/tree/main/Recursos/)
 
 

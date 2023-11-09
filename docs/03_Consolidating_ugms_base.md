@@ -1,14 +1,14 @@
 
 
 
-# Standardization and validation of covariates                    
+# Estandarización y validación de covariables
 
-Similarly, just as the census variables underwent a validation process, the covariates dataset is subject to a similar procedure. This involves ensuring uniformity in the length of identifiers such as UGM, Cantos, regions, etc. Additionally, a validation is conducted to identify any missing values (NAs) in the dataset. Following this, a descriptive analysis is performed on the data.
+De manera similar a cómo las variables del censo se sometieron a un proceso de validación, el conjunto de covariables se somete a un procedimiento similar. Esto implica asegurar la uniformidad en la longitud de los identificadores, como UGM, cantones, regiones, etc. Además, se realiza una validación para identificar valores faltantes (NAs) en el conjunto de datos. A continuación, se realiza un análisis descriptivo de los datos.
 
+## Preparación del entorno y carga de bibliotecas
 
-## Environment Preparation and Library Loading
+Este código es responsable de revisar y mejorar los datos que tenemos. Primero, borra cualquier cosa que tengamos en la memoria. Luego, carga algunas herramientas especiales que vamos a utilizar. Después, lee información sobre el censo y las áreas geográficas.
 
-This code is responsible for reviewing and improving the data we have. First, it clears anything we have in memory. Then, it loads some special tools that we are going to use. After that, it reads information about the census and geographic areas.
 
 
 ```r
@@ -61,10 +61,9 @@ n_distinct(Base_ugms$UGM_ID) # Not all UGMs have houses
 #50760
 ```
 
+## Valores descriptivos de la base de UGMs
 
-## Descriptive values of the UGMS base
-
-We begin by creating a summary dataframe that includes the column names and their corresponding data types. Subsequently, we enhance this summary by adding a column indicating the data type of each column, achieved through the use of the map_chr function on the column names and their corresponding data.
+Comenzamos creando un marco de datos resumen que incluye los nombres de las columnas y sus tipos de datos correspondientes. Posteriormente, mejoramos este resumen agregando una columna que indica el tipo de dato de cada columna, lo que se logra mediante el uso de la función map_chr en los nombres de las columnas y sus datos correspondientes.
 
 
 ```r
@@ -73,7 +72,7 @@ resumen <- data.frame(Nombre_Columna = names(Base_ugms))
 resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(Base_ugms[[x]])))
 ```
 
--   Numeric Variables 
+-   Variables numéricas 
 
 
 ```r
@@ -108,7 +107,7 @@ nas_values <- Base_ugms %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 ```
 
--   Character Variables
+-   Variables tipo carácter
 
 
 ```r
@@ -128,7 +127,7 @@ nas_values_char <- Base_ugms %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 ```
 
--   Organizing results in a database.
+-  Organizando resultados en una base de datos
 
 
 ```r
@@ -305,7 +304,7 @@ resumen2 %>% head(10) %>% tba()
 </tbody>
 </table>
 
--   Variables of interest
+-  Selección de variables de intrés
 
 
 ```r
@@ -348,7 +347,7 @@ Nombre_Columna <- c(
   "ugm_sin_info")
 ```
 
--   Changing the type of variables
+-   Cambiando la naturaleza de las variables 
 
 
 ```r
@@ -391,7 +390,7 @@ Tipo_actualizar <- c(
   as.character)
 ```
 
--   Update column types based on Nombre_Columna and Tipo_actualizar
+-   Actualizar los tipos de columna basados en `Nombre_Columna` y `Tipo_actualizar`.
 
 
 ```r
@@ -440,7 +439,7 @@ paso <- map2(Nombre_Columna, Tipo_actualizar, function(nom, tipo) {
 ## ugm_sin_info
 ```
 
--   Create a summary dataframe with column names and their data types
+-   Crear un `data.frame` resumen con los nombres de las columnas y sus tipos de datos.
 
 
 ```r
@@ -638,7 +637,7 @@ Base_ugms[, tipo_char] %>%
 </tbody>
 </table>
 
-### Standardizing Variables and Joining Datasets
+### Estandarización de variables y unión de conjuntos de datos.
 
 
 ```r
@@ -839,7 +838,7 @@ Base_ugms_censo[, tipo_char] %>%
 </tbody>
 </table>
 
--   Calculate the counts of missing 
+-   Calcular el conteo de valores faltantes.
 
 
 ```r
@@ -854,7 +853,7 @@ nas_values2 <- Base_ugms_censo %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 ```
 
--   Remove specific columns from the dataset
+-   Removiendo columnas adicionales de la base. 
 
 
 ```r
@@ -862,7 +861,7 @@ Base_ugms_censo$dist_poblacion_rup <- NULL
 Base_ugms_censo$dist_matricula_educacion_secundaria_2021 <- NULL
 ```
 
-### Standardize numeric variables using z-score scaling
+### Estandarizar las variables numéricas utilizando la escala de puntuación z (z-score).
 
 
 ```r
@@ -870,7 +869,7 @@ Base_ugms_censo <- Base_ugms_censo %>%
   mutate_if(is.numeric, function(x) as.numeric(scale(x)))
 ```
 
--   Save the standardized dataset  
+-   Guardando la base estandarizada. 
 
 
 ```r

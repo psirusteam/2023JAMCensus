@@ -1,63 +1,69 @@
 
 
-# Installation of Libraries and Required Software for Bayesian Area Models.
+# Instalación de bibliotecas y software necesario para modelos de censo con enfoque bayesiano
 
-## Step 1: Installing Software
-
-Below is a list of the necessary software for the proper development of the training. It is recommended to install these packages before starting with the practical development.
-
-1. Download and install **Rbase** (<https://cran.r-project.org/bin/windows/base/>)
-2. Download and install **Rtools** (<https://cran.r-project.org/bin/windows/Rtools/>)
-3. Download and install **Rstudio** (<https://posit.co/download/rstudio-desktop/>)
-4. Download and install **Quarto** (<https://quarto.org/docs/get-started/>)
-5. Download and install **Anaconda** (<https://www.anaconda.com/products/individual>)
-6. Download and install **Google Cloud** (<https://cloud.google.com/sdk/docs/install?hl=es-419>)
+## Paso 1: Instalación del software
+A continuación se muestra una lista del software necesario para el correcto desarrollo de la formación. Se recomienda instalar estos paquetes antes de comenzar con el desarrollo práctico.
 
 
-## Step 2: Installing the following libraries in *R.*
+1. Descargue e instale **Rbase** (<https://cran.r-project.org/bin/windows/base/>)
+2. Descargue e instale **Rtools** (<https://cran.r-project.org/bin/windows/Rtools/>)
+3. Descargue e instale **Rstudio** (<https://posit.co/download/rstudio-desktop/>)
+4. Descargue e instale **Quarto** (<https://quarto.org/docs/get-started/>)
+5. Descargue e instale **Anaconda** (<https://www.anaconda.com/products/individual>)
+6. Descargue e instale **Google Cloud** (<https://cloud.google.com/sdk/docs/install?hl=es-419>)
 
-### Data Visualization and Manipulation:
-- **tidyverse**: A collection of packages for data manipulation and visualization.
-- **magrittr**: Provides a pipe `%>%` operator to make code more readable.
-- **scales**: Tools for scaling visualizations, like adjusting axis breaks.
-- **sf**: For working with spatial data and maps.
-- **tmap**: Creates thematic maps and overlays.
 
-### Statistical Modeling:
-- **lme4**: Fits linear and generalized linear mixed-effects models.
-- **rstanarm**: Fits Bayesian models using Stan for various statistical tasks.
+##  Paso 2: Instalar las siguientes bibliotecas en *R.*
 
-### Survey Analysis:
-- **srvyr**: Tools for working with survey data alongside the `dplyr` package.
-- **survey**: For analyzing complex survey data.
+### Visualización y manipulación de datos:
 
-### Data Manipulation and Transformation:
-- **dplyr**: Data manipulation tools.
-- **tidyr**: Tools for reshaping and tidying data.
-- **reshape2**: Reshaping data frames.
+- **tidyverse** : una colección de paquetes para manipulación y visualización de datos.
 
-### Bayesian Analysis:
-- **bayesplot**: Visualization of Bayesian models.
-- **posterior**: Tools for working with posterior distributions.
-- **rstan**: R interface to Stan, a platform for Bayesian modeling.
+- **magrittr** : proporciona un %>%operador de canalización para hacer que el código sea más legible.
+
+- **scales** : herramientas para escalar visualizaciones, como ajustar las rupturas de eje.
+
+- **sf** : Para trabajar con datos espaciales y mapas.
+- **tmap** : Crea mapas temáticos y superposiciones.
+
+### Modelos estadísticos:
+- **lme4**: Se adapta a modelos lineales y lineales generalizados de efectos mixtos.
+- **rstanarm**: Se adapta a modelos bayesianos utilizando Stan para diversas tareas estadísticas.
+
+### Analisis de encuestas:
+- **srvyr**: Herramientas para trabajar con datos de encuestas junto con el paquete `dplyr`.
+- **survey**: Para analizar datos de encuestas complejos.
+
+###  Manipulación y Transformación de Datos:
+- **dplyr**: Herramientas de manipulación de datos.
+- **tidyr**: Herramientas para remodelar y ordenar datos.
+- **reshape2**:  Reordenar de marcos de datos..
+
+### Análisis Bayesiano:
+- **bayesplot**: Visualización de modelos bayesianos.
+- **posterior**: Herramientas para trabajar con distribuciones posteriores.
+- **rstan**: Interfaz *R* para `Stan`, una plataforma para modelado bayesiano.
 
 ### Geospatial Analysis:
-- **rgee**: Interface to Google Earth Engine.
-- **trafo**: Tools for transforming spatial data.
-- **maptools**: Tools for reading and manipulating geographic data.
-- **usmap**: Maps of the United States.
+- **rgee**: Interfaz para Google Earth Engine.
+- **trafo**: Herramientas para transformar datos espaciales.
+- **maptools**: Herramientas de lectura y manipulación de datos geográficos.
+- **usmap**: Mapas de Estados Unidos.
 
-### Miscellaneous:
-- **sampling**: Tools for survey sampling.
-- **haven**: For reading and writing SPSS, Stata, and SAS files.
-- **RColorBrewer**: Provides color palettes.
-- **kableExtra**: Enhances table rendering in R Markdown.
-- **formatR**: Formatting tools for R code.
-- **printr**: Custom printing of data frames and tables.
-- **remotes**: Tools for package development and installation.
-- **latex2exp**: Converts LaTeX code into expressions.
+### Misceláneas:
+- **sampling**: Herramientas para muestreo de encuestas.
+- **haven**: Para leer y escribir archivos SPSS, Stata y SAS.
+- **RColorBrewer**: Proporciona paletas de colores.
+- **kableExtra**: Mejora la representación de tablas en R Markdown.
+- **formatR**: Herramientas de formato para código R.
+- **printr**:  Impresión personalizada de marcos de datos y tablas.
+- **remotes**: Herramientas para el desarrollo e instalación de paquetes.
+- **latex2exp**: Convierte código LaTeX en expresiones.
 
-To install each package, use the command `install.packages("package_name")`.
+
+
+Para instalar cada paquete, use el comando `install.packages("package_name")`.
 
 
 ```r
@@ -95,30 +101,36 @@ install.packages("latex2exp")
 install.packages("gtsummary")
 ```
 
-### Step-by-Step Guide to Install rstan
+###  Guía paso a paso para instalar `rstan`
 
-Follow these steps to install the `rstan` package:
+Siga estos pasos para instalar el paquete `rstan`:
 
-1. Install Rtools (if using Windows):
-   - Download and install Rtools.
+1. Instale *Rtools* (si usa Windows):
+   - Descargue e instale Rtools.
 
-2. Install `StanHeaders`:
-   - Open R or RStudio.
-   - Run the command: `install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))`.
+2. instalar `StanHeaders`:
+   - Abrir `R` o `RStudio`.
+   - Ejecute el comando: `install.packages("StanHeaders", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))`.
 
-3. Install `rstan`:
-   - Run the command: `install.packages("rstan", repos=c("https://mc-stan.org/r-packages/", getOption("repos")))`.
+3. Instalar `rstan`:
+   - Ejecute el comando: `install.packages("rstan", repos=c("https://mc-stan.org/r-packages/", getOption("repos")))`.
 
-4. Verify the installation:
-   - Load the package using: `library(rstan)`.
+4. Verifique la instalación de la librería
+   - Cargue la librería usando: `library(rstan)`.
 
-5. Validate the installation:
-   - Run a simple model to ensure that `rstan` is working properly. You can use the example code provided in the documentation.
+5. Validación de la instalación:
+   - Ejecute un modelo simple para asegurarse de que rstan funcione correctamente. Puede utilizar el código de ejemplo proporcionado en la documentación.
+   
+Recuerde seguir estos pasos cuidadosamente para garantizar una instalación exitosa `rstan` y sus dependencias.
 
-Remember to follow these steps carefully to ensure a successful installation of `rstan` and its dependencies.
 
-## Step 3: Validation of Installation - Ensuring Proper `rstan` Installation
+## Paso 3: Validación de la instalación: garantizar una instalación adecuada de `rstan`
 
+En esta sección, validamos la instalación correcta de `rstan` ejecutando un modelo bayesiano simple. Cargamos los paquetes necesarios, incluidos `rstan`, `posterior` y `bayesplot`. Luego definimos un modelo Stan básico usando el código Stan proporcionado. Ajustamos este modelo usando `stan()` con una pequeña cantidad de iteraciones (`iter = 10`) para verificar rápidamente la instalación.
+
+A continuación, demostramos cómo ajustar aún más el modelo (`fit2`) con más iteraciones (`iter = 10000`) para mostrar cómo realizar un análisis más completo. El resumen del modelo ajustado se imprime utilizando la función `summary()`.
+
+Asegúrese de evaluar este código en un entorno R después de instalar los paquetes necesarios para verificar que `rstan` se haya instalado correctamente y funcione como se esperaba.
 
 
 ```r
@@ -147,31 +159,29 @@ fit2 <- stan(fit = fit1, iter = 10000, verbose = FALSE)
 summary(fit2)$summary 
 ```
 
-In this section, we validate the correct installation of `rstan` by running a simple Bayesian model. We load the required packages, including `rstan`, `posterior`, and `bayesplot`. We then define a basic Stan model using the Stan code provided. We fit this model using `stan()` with a small number of iterations (`iter = 10`) to quickly verify the installation.
 
-Next, we demonstrate fitting the model further (`fit2`) with more iterations (`iter = 10000`) to show how to perform a more comprehensive analysis. The summary of the fitted model is printed using the `summary()` function.
 
-Make sure to evaluate this code in an R environment after installing the required packages to verify that `rstan` has been installed correctly and is functioning as expected.
-
-## Step 4: Creating a Google Earth Engine Account:
+## Paso 4: Crear una cuenta de Google Earth Engine:
 
 <https://developers.google.com/earth-engine/datasets/>
 
-After successfully creating your account, it's important to follow these steps to ensure everything is set up correctly:
+Después de crear exitosamente su cuenta, es importante seguir estos pasos para asegurarse de que todo esté configurado correctamente:
 
-1. Access the provided link: <https://developers.google.com/earth-engine/datasets/catalog/WHRC_biomass_tropical>.
+1. Acceda al enlace proporcionado:
 
-2. Scroll down to the bottom of the page and locate the code displayed in the image below:
+<https://developers.google.com/earth-engine/datasets/catalog/WHRC_biomass_tropical>.
+
+2. Desplácese hasta el final de la página y localice el código que se muestra en la imagen a continuación:
 
 
 <img src="Recursos/00_Instalar_rstan/Validar cuenta.png" width="476" />
 
-3. Click on the **Open in Code Editor** option, which will open a new browser tab. Follow the instructions provided until you achieve the result shown in the image below:
+3. Haga clic en la opción  **Open in Code Editor**, que abrirá una nueva pestaña del navegador. Siga las instrucciones proporcionadas hasta lograr el resultado que se muestra en la imagen a continuación:
 
 <img src="Recursos/00_Instalar_rstan/Validar cuenta2.png" width="788" />
 
-4. In the previous tab, find and click the **Run** button to obtain the outcome displayed in the image below:
+4. En la pestaña anterior, busque y haga clic en el botón **Run** para obtener el resultado que se muestra en la imagen a continuación:
 
 <img src="Recursos/00_Instalar_rstan/Validar cuenta3.png" width="958" />
 
-**Note**: Repeat the process as needed to ensure you achieve the desired outcome.
+**Nota**: Repita el proceso según sea necesario para asegurarse de lograr el resultado deseado.

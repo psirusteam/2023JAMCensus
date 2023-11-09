@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>11.1 Prediction of the unoccupied household rate | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos</title>
+  <title>2.3 Organización de resultados en una base de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos</title>
   <meta name="description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="11.1 Prediction of the unoccupied household rate | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  <meta property="og:title" content="2.3 Organización de resultados en una base de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
   <meta name="github-repo" content="psirusteam/HHS-Handbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="11.1 Prediction of the unoccupied household rate | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  <meta name="twitter:title" content="2.3 Organización de resultados en una base de datos | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
   
   <meta name="twitter:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="estimaciones-agregadas.html"/>
-<link rel="next" href="predicción-del-total-de-personas.html"/>
+<link rel="prev" href="valores-descriptivos-de-los-datos-censos.html"/>
+<link rel="next" href="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -254,1287 +254,423 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="prediction-of-the-unoccupied-household-rate" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> Prediction of the unoccupied household rate<a href="prediction-of-the-unoccupied-household-rate.html#prediction-of-the-unoccupied-household-rate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb125-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span>  <span class="fu">Pred_desocupado</span>(censo_vivienda,</span>
-<span id="cb125-2"><a href="prediction-of-the-unoccupied-household-rate.html#cb125-2" tabindex="-1"></a>                <span class="at">agrega =</span> <span class="cn">NULL</span>,</span>
-<span id="cb125-3"><a href="prediction-of-the-unoccupied-household-rate.html#cb125-3" tabindex="-1"></a>                <span class="at">Plot =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb125-4"><a href="prediction-of-the-unoccupied-household-rate.html#cb125-4" tabindex="-1"></a>                <span class="at">filtro =</span> <span class="cn">NULL</span>) </span></code></pre></div>
-<p><img src="10.Demographic_analysis_files/figure-html/unnamed-chunk-3-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb126-1" tabindex="-1"></a><span class="fu">tba</span>(p1)</span></code></pre></div>
-<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:right;">
-total
-</th>
-<th style="text-align:right;">
-Porcen
-</th>
-<th style="text-align:right;">
-LimInf
-</th>
-<th style="text-align:right;">
-LimSup
-</th>
-<th style="text-align:right;">
-Len_IC
-</th>
-<th style="text-align:right;">
-SE
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-170596
-</td>
-<td style="text-align:right;">
-9.6495
-</td>
-<td style="text-align:right;">
-7.8008
-</td>
-<td style="text-align:right;">
-15.6923
-</td>
-<td style="text-align:right;">
-7.8915
-</td>
-<td style="text-align:right;">
-2.0131
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb127-1" tabindex="-1"></a><span class="fu">Pred_desocupado</span>(censo_vivienda, <span class="at">agrega =</span> <span class="st">&quot;PROV_ID&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
+<div id="organización-de-resultados-en-una-base-de-datos" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Organización de resultados en una base de datos<a href="organización-de-resultados-en-una-base-de-datos.html#organización-de-resultados-en-una-base-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En esta sección, las estadísticas descriptivas recopiladas se organizan y combinan en una base de datos resumida integral denominada <code>resumen2</code>.</p>
+<p>Para lograr esto, se utiliza la función <code>reducir</code> con una lista de tablas que contienen las distintas estadísticas. Las tablas incluyen estadísticas relacionadas con variables de caracteres (<code>nas_values_char</code>, <code>min_char</code>, <code>max_char</code>), variables numéricas (<code>nas_values</code>, <code>SD_values</code>, <code>mediana_values</code>, <code>media_values</code>, <code>min_values</code>, <code>max_values</code>), y una tabla que contiene información sobre nombres y tipos de variables (“resumen”).</p>
+<p>La función <code>full_join</code> se aplica de forma iterativa utilizando <code>reduce</code> para combinar todas estas tablas. El parámetro <code>by</code> especifica que la unión debe realizarse en función de la variable <code>Nombre_Columna</code>, asegurando que las estadísticas de cada variable coincidan y alineen correctamente.</p>
+<p>El resultado final es la base de datos <code>resumen2</code>, que proporciona una vista consolidada de estadísticas descriptivas para cada variable en el conjunto de datos del <code>censo</code>, incorporando información sobre NA, mínimos, máximos, desviaciones estándar, medianas, medias y más.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-1" tabindex="-1"></a>resumen2 <span class="ot">&lt;-</span> <span class="fu">reduce</span>(</span>
+<span id="cb8-2"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-2" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb8-3"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-3" tabindex="-1"></a>    nas_values_char,</span>
+<span id="cb8-4"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-4" tabindex="-1"></a>    min_char,</span>
+<span id="cb8-5"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-5" tabindex="-1"></a>    max_char,</span>
+<span id="cb8-6"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-6" tabindex="-1"></a>    nas_values,</span>
+<span id="cb8-7"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-7" tabindex="-1"></a>    SD_values,</span>
+<span id="cb8-8"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-8" tabindex="-1"></a>    mediana_values,</span>
+<span id="cb8-9"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-9" tabindex="-1"></a>    media_values,</span>
+<span id="cb8-10"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-10" tabindex="-1"></a>    min_values,</span>
+<span id="cb8-11"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-11" tabindex="-1"></a>    max_values</span>
+<span id="cb8-12"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-12" tabindex="-1"></a>  ),</span>
+<span id="cb8-13"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-13" tabindex="-1"></a>  full_join,</span>
+<span id="cb8-14"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-14" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(Nombre_Columna)</span>
+<span id="cb8-15"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-15" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-16" tabindex="-1"></a>  <span class="fu">full_join</span>(<span class="at">x =</span> resumen,</span>
+<span id="cb8-17"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-17" tabindex="-1"></a>            <span class="at">y =</span> .,</span>
+<span id="cb8-18"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-18" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">join_by</span>(Nombre_Columna))</span>
+<span id="cb8-19"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-20" tabindex="-1"></a><span class="co"># save data   </span></span>
+<span id="cb8-21"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-21" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-22" tabindex="-1"></a>openxlsx<span class="sc">::</span><span class="fu">write.xlsx</span>(resumen2,</span>
+<span id="cb8-23"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-23" tabindex="-1"></a>                     <span class="at">file =</span> <span class="st">&quot;Recursos/01_Input_Validation/Data/Estado_base.xlsx&quot;</span>)</span>
+<span id="cb8-24"><a href="organización-de-resultados-en-una-base-de-datos.html#cb8-24" tabindex="-1"></a>openxlsx<span class="sc">::</span><span class="fu">openXL</span>(<span class="st">&quot;Recursos/01_Input_Validation/Data/Estado_base.xlsx&quot;</span>)</span></code></pre></div>
 <table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
-PROV_ID
+Nombre_Columna
+</th>
+<th style="text-align:left;">
+tipo
 </th>
 <th style="text-align:right;">
-total
+Num_nas_char
 </th>
 <th style="text-align:right;">
-Porcen
+leng_min
 </th>
 <th style="text-align:right;">
-LimInf
+leng_max
 </th>
 <th style="text-align:right;">
-LimSup
+Num_nas
 </th>
 <th style="text-align:right;">
-Len_IC
+Valor_sd
 </th>
 <th style="text-align:right;">
-SE
+Valor_Mediana
+</th>
+<th style="text-align:right;">
+Valor_Media
+</th>
+<th style="text-align:right;">
+Valor_Minimo
+</th>
+<th style="text-align:right;">
+Valor_Maximo
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
+un_ID
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+503230.4746
+</td>
+<td style="text-align:right;">
+871621
+</td>
+<td style="text-align:right;">
+871621.0000
+</td>
+<td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-32511.23
-</td>
-<td style="text-align:right;">
-6.1292
-</td>
-<td style="text-align:right;">
-5.3021
-</td>
-<td style="text-align:right;">
-9.9408
-</td>
-<td style="text-align:right;">
-4.6388
-</td>
-<td style="text-align:right;">
-1.1834
+1743241
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-2
+PROV_ID
+</td>
+<td style="text-align:left;">
+character
 </td>
 <td style="text-align:right;">
-32237.42
+0
 </td>
 <td style="text-align:right;">
-8.7274
+1
 </td>
 <td style="text-align:right;">
-6.9849
+1
 </td>
 <td style="text-align:right;">
-15.4285
+NA
 </td>
 <td style="text-align:right;">
-8.4436
+NA
 </td>
 <td style="text-align:right;">
-2.1540
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
+CANT_ID
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
 3
 </td>
 <td style="text-align:right;">
-12311.19
+3
 </td>
 <td style="text-align:right;">
-6.6667
+NA
 </td>
 <td style="text-align:right;">
-5.8987
+NA
 </td>
 <td style="text-align:right;">
-10.1143
+NA
 </td>
 <td style="text-align:right;">
-4.2157
+NA
 </td>
 <td style="text-align:right;">
-1.0754
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-4
+DIST_ID
 </td>
-<td style="text-align:right;">
-10280.48
-</td>
-<td style="text-align:right;">
-5.9283
-</td>
-<td style="text-align:right;">
-4.7734
-</td>
-<td style="text-align:right;">
-11.5613
-</td>
-<td style="text-align:right;">
-6.7879
-</td>
-<td style="text-align:right;">
-1.7316
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
 5
 </td>
 <td style="text-align:right;">
-26994.96
+5
 </td>
 <td style="text-align:right;">
-18.0624
+NA
 </td>
 <td style="text-align:right;">
-12.7344
+NA
 </td>
 <td style="text-align:right;">
-29.9794
+NA
 </td>
 <td style="text-align:right;">
-17.2451
+NA
 </td>
 <td style="text-align:right;">
-4.3993
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-6
+NA
 </td>
 <td style="text-align:right;">
-36611.60
-</td>
-<td style="text-align:right;">
-18.9245
-</td>
-<td style="text-align:right;">
-15.2168
-</td>
-<td style="text-align:right;">
-27.3844
-</td>
-<td style="text-align:right;">
-12.1677
-</td>
-<td style="text-align:right;">
-3.1040
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-7
+UGM_ID
 </td>
-<td style="text-align:right;">
-19649.10
-</td>
-<td style="text-align:right;">
-11.7585
-</td>
-<td style="text-align:right;">
-9.7813
-</td>
-<td style="text-align:right;">
-18.6686
-</td>
-<td style="text-align:right;">
-8.8873
-</td>
-<td style="text-align:right;">
-2.2672
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb128-1" tabindex="-1"></a><span class="fu">Pred_desocupado</span>(censo_vivienda, <span class="at">agrega =</span> <span class="st">&quot;CANT_ID&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb128-2"><a href="prediction-of-the-unoccupied-household-rate.html#cb128-2" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
-<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-CANT_ID
-</th>
-<th style="text-align:right;">
-total
-</th>
-<th style="text-align:right;">
-Porcen
-</th>
-<th style="text-align:right;">
-LimInf
-</th>
-<th style="text-align:right;">
-LimSup
-</th>
-<th style="text-align:right;">
-Len_IC
-</th>
-<th style="text-align:right;">
-SE
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
 <td style="text-align:left;">
-101
+character
 </td>
 <td style="text-align:right;">
-4704.3753
+0
 </td>
 <td style="text-align:right;">
-4.7950
+8
 </td>
 <td style="text-align:right;">
-3.8687
+8
 </td>
 <td style="text-align:right;">
-9.8229
+NA
 </td>
 <td style="text-align:right;">
-5.9542
+NA
 </td>
 <td style="text-align:right;">
-1.5189
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-102
+LLAVEV
+</td>
+<td style="text-align:left;">
+character
 </td>
 <td style="text-align:right;">
-904.1052
+0
 </td>
 <td style="text-align:right;">
-3.7886
+1
 </td>
 <td style="text-align:right;">
-3.3167
+14
 </td>
 <td style="text-align:right;">
-6.7276
+NA
 </td>
 <td style="text-align:right;">
-3.4109
+NA
 </td>
 <td style="text-align:right;">
-0.8701
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-103
+RESUL_ENTREVISTA_VIV
+</td>
+<td style="text-align:left;">
+integer
 </td>
 <td style="text-align:right;">
-2326.4401
+NA
 </td>
 <td style="text-align:right;">
-3.3440
+NA
 </td>
 <td style="text-align:right;">
-2.7587
+NA
 </td>
 <td style="text-align:right;">
-6.1325
+0
 </td>
 <td style="text-align:right;">
-3.3738
+1.5899
 </td>
 <td style="text-align:right;">
-0.8607
+1
+</td>
+<td style="text-align:right;">
+2.2408
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-104
+TIPO_VIVIENDA_PRECENSO
+</td>
+<td style="text-align:left;">
+character
 </td>
 <td style="text-align:right;">
-1302.8111
+0
 </td>
 <td style="text-align:right;">
-8.7484
+1
 </td>
 <td style="text-align:right;">
-7.9692
+22
 </td>
 <td style="text-align:right;">
-11.9333
+NA
 </td>
 <td style="text-align:right;">
-3.9640
+NA
 </td>
 <td style="text-align:right;">
-1.0112
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-105
+V01_TIPO_VIVIENDA
+</td>
+<td style="text-align:left;">
+integer
 </td>
 <td style="text-align:right;">
-1529.1408
+NA
 </td>
 <td style="text-align:right;">
-21.3061
+NA
 </td>
 <td style="text-align:right;">
-18.9280
+NA
 </td>
 <td style="text-align:right;">
-27.2467
+0
 </td>
 <td style="text-align:right;">
-8.3187
+4.6571
 </td>
 <td style="text-align:right;">
-2.1221
+1
+</td>
+<td style="text-align:right;">
+2.9378
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+15
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-106
+V02_OCUPACION_VIVIENDA
 </td>
-<td style="text-align:right;">
-1303.6682
-</td>
-<td style="text-align:right;">
-5.8785
-</td>
-<td style="text-align:right;">
-4.8028
-</td>
-<td style="text-align:right;">
-11.5253
-</td>
-<td style="text-align:right;">
-6.7225
-</td>
-<td style="text-align:right;">
-1.7149
-</td>
-</tr>
-<tr>
 <td style="text-align:left;">
-107
+integer
 </td>
 <td style="text-align:right;">
-1329.3520
+NA
 </td>
 <td style="text-align:right;">
-10.2038
+NA
 </td>
 <td style="text-align:right;">
-9.0813
+NA
 </td>
 <td style="text-align:right;">
-14.9483
+0
 </td>
 <td style="text-align:right;">
-5.8670
+2.8114
 </td>
 <td style="text-align:right;">
-1.4967
+2
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-108
-</td>
-<td style="text-align:right;">
-1191.2768
-</td>
-<td style="text-align:right;">
-2.8692
-</td>
-<td style="text-align:right;">
-2.4607
-</td>
-<td style="text-align:right;">
-5.4149
-</td>
-<td style="text-align:right;">
-2.9541
-</td>
-<td style="text-align:right;">
-0.7536
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-109
-</td>
-<td style="text-align:right;">
-906.0511
-</td>
-<td style="text-align:right;">
-3.9678
-</td>
-<td style="text-align:right;">
-3.2436
-</td>
-<td style="text-align:right;">
-8.0984
-</td>
-<td style="text-align:right;">
-4.8548
-</td>
-<td style="text-align:right;">
-1.2385
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-110
-</td>
-<td style="text-align:right;">
-1071.5921
-</td>
-<td style="text-align:right;">
-4.1771
-</td>
-<td style="text-align:right;">
-3.4247
-</td>
-<td style="text-align:right;">
-8.4890
-</td>
-<td style="text-align:right;">
-5.0643
-</td>
-<td style="text-align:right;">
-1.2919
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-111
-</td>
-<td style="text-align:right;">
-629.5658
-</td>
-<td style="text-align:right;">
-2.8960
-</td>
-<td style="text-align:right;">
-2.6462
-</td>
-<td style="text-align:right;">
-4.4006
-</td>
-<td style="text-align:right;">
-1.7544
-</td>
-<td style="text-align:right;">
-0.4476
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-112
-</td>
-<td style="text-align:right;">
-1188.2365
-</td>
-<td style="text-align:right;">
-13.0146
-</td>
-<td style="text-align:right;">
-11.3643
-</td>
-<td style="text-align:right;">
-17.6408
-</td>
-<td style="text-align:right;">
-6.2765
-</td>
-<td style="text-align:right;">
-1.6011
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-113
-</td>
-<td style="text-align:right;">
-1338.6913
-</td>
-<td style="text-align:right;">
-6.3086
-</td>
-<td style="text-align:right;">
-5.8192
-</td>
-<td style="text-align:right;">
-8.6923
-</td>
-<td style="text-align:right;">
-2.8730
-</td>
-<td style="text-align:right;">
-0.7329
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-114
-</td>
-<td style="text-align:right;">
-842.5751
-</td>
-<td style="text-align:right;">
-3.6877
-</td>
-<td style="text-align:right;">
-3.3801
-</td>
-<td style="text-align:right;">
-5.6110
-</td>
-<td style="text-align:right;">
-2.2309
-</td>
-<td style="text-align:right;">
-0.5691
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-115
-</td>
-<td style="text-align:right;">
-860.8183
-</td>
-<td style="text-align:right;">
-4.3823
-</td>
-<td style="text-align:right;">
-3.7200
-</td>
-<td style="text-align:right;">
-8.1193
-</td>
-<td style="text-align:right;">
-4.3993
-</td>
-<td style="text-align:right;">
-1.1223
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-116
-</td>
-<td style="text-align:right;">
-793.8269
-</td>
-<td style="text-align:right;">
-21.9047
-</td>
-<td style="text-align:right;">
-19.4176
-</td>
-<td style="text-align:right;">
-28.8232
-</td>
-<td style="text-align:right;">
-9.4056
-</td>
-<td style="text-align:right;">
-2.3994
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-117
-</td>
-<td style="text-align:right;">
-1028.0808
-</td>
-<td style="text-align:right;">
-26.3206
-</td>
-<td style="text-align:right;">
-21.9920
-</td>
-<td style="text-align:right;">
-34.4197
-</td>
-<td style="text-align:right;">
-12.4277
-</td>
-<td style="text-align:right;">
-3.1703
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-118
-</td>
-<td style="text-align:right;">
-671.6741
-</td>
-<td style="text-align:right;">
-2.7472
-</td>
-<td style="text-align:right;">
-2.0860
-</td>
-<td style="text-align:right;">
-7.0503
-</td>
-<td style="text-align:right;">
-4.9643
-</td>
-<td style="text-align:right;">
-1.2664
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-119
-</td>
-<td style="text-align:right;">
-7588.2603
-</td>
-<td style="text-align:right;">
-12.7034
-</td>
-<td style="text-align:right;">
-11.5004
-</td>
-<td style="text-align:right;">
-16.7497
-</td>
-<td style="text-align:right;">
-5.2493
-</td>
-<td style="text-align:right;">
-1.3391
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-120
-</td>
-<td style="text-align:right;">
-1000.6907
-</td>
-<td style="text-align:right;">
-18.8206
-</td>
-<td style="text-align:right;">
-16.7473
-</td>
-<td style="text-align:right;">
-24.5034
-</td>
-<td style="text-align:right;">
-7.7561
-</td>
-<td style="text-align:right;">
-1.9786
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb129-1" tabindex="-1"></a><span class="fu">Pred_desocupado</span>(censo_vivienda, <span class="at">agrega =</span> <span class="st">&quot;DIST_ID&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb129-2"><a href="prediction-of-the-unoccupied-household-rate.html#cb129-2" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
-<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-DIST_ID
-</th>
-<th style="text-align:right;">
-total
-</th>
-<th style="text-align:right;">
-Porcen
-</th>
-<th style="text-align:right;">
-LimInf
-</th>
-<th style="text-align:right;">
-LimSup
-</th>
-<th style="text-align:right;">
-Len_IC
-</th>
-<th style="text-align:right;">
-SE
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-10101
-</td>
-<td style="text-align:right;">
-259.9300
-</td>
-<td style="text-align:right;">
-17.8769
-</td>
-<td style="text-align:right;">
-14.8636
-</td>
-<td style="text-align:right;">
-26.9333
-</td>
-<td style="text-align:right;">
-12.0698
-</td>
-<td style="text-align:right;">
-3.0790
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10102
-</td>
-<td style="text-align:right;">
-242.6324
-</td>
-<td style="text-align:right;">
-5.0464
-</td>
-<td style="text-align:right;">
-3.5641
-</td>
-<td style="text-align:right;">
-13.1547
-</td>
-<td style="text-align:right;">
-9.5906
-</td>
-<td style="text-align:right;">
-2.4466
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10103
-</td>
-<td style="text-align:right;">
-325.8134
-</td>
-<td style="text-align:right;">
-5.1132
-</td>
-<td style="text-align:right;">
-4.0814
-</td>
-<td style="text-align:right;">
-10.8335
-</td>
-<td style="text-align:right;">
-6.7521
-</td>
-<td style="text-align:right;">
-1.7225
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10104
-</td>
-<td style="text-align:right;">
-525.2972
-</td>
-<td style="text-align:right;">
-10.0574
-</td>
-<td style="text-align:right;">
-8.1812
-</td>
-<td style="text-align:right;">
-17.8866
-</td>
-<td style="text-align:right;">
-9.7055
-</td>
-<td style="text-align:right;">
-2.4759
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10105
-</td>
-<td style="text-align:right;">
-622.1515
-</td>
-<td style="text-align:right;">
-9.1817
-</td>
-<td style="text-align:right;">
-8.2921
-</td>
-<td style="text-align:right;">
-13.0957
-</td>
-<td style="text-align:right;">
-4.8036
-</td>
-<td style="text-align:right;">
-1.2254
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10106
-</td>
-<td style="text-align:right;">
-260.6938
-</td>
-<td style="text-align:right;">
-3.7700
-</td>
-<td style="text-align:right;">
-3.5110
-</td>
-<td style="text-align:right;">
-5.3212
-</td>
-<td style="text-align:right;">
-1.8102
-</td>
-<td style="text-align:right;">
-0.4618
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10107
-</td>
-<td style="text-align:right;">
-162.3146
-</td>
-<td style="text-align:right;">
-1.4402
-</td>
-<td style="text-align:right;">
-1.2844
-</td>
-<td style="text-align:right;">
-2.5274
-</td>
-<td style="text-align:right;">
-1.2430
-</td>
-<td style="text-align:right;">
-0.3171
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10108
-</td>
-<td style="text-align:right;">
-357.2789
-</td>
-<td style="text-align:right;">
-8.5781
-</td>
-<td style="text-align:right;">
-7.3951
-</td>
-<td style="text-align:right;">
-13.9366
-</td>
-<td style="text-align:right;">
-6.5415
-</td>
-<td style="text-align:right;">
-1.6688
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10109
-</td>
-<td style="text-align:right;">
-855.4386
-</td>
-<td style="text-align:right;">
-4.0477
-</td>
-<td style="text-align:right;">
-2.5018
-</td>
-<td style="text-align:right;">
-13.3719
-</td>
-<td style="text-align:right;">
-10.8702
-</td>
-<td style="text-align:right;">
-2.7730
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10110
-</td>
-<td style="text-align:right;">
-626.1736
-</td>
-<td style="text-align:right;">
-3.8801
-</td>
-<td style="text-align:right;">
-3.3093
-</td>
-<td style="text-align:right;">
-7.2516
-</td>
-<td style="text-align:right;">
-3.9423
-</td>
-<td style="text-align:right;">
-1.0057
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10111
-</td>
-<td style="text-align:right;">
-466.6511
-</td>
-<td style="text-align:right;">
-3.3683
-</td>
-<td style="text-align:right;">
-2.8908
-</td>
-<td style="text-align:right;">
-6.2913
-</td>
-<td style="text-align:right;">
-3.4005
-</td>
-<td style="text-align:right;">
-0.8675
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10201
-</td>
-<td style="text-align:right;">
-193.1655
-</td>
-<td style="text-align:right;">
-4.6201
-</td>
-<td style="text-align:right;">
-4.3063
-</td>
-<td style="text-align:right;">
-6.4739
-</td>
-<td style="text-align:right;">
-2.1676
-</td>
-<td style="text-align:right;">
-0.5530
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10202
-</td>
-<td style="text-align:right;">
-200.4354
-</td>
-<td style="text-align:right;">
-2.3603
-</td>
-<td style="text-align:right;">
-1.8712
-</td>
-<td style="text-align:right;">
-5.6881
-</td>
-<td style="text-align:right;">
-3.8169
-</td>
-<td style="text-align:right;">
-0.9737
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10203
-</td>
-<td style="text-align:right;">
-510.5042
-</td>
-<td style="text-align:right;">
-4.5617
-</td>
-<td style="text-align:right;">
-4.0439
-</td>
-<td style="text-align:right;">
-7.6111
-</td>
-<td style="text-align:right;">
-3.5672
-</td>
-<td style="text-align:right;">
-0.9100
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10301
-</td>
-<td style="text-align:right;">
-194.1877
-</td>
-<td style="text-align:right;">
-1.6909
-</td>
-<td style="text-align:right;">
-1.3653
-</td>
-<td style="text-align:right;">
-3.8786
-</td>
-<td style="text-align:right;">
-2.5133
-</td>
-<td style="text-align:right;">
-0.6411
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10302
-</td>
-<td style="text-align:right;">
-313.4239
-</td>
-<td style="text-align:right;">
-2.8655
-</td>
-<td style="text-align:right;">
-2.5148
-</td>
-<td style="text-align:right;">
-5.0408
-</td>
-<td style="text-align:right;">
-2.5260
-</td>
-<td style="text-align:right;">
-0.6444
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10303
-</td>
-<td style="text-align:right;">
-178.4447
-</td>
-<td style="text-align:right;">
-3.0514
-</td>
-<td style="text-align:right;">
-2.7513
-</td>
-<td style="text-align:right;">
-4.8938
-</td>
-<td style="text-align:right;">
-2.1425
-</td>
-<td style="text-align:right;">
-0.5466
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10304
-</td>
-<td style="text-align:right;">
-160.4965
-</td>
-<td style="text-align:right;">
-3.4126
-</td>
-<td style="text-align:right;">
-3.0166
-</td>
-<td style="text-align:right;">
-5.7444
-</td>
-<td style="text-align:right;">
-2.7278
-</td>
-<td style="text-align:right;">
-0.6959
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10305
-</td>
-<td style="text-align:right;">
-122.9297
-</td>
-<td style="text-align:right;">
-3.7331
-</td>
-<td style="text-align:right;">
-3.3143
-</td>
-<td style="text-align:right;">
-6.2113
-</td>
-<td style="text-align:right;">
-2.8970
-</td>
-<td style="text-align:right;">
-0.7390
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-10306
-</td>
-<td style="text-align:right;">
-135.8658
-</td>
-<td style="text-align:right;">
-9.8668
-</td>
-<td style="text-align:right;">
-9.0079
-</td>
-<td style="text-align:right;">
-13.5051
-</td>
-<td style="text-align:right;">
-4.4971
-</td>
-<td style="text-align:right;">
-1.1472
-</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb130-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">Pred_desocupado</span>(censo_vivienda,</span>
-<span id="cb130-2"><a href="prediction-of-the-unoccupied-household-rate.html#cb130-2" tabindex="-1"></a>                <span class="at">agrega =</span> <span class="st">&quot;DIST_ID&quot;</span>,</span>
-<span id="cb130-3"><a href="prediction-of-the-unoccupied-household-rate.html#cb130-3" tabindex="-1"></a>                <span class="at">Plot =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb130-4"><a href="prediction-of-the-unoccupied-household-rate.html#cb130-4" tabindex="-1"></a>                <span class="at">filtro =</span> <span class="st">&quot;10101&quot;</span>)</span></code></pre></div>
-<p><img src="10.Demographic_analysis_files/figure-html/unnamed-chunk-7-1.svg" width="672" /></p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="prediction-of-the-unoccupied-household-rate.html#cb131-1" tabindex="-1"></a><span class="fu">tba</span>(p1)</span></code></pre></div>
-<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-DIST_ID
-</th>
-<th style="text-align:right;">
-total
-</th>
-<th style="text-align:right;">
-Porcen
-</th>
-<th style="text-align:right;">
-LimInf
-</th>
-<th style="text-align:right;">
-LimSup
-</th>
-<th style="text-align:right;">
-Len_IC
-</th>
-<th style="text-align:right;">
-SE
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-10101
-</td>
-<td style="text-align:right;">
-259.93
-</td>
-<td style="text-align:right;">
-17.8769
-</td>
-<td style="text-align:right;">
-14.8636
-</td>
 <td style="text-align:right;">
-26.9333
+2.9311
 </td>
 <td style="text-align:right;">
-12.0698
+1
 </td>
 <td style="text-align:right;">
-3.079
+9
 </td>
 </tr>
 </tbody>
@@ -1545,8 +681,8 @@ SE
           </div>
         </div>
       </div>
-<a href="estimaciones-agregadas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="predicción-del-total-de-personas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="valores-descriptivos-de-los-datos-censos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1577,7 +713,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/psirusteam/2021ASDA/10.Demographic_analysis.qmd",
+"link": "https://github.com/psirusteam/2021ASDA/01_Standardizing_the_Census.qmd",
 "text": "Edit"
 },
 "history": {

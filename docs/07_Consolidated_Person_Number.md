@@ -1,13 +1,10 @@
 
 
 
-# consolidating the number of people per household
+# Consolidar el número de personas por hogar
 
 
 ```r
-### Cleaning R environment ###
-rm(list = ls())
-
 #################
 ### Libraries ###
 #################
@@ -22,7 +19,7 @@ library(merTools)
 cat("\f")
 ```
 
--   Read census data and models. 
+- Leer datos y modelos censales.
 
 
 ```r
@@ -36,7 +33,7 @@ modelo_ocupadas <-
   readRDS("Recursos/05_Model_for_people/Data/fit_poisson_ocupadas.rds")
 ```
 
--   Make predictions using the models
+- Hacer predicciones utilizando los modelos.
 
 
 ```r
@@ -72,7 +69,7 @@ summary(Base_ugms$pred_todas)
 summary(Base_ugms$pred_ocupadas)
 ```
 
--   Merge census information with predictions
+- Fusionar información del censo con predicciones.
 
 
 ```r
@@ -98,7 +95,7 @@ censo_temp <- censo_vivienda %>%
   )
 ```
 
--   Calculate sum of predictions
+- Calcular la suma de las predicciones.
 
 
 ```r
@@ -119,7 +116,7 @@ censo_temp %>% filter(greenpoint2  == "Sin informacion pero n>=0" ) %>%
   View()
 ```
 
--   Save consolidated information to a file
+- Guardar información consolidada en un archivo.
 
 
 ```r

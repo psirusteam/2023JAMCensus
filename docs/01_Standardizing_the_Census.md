@@ -1,9 +1,8 @@
 
 
+# Estandarización y validación de variables de datos censales disponibles
 
-# Standardization and Validation of Available Census Data Variables
-
-In the following code set, a series of processes are carried out for data cleaning and preparation. These steps include removing objects from the workspace, loading necessary libraries, reading census data, assigning missing values based on certain conditions, and calculating descriptive statistics for numeric and character variables. Additionally, adjustments are made to character variables to ensure consistent length. The final results are summarized in a data structure and saved in files for further analysis and reference.
+En el siguiente conjunto de códigos, se llevan a cabo una serie de procesos para la limpieza y preparación de datos. Estos pasos incluyen eliminar objetos del espacio de trabajo, cargar las librerías necesarias, leer datos del censo, asignar valores faltantes según ciertas condiciones y calcular estadísticas descriptivas para variables numéricas y de caracteres. Además, se realizan ajustes a las variables de caracteres para garantizar una longitud constante. Los resultados finales se resumen en una estructura de datos y se guardan en archivos para su posterior análisis y referencia.
 
 
 ```r
@@ -84,17 +83,17 @@ tba(head(resumen,10))
 </table>
 
 
-## Assigning Missing Values to the 'H01A_TOTAL_PERSONAS' Variable
+## Asignación de valores faltantes a la variable `H01A_TOTAL_PERSONAS`
 
-In this section, actions related to the 'H01A_TOTAL_PERSONAS' variable are performed. Missing values (NA) are assigned to this variable based on specific conditions, which include:
+En esta sección se realizan acciones relacionadas con la variable `H01A_TOTAL_PERSONAS`. Los valores faltantes (NA) se asignan a esta variable según condiciones específicas, que incluyen:
 
-- Dwellings that were not visited (category 9).
-- Dwellings that rejected the visit or are pending (classification 2).
-- Dwellings with other reasons (category 8).
+- Viviendas que no fueron visitadas (categoría 9).
+- Viviendas que rechazaron la visita o se encuentran pendientes (clasificación 2).
+- Viviendas con otros motivos (categoría 8).
 
-Next, a count of cases before and after the assignment of missing values is conducted. The 'mutate' function is used to create a new temporary column 'H01A_TOTAL_PERSONAS_temp' in which NA values are assigned according to the specified conditions. The information is then grouped by the 'V02_OCUPACION_VIVIENDA' variable, and the number of missing values ('nas') before and after the assignment is calculated, along with the total count of missing values after the assignment.
+A continuación se realiza un recuento de casos antes y después de la asignación de valores faltantes. La función `mutar` se utiliza para crear una nueva columna temporal `H01A_TOTAL_PERSONAS_temp` en la que se asignan valores NA de acuerdo con las condiciones especificadas. Luego, la información se agrupa por la variable `V02_OCUPACION_VIVIENDA` y se calcula el número de valores faltantes (`NAs`) antes y después de la asignación, junto con el recuento total de valores faltantes después de la asignación.
 
-Subsequently, another assignment of missing values is performed directly to the 'H01A_TOTAL_PERSONAS' variable within the 'censo' dataset. This is done following the same conditions mentioned earlier.
+Posteriormente, se realiza otra asignación de valores faltantes directamente a la variable `H01A_TOTAL_PERSONAS` dentro del conjunto de datos `censo`. Esto se hace siguiendo las mismas condiciones mencionadas anteriormente.
 
 
 ```r
@@ -123,23 +122,24 @@ censo %<>% mutate(
 ```
 
 
-## Descriptive Values of the Census Data
+## Valores Descriptivos de los Datos Censos
 
-### Numeric Variables {-}
+### Variables numéricas {-}
 
-In this section, various descriptive statistics are calculated for the numeric variables within the 'censo' dataset. These statistics provide insights into the distribution and characteristics of the numeric data.
+En esta sección, se calculan varias estadísticas descriptivas para las variables numéricas dentro del conjunto de datos del `censo`. Estas estadísticas proporcionan información sobre la distribución y las características de los datos numéricos.
 
-- 'max_values': The maximum values of numeric and integer variables are calculated using the 'summarise' and 'pivot_longer' functions. The result is a table that lists the maximum values for each variable.
+- `max_values`: Los valores máximos de variables numéricas y enteras se calculan utilizando las funciones `summarise` y `pivot_longer`. El resultado es una tabla que enumera los valores máximos para cada variable.
 
-- 'min_values': Similarly, the minimum values of numeric and integer variables are computed and organized into a table format.
+- `min_values`: De manera similar, los valores mínimos de variables numéricas y enteras se calculan y organizan en un formato de tabla.
 
-- 'media_values': The mean (average) values of numeric and integer variables are calculated and presented in tabular form.
+- `media_values`: los valores medios (promedio) de variables numéricas y enteras se calculan y presentan en forma de tabla.
 
-- 'mediana_values': The median values of numeric and integer variables are determined and displayed as a table.
+- `mediana_values`: Los valores medianos de variables numéricas y enteras se determinan y muestran como una tabla.
 
-- 'SD_values': Standard deviations (SD) of numeric and integer variables are computed and organized into a table structure.
+- `SD_values`: las desviaciones estándar (SD) de variables numéricas y enteras se calculan y organizan en una estructura de tabla.
 
-- 'nas_values': The number of missing values (NAs) for each numeric and integer variable is counted and presented in tabular format.
+- `nas_values`: el número de valores faltantes (NA) para cada variable numérica y entera se cuenta y se presenta en formato tabular.
+
 
 
 ```r
@@ -169,15 +169,15 @@ nas_values <- censo %>%
 ```
 
 
-### Character Variables {-}
+### Variables de caracteres {-}
 
-For character variables within the 'censo' dataset, specific descriptive statistics are generated:
+Para las variables de caracteres dentro del conjunto de datos del `censo`, se generan estadísticas descriptivas específicas:
 
-- 'max_char': This table contains the maximum lengths of character variables. It calculates the maximum number of characters within each character variable.
+- `max_char`: esta tabla contiene las longitudes máximas de las variables de caracteres. Calcula el número máximo de caracteres dentro de cada variable de carácter.
 
-- 'min_char': Similar to 'max_char', this table provides the minimum lengths of character variables.
+- `min_char`: similar a `max_char`, esta tabla proporciona las longitudes mínimas de las variables de caracteres.
 
-- 'nas_values_char': This table displays the counts of missing values (NAs) for each character variable.
+- `nas_values_char`: esta tabla muestra los recuentos de valores faltantes (NA) para cada variable de carácter.
 
 
 ```r
@@ -193,16 +193,15 @@ nas_values_char <- censo %>%
   summarise(across(where(is.character) , function(x)sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 ```
+## Organización de resultados en una base de datos
 
-## Organizing Results in a Database
+En esta sección, las estadísticas descriptivas recopiladas se organizan y combinan en una base de datos resumida integral denominada `resumen2`.
 
-In this section, the collected descriptive statistics are organized and combined into a comprehensive summary database named 'resumen2'.
+Para lograr esto, se utiliza la función `reducir` con una lista de tablas que contienen las distintas estadísticas. Las tablas incluyen estadísticas relacionadas con variables de caracteres (`nas_values_char`, `min_char`, `max_char`), variables numéricas (`nas_values`, `SD_values`, `mediana_values`, `media_values`, `min_values`, `max_values`), y una tabla que contiene información sobre nombres y tipos de variables ("resumen").
 
-To achieve this, the 'reduce' function is used with a list of tables containing the various statistics. The tables include statistics related to character variables ('nas_values_char', 'min_char', 'max_char'), numeric variables ('nas_values', 'SD_values', 'mediana_values', 'media_values', 'min_values', 'max_values'), and a table that holds information about variable names and types ('resumen').
+La función `full_join` se aplica de forma iterativa utilizando `reduce` para combinar todas estas tablas. El parámetro `by` especifica que la unión debe realizarse en función de la variable `Nombre_Columna`, asegurando que las estadísticas de cada variable coincidan y alineen correctamente.
 
-The 'full_join' function is applied iteratively using 'reduce' to combine all these tables together. The 'by' parameter specifies that the join should be performed based on the 'Nombre_Columna' (Column Name) variable, ensuring that the statistics for each variable are correctly matched and aligned.
-
-The final result is the 'resumen2' database, which provides a consolidated view of descriptive statistics for each variable in the 'censo' dataset, incorporating information about NAs, minimums, maximums, standard deviations, medians, means, and more.
+El resultado final es la base de datos `resumen2`, que proporciona una vista consolidada de estadísticas descriptivas para cada variable en el conjunto de datos del `censo`, incorporando información sobre NA, mínimos, máximos, desviaciones estándar, medianas, medias y más.
 
 
 
@@ -383,15 +382,16 @@ openxlsx::openXL("Recursos/01_Input_Validation/Data/Estado_base.xlsx")
 </tbody>
 </table>
 
-## Updating the Dataset Based on Report Results
+## Actualización del conjunto de datos basada en los resultados del informe
 
-In this part of the code, the 'censo' dataset is updated based on the results obtained from the report.
+En esta parte del código, el conjunto de datos `censo` se actualiza en función de los resultados obtenidos del informe.
 
-First, the 'Nombre_Columna' vector is defined, which contains the names of the columns to be updated. Next, the 'Tipo_actualizar' vector is defined, which contains the type conversion functions to be applied to each corresponding column.
+Primero, se define el vector `Nombre_Columna`, que contiene los nombres de las columnas que se van a actualizar. A continuación, se define el vector `Tipo_actualizar`, que contiene las funciones de conversión de tipo que se aplicarán a cada columna correspondiente.
 
-Using the 'map2' function from the 'purrr' package, each pair of elements in 'Nombre_Columna' and 'Tipo_actualizar' is iterated over, applying the respective type conversion function to each column in the 'censo' dataset. This is achieved using the '<<-' function to update values in the original dataset.
+Utilizando la función `map2` del paquete `purrr`, se itera sobre cada par de elementos en `Nombre_Columna` y `Tipo_actualizar`, aplicando la respectiva función de conversión de tipo a cada columna en el conjunto de datos `censo`. Esto se logra utilizando la función `<<-` para actualizar los valores en el conjunto de datos original.
 
-Finally, a new dataset 'censo2' is created that only contains the columns specified in 'Nombre_Columna'. This ensures that the dataset is updated according to the data types and modifications made based on the report results.
+Finalmente, se crea un nuevo conjunto de datos `censo2` que solo contiene las columnas especificadas en `Nombre_Columna`. Esto garantiza que el conjunto de datos se actualice de acuerdo con los tipos de datos y las modificaciones realizadas en función de los resultados del informe.
+
 
 
 ```r
@@ -482,17 +482,18 @@ map2(Nombre_Columna, Tipo_actualizar, function(nom,tipo){
   censo[[nom]] <<- tipo(censo[[nom]])
 })
 
-# Selecting columns specified in 'Nombre_Columna'
+# Selecting columns specified in `Nombre_Columna`
 censo2 <- censo %>% select(all_of(Nombre_Columna))
 ```
 
-## Dataset Refinement and Analysis
+## Refinamiento y Análisis del Conjunto de Datos
 
-In this section, the 'censo' dataset is refined further, and some descriptive analyses are conducted on the updated dataset. Additionally, the results of these analyses are saved in the specified directory.
+En esta sección, el conjunto de datos `censo` se refina aún más, y se realizan algunos análisis descriptivos en el conjunto de datos actualizado. Además, los resultados de estos análisis se guardan en el directorio especificado.
 
 
 
-- Summary of variables
+
+- Resumen de variables
 
 
 ```r
@@ -513,7 +514,7 @@ censo2 %>% distinct(UGM_ID, wpop_sum) %>%
 </tbody>
 </table>
 
-- Count of ugm_viviendas_totales_censo == 0
+- Conteo de `ugm_viviendas_totales_censo` == 0
 
 
 ```r
@@ -576,7 +577,7 @@ censo2 %>%
 </tbody>
 </table>
 
-- Comparing with the number of records per UGM
+- Comparación con el número de registros por UGM
 
 
 ```r
@@ -613,7 +614,7 @@ inner_join(ugm_cero_viviendas, cont_registros_ugm) %>%
 </tbody>
 </table>
 
-- Summary of variables for specific condition
+- Resumen de variables para una condición específica
 
 
 ```r
@@ -643,20 +644,18 @@ censo2 %>% filter(V02_OCUPACION_VIVIENDA == "8") %>%
 </tbody>
 </table>
 
+## Resumen y Análisis de Datos
 
+En esta sección, estamos resumiendo y analizando los datos para obtener información clave. Calcularemos diferentes medidas para comprender las características de las variables.
 
-## Summary and Analysis of Data
-
-In this section, we are summarizing and analyzing the data in order to gain insights. We will calculate different measures to understand the characteristics of the variables.
-
-- Creating a summary of the column names and their data types
+- Creación de un resumen de los nombres de las columnas y sus tipos de datos
 
 ```r
 resumen <- data.frame(Nombre_Columna = names(censo2))
 resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(censo2[[x]])))
 ```
 
-- Checking for character variables and ensuring consistent character length
+- Comprobación de variables de tipo carácter y aseguramiento de una longitud de carácter consistente
 
 
 ```r
@@ -671,24 +670,27 @@ for(ii in tipo_char) {
 }
 ```
 
-- Summarizing character variables
+- Resumen de variables de tipo carácter
 
 
 ```r
-max_char <- censo2 %>%
-  summarise(across(where(is.character), function(x)max(nchar(x)))) %>%
+max_char <- censo %>%
+  summarise(across(where(is.character), function(x)
+    max(nchar(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "leng_max")
 
-min_char <- censo2 %>%
-  summarise(across(where(is.character), function(x)min(nchar(x)))) %>%
+min_char <- censo %>%
+  summarise(across(where(is.character), function(x)
+    min(nchar(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "leng_min")
 
-nas_values_char <- censo2 %>%
-  summarise(across(where(is.character) , function(x)sum(is.na(x)))) %>%
+nas_values_char <- censo %>%
+  summarise(across(where(is.character) , function(x)
+    sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 ```
 
-- Summarizing numeric variables
+- Resumen de variables numéricas
 
 
 ```r
@@ -712,12 +714,12 @@ SD_values <- censo2 %>%
   summarise(across(where(is.numeric) | where(is.integer), sd)) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Valor_sd")
 
-nas_values <- censo2 %>%
+nas_values <- censo %>%
   summarise(across(where(is.numeric) | where(is.integer), function(x)sum(is.na(x)))) %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 ```
 
-- Combining all the summary information
+- Combinación de toda la información de resumen
 
 
 ```r
@@ -728,7 +730,7 @@ resumen2 <- reduce(
   full_join(x = resumen, y = ., by = join_by(Nombre_Columna))
 ```
 
-- Saving the summary results to an Excel file
+- Guardando los resultados del resumen en un archivo de Excel
 
 
 ```r
@@ -736,12 +738,11 @@ openxlsx::write.xlsx(resumen2,
                      file = "Recursos/01_Input_Validation/Data/Estado_base_despues.xlsx")
 ```
 
-- Saving the standardized dataset
+- Guardando el dataset estandarizado
 
 
 ```r
 saveRDS(censo2, file = "Recursos/01_Input_Validation/Data/censo_estandarizado.rds")
 ```
 
-In this code block, we are creating summaries of the dataset variables to understand their characteristics. We are calculating different measures for both character and numeric variables, such as maximum, minimum, mean, median, and standard deviation. Additionally, we are counting missing values for character variables.
-
+En este bloque de código, estamos creando resúmenes de las variables del conjunto de datos para comprender sus características. Calculamos diferentes medidas tanto para variables de tipo carácter como numéricas, como el máximo, mínimo, media, mediana y desviación estándar. Además, contamos los valores faltantes para variables de tipo carácter.

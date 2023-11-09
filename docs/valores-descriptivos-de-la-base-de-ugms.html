@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="es" xml:lang="es">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.2 Valores descriptivos de la base de UGMs | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos</title>
+  <meta name="description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.2 Valores descriptivos de la base de UGMs | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  <meta name="github-repo" content="psirusteam/HHS-Handbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.2 Valores descriptivos de la base de UGMs | Metodologías-de-modelo-de-multinivel-para-la-imputación-del-recuento-de-personas-en-Censos" />
+  
+  <meta name="twitter:description" content="Modelo de multinivel para la imputación del recuento de personas en Censos" />
+  
+
+
+
+<meta name="date" content="2023-11-09" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="preparación-del-entorno-y-carga-de-bibliotecas.html"/>
+<link rel="next" href="modelo-binomial-de-unidad-para-viviendas-ocupadas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Workshop on Capacity Building Installation</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
+<li class="chapter" data-level="1" data-path="instalación-de-bibliotecas-y-software-necesario-para-modelos-de-censo-con-enfoque-bayesiano.html"><a href="instalación-de-bibliotecas-y-software-necesario-para-modelos-de-censo-con-enfoque-bayesiano.html"><i class="fa fa-check"></i><b>1</b> Instalación de bibliotecas y software necesario para modelos de censo con enfoque bayesiano</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="paso-1-instalación-del-software.html"><a href="paso-1-instalación-del-software.html"><i class="fa fa-check"></i><b>1.1</b> Paso 1: Instalación del software</a></li>
+<li class="chapter" data-level="1.2" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><i class="fa fa-check"></i><b>1.2</b> Paso 2: Instalar las siguientes bibliotecas en <em>R.</em></a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#visualización-y-manipulación-de-datos"><i class="fa fa-check"></i><b>1.2.1</b> Visualización y manipulación de datos:</a></li>
+<li class="chapter" data-level="1.2.2" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#modelos-estadísticos"><i class="fa fa-check"></i><b>1.2.2</b> Modelos estadísticos:</a></li>
+<li class="chapter" data-level="1.2.3" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#analisis-de-encuestas"><i class="fa fa-check"></i><b>1.2.3</b> Analisis de encuestas:</a></li>
+<li class="chapter" data-level="1.2.4" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#manipulación-y-transformación-de-datos"><i class="fa fa-check"></i><b>1.2.4</b> Manipulación y Transformación de Datos:</a></li>
+<li class="chapter" data-level="1.2.5" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#análisis-bayesiano"><i class="fa fa-check"></i><b>1.2.5</b> Análisis Bayesiano:</a></li>
+<li class="chapter" data-level="1.2.6" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#geospatial-analysis"><i class="fa fa-check"></i><b>1.2.6</b> Geospatial Analysis:</a></li>
+<li class="chapter" data-level="1.2.7" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#misceláneas"><i class="fa fa-check"></i><b>1.2.7</b> Misceláneas:</a></li>
+<li class="chapter" data-level="1.2.8" data-path="paso-2-instalar-las-siguientes-bibliotecas-en-r..html"><a href="paso-2-instalar-las-siguientes-bibliotecas-en-r..html#guía-paso-a-paso-para-instalar-rstan"><i class="fa fa-check"></i><b>1.2.8</b> Guía paso a paso para instalar <code>rstan</code></a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="paso-3-validación-de-la-instalación-garantizar-una-instalación-adecuada-de-rstan.html"><a href="paso-3-validación-de-la-instalación-garantizar-una-instalación-adecuada-de-rstan.html"><i class="fa fa-check"></i><b>1.3</b> Paso 3: Validación de la instalación: garantizar una instalación adecuada de <code>rstan</code></a></li>
+<li class="chapter" data-level="1.4" data-path="paso-4-crear-una-cuenta-de-google-earth-engine.html"><a href="paso-4-crear-una-cuenta-de-google-earth-engine.html"><i class="fa fa-check"></i><b>1.4</b> Paso 4: Crear una cuenta de Google Earth Engine:</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="estandarización-y-validación-de-variables-de-datos-censales-disponibles.html"><a href="estandarización-y-validación-de-variables-de-datos-censales-disponibles.html"><i class="fa fa-check"></i><b>2</b> Estandarización y validación de variables de datos censales disponibles</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="asignación-de-valores-faltantes-a-la-variable-h01a_total_personas.html"><a href="asignación-de-valores-faltantes-a-la-variable-h01a_total_personas.html"><i class="fa fa-check"></i><b>2.1</b> Asignación de valores faltantes a la variable <code>H01A_TOTAL_PERSONAS</code></a></li>
+<li class="chapter" data-level="2.2" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html"><i class="fa fa-check"></i><b>2.2</b> Valores Descriptivos de los Datos Censos</a>
+<ul>
+<li class="chapter" data-level="" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html#variables-numéricas"><i class="fa fa-check"></i>Variables numéricas</a></li>
+<li class="chapter" data-level="" data-path="valores-descriptivos-de-los-datos-censos.html"><a href="valores-descriptivos-de-los-datos-censos.html#variables-de-caracteres"><i class="fa fa-check"></i>Variables de caracteres</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="organización-de-resultados-en-una-base-de-datos.html"><a href="organización-de-resultados-en-una-base-de-datos.html"><i class="fa fa-check"></i><b>2.3</b> Organización de resultados en una base de datos</a></li>
+<li class="chapter" data-level="2.4" data-path="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html"><a href="actualización-del-conjunto-de-datos-basada-en-los-resultados-del-informe.html"><i class="fa fa-check"></i><b>2.4</b> Actualización del conjunto de datos basada en los resultados del informe</a></li>
+<li class="chapter" data-level="2.5" data-path="refinamiento-y-análisis-del-conjunto-de-datos.html"><a href="refinamiento-y-análisis-del-conjunto-de-datos.html"><i class="fa fa-check"></i><b>2.5</b> Refinamiento y Análisis del Conjunto de Datos</a></li>
+<li class="chapter" data-level="2.6" data-path="resumen-y-análisis-de-datos.html"><a href="resumen-y-análisis-de-datos.html"><i class="fa fa-check"></i><b>2.6</b> Resumen y Análisis de Datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="filtrado-y-refinamiento-de-datos-del-censo.html"><a href="filtrado-y-refinamiento-de-datos-del-censo.html"><i class="fa fa-check"></i><b>3</b> Filtrado y Refinamiento de Datos del Censo</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><i class="fa fa-check"></i><b>3.1</b> Lectura de Bibliotecas, Bases de Datos y Otros Insumos</a>
+<ul>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#lectura-de-datos-de-vivienda-sin-coordenadas."><i class="fa fa-check"></i>Lectura de Datos de Vivienda sin Coordenadas.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#cambio-de-códigos-ugm-en-los-datos-de-vivienda."><i class="fa fa-check"></i>Cambio de Códigos UGM en los Datos de Vivienda.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#leer-los-datos-del-censo-estandarizados."><i class="fa fa-check"></i>Leer los Datos del Censo Estandarizados.</a></li>
+<li class="chapter" data-level="" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#agregando-la-base-de-edad-y-sexo."><i class="fa fa-check"></i>Agregando la Base de Edad y Sexo.</a></li>
+<li class="chapter" data-level="3.1.1" data-path="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html"><a href="lectura-de-bibliotecas-bases-de-datos-y-otros-insumos.html#inner-join-para-agregar-la-base-de-edad-y-sexo"><i class="fa fa-check"></i><b>3.1.1</b> Inner Join para Agregar la Base de Edad y Sexo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html"><i class="fa fa-check"></i><b>3.2</b> Aplicación de filtros y análisis de datos</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-primer-filtro-categorización-de-hogares-con-residentes-y-determinación-del-estado-de-greenpoint"><i class="fa fa-check"></i><b>3.2.1</b> Aplicación del primer filtro: categorización de hogares con residentes y determinación del estado de greenpoint</a></li>
+<li class="chapter" data-level="3.2.2" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#aplicación-del-segundo-filtro-criterio-worldpop"><i class="fa fa-check"></i><b>3.2.2</b> Aplicación del segundo filtro: Criterio WorldPop</a></li>
+<li class="chapter" data-level="3.2.3" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#resumen-de-estadísticas-basado-en-greenpoint2"><i class="fa fa-check"></i><b>3.2.3</b> Resumen de estadísticas basado en ‘greenpoint2’</a></li>
+<li class="chapter" data-level="3.2.4" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#definición-del-tercer-filtro"><i class="fa fa-check"></i><b>3.2.4</b> Definición del tercer filtro</a></li>
+<li class="chapter" data-level="3.2.5" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#combinando-casas-no-coordinadas"><i class="fa fa-check"></i><b>3.2.5</b> Combinando casas no coordinadas</a></li>
+<li class="chapter" data-level="3.2.6" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#agregación-de-estadísticas-y-resúmenes"><i class="fa fa-check"></i><b>3.2.6</b> Agregación de estadísticas y resúmenes</a></li>
+<li class="chapter" data-level="3.2.7" data-path="aplicación-de-filtros-y-análisis-de-datos.html"><a href="aplicación-de-filtros-y-análisis-de-datos.html#extraer-y-guardar-subconjunto"><i class="fa fa-check"></i><b>3.2.7</b> Extraer y guardar subconjunto</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="estandarización-y-validación-de-covariables.html"><a href="estandarización-y-validación-de-covariables.html"><i class="fa fa-check"></i><b>4</b> Estandarización y validación de covariables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="preparación-del-entorno-y-carga-de-bibliotecas.html"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html"><i class="fa fa-check"></i><b>4.1</b> Preparación del entorno y carga de bibliotecas</a></li>
+<li class="chapter" data-level="4.2" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html"><i class="fa fa-check"></i><b>4.2</b> Valores descriptivos de la base de UGMs</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html#estandarización-de-variables-y-unión-de-conjuntos-de-datos."><i class="fa fa-check"></i><b>4.2.1</b> Estandarización de variables y unión de conjuntos de datos.</a></li>
+<li class="chapter" data-level="4.2.2" data-path="valores-descriptivos-de-la-base-de-ugms.html"><a href="valores-descriptivos-de-la-base-de-ugms.html#estandarizar-las-variables-numéricas-utilizando-la-escala-de-puntuación-z-z-score."><i class="fa fa-check"></i><b>4.2.2</b> Estandarizar las variables numéricas utilizando la escala de puntuación z (z-score).</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="modelo-binomial-de-unidad-para-viviendas-ocupadas.html"><a href="modelo-binomial-de-unidad-para-viviendas-ocupadas.html"><i class="fa fa-check"></i><b>5</b> Modelo binomial de unidad para viviendas ocupadas</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="preparación-del-entorno-y-los-datos.html"><a href="preparación-del-entorno-y-los-datos.html"><i class="fa fa-check"></i><b>5.1</b> Preparación del entorno y los datos</a></li>
+<li class="chapter" data-level="5.2" data-path="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><a href="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><i class="fa fa-check"></i><b>5.2</b> Definición de la columna ‘Desocupada’: Clasificación del estado de ocupación</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html"><a href="definición-de-la-columna-desocupada-clasificación-del-estado-de-ocupación.html#conteo-de-combinaciones-de-estado-de-ocupación-y-valores-de-greenpoint"><i class="fa fa-check"></i><b>5.2.1</b> Conteo de Combinaciones de Estado de Ocupación y Valores de ‘Greenpoint’</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="consolidación-de-bases-de-datos-de-viviendas-del-censo.html"><a href="consolidación-de-bases-de-datos-de-viviendas-del-censo.html"><i class="fa fa-check"></i><b>6</b> Consolidación de bases de datos de viviendas del CENSO</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="definición-de-viviendas-ocupadas-y-desocupadas..html"><a href="definición-de-viviendas-ocupadas-y-desocupadas..html"><i class="fa fa-check"></i><b>6.1</b> Definición de viviendas ocupadas y desocupadas.</a></li>
+<li class="chapter" data-level="6.2" data-path="resumen-de-medidas-y-validación-de-resultados.html"><a href="resumen-de-medidas-y-validación-de-resultados.html"><i class="fa fa-check"></i><b>6.2</b> Resumen de medidas y validación de resultados</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="estimación-del-número-de-personas-por-hogar.html"><a href="estimación-del-número-de-personas-por-hogar.html"><i class="fa fa-check"></i><b>7</b> Estimación del número de personas por hogar</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lectura-de-los-datos-del-censo..html"><a href="lectura-de-los-datos-del-censo..html"><i class="fa fa-check"></i><b>7.1</b> Lectura de los datos del censo.</a></li>
+<li class="chapter" data-level="7.2" data-path="preparando-datos-para-el-modelo-1.html"><a href="preparando-datos-para-el-modelo-1.html"><i class="fa fa-check"></i><b>7.2</b> Preparando datos para el Modelo 1</a></li>
+<li class="chapter" data-level="7.3" data-path="preparando-datos-para-el-modelo-2.html"><a href="preparando-datos-para-el-modelo-2.html"><i class="fa fa-check"></i><b>7.3</b> Preparando datos para el Modelo 2</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="consolidar-el-número-de-personas-por-hogar.html"><a href="consolidar-el-número-de-personas-por-hogar.html"><i class="fa fa-check"></i><b>8</b> Consolidar el número de personas por hogar</a></li>
+<li class="chapter" data-level="9" data-path="modelo-multinomial-para-estimar-personas-por-rango-de-edad-y-sexo.html"><a href="modelo-multinomial-para-estimar-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>9</b> Modelo multinomial para estimar personas por rango de edad y sexo</a></li>
+<li class="chapter" data-level="10" data-path="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html"><i class="fa fa-check"></i><b>10</b> Creando la base censal con predicciones del modelo multinomial</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="resultados-por-provincias.html"><a href="resultados-por-provincias.html"><i class="fa fa-check"></i><b>10.1</b> Resultados por Provincias</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
+<ul>
+<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
+<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
+<li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a Workshop on Capacity Building Installation </a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="valores-descriptivos-de-la-base-de-ugms" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Valores descriptivos de la base de UGMs<a href="valores-descriptivos-de-la-base-de-ugms.html#valores-descriptivos-de-la-base-de-ugms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Comenzamos creando un marco de datos resumen que incluye los nombres de las columnas y sus tipos de datos correspondientes. Posteriormente, mejoramos este resumen agregando una columna que indica el tipo de dato de cada columna, lo que se logra mediante el uso de la función map_chr en los nombres de las columnas y sus datos correspondientes.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb57-1" tabindex="-1"></a><span class="co"># Create a summary dataframe with column names and their data types</span></span>
+<span id="cb57-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb57-2" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Nombre_Columna =</span> <span class="fu">names</span>(Base_ugms))</span>
+<span id="cb57-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb57-3" tabindex="-1"></a>resumen <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">tipo =</span> <span class="fu">map_chr</span>(Nombre_Columna, <span class="cf">function</span>(x)<span class="fu">class</span>(Base_ugms[[x]])))</span></code></pre></div>
+<ul>
+<li>Variables numéricas</li>
+</ul>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-1" tabindex="-1"></a><span class="co"># Calculate maximum values for numeric and integer columns</span></span>
+<span id="cb58-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-2" tabindex="-1"></a>max_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), max)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Valor_Maximo&quot;</span>)</span>
+<span id="cb58-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-5" tabindex="-1"></a></span>
+<span id="cb58-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-6" tabindex="-1"></a><span class="co"># Calculate minimum values for numeric and integer columns</span></span>
+<span id="cb58-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-7" tabindex="-1"></a>min_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), min)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Valor_Minimo&quot;</span>)</span>
+<span id="cb58-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-10" tabindex="-1"></a></span>
+<span id="cb58-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-11" tabindex="-1"></a><span class="co"># Calculate mean values for numeric and integer columns</span></span>
+<span id="cb58-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-12" tabindex="-1"></a>media_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-13"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-13" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), mean)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-14"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-14" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Valor_Media&quot;</span>)</span>
+<span id="cb58-15"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-15" tabindex="-1"></a></span>
+<span id="cb58-16"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-16" tabindex="-1"></a><span class="co"># Calculate median values for numeric and integer columns</span></span>
+<span id="cb58-17"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-17" tabindex="-1"></a>mediana_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-18"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-18" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), median)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-19"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-19" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Valor_Mediana&quot;</span>)</span>
+<span id="cb58-20"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-20" tabindex="-1"></a></span>
+<span id="cb58-21"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-21" tabindex="-1"></a><span class="co"># Calculate standard deviation values for numeric and integer columns</span></span>
+<span id="cb58-22"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-22" tabindex="-1"></a>SD_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-23"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-23" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), sd)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-24"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-24" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Valor_sd&quot;</span>)</span>
+<span id="cb58-25"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-25" tabindex="-1"></a></span>
+<span id="cb58-26"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-26" tabindex="-1"></a><span class="co"># Calculate the number of missing values for numeric and integer columns</span></span>
+<span id="cb58-27"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-27" tabindex="-1"></a>nas_values <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb58-28"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-28" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), <span class="cf">function</span>(x)<span class="fu">sum</span>(<span class="fu">is.na</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb58-29"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb58-29" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Num_nas&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Variables tipo carácter</li>
+</ul>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-1" tabindex="-1"></a><span class="co"># Calculate maximum lengths of characters for character columns</span></span>
+<span id="cb59-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-2" tabindex="-1"></a>max_char <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="cf">function</span>(x)<span class="fu">max</span>(<span class="fu">nchar</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb59-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;leng_max&quot;</span>)</span>
+<span id="cb59-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-5" tabindex="-1"></a></span>
+<span id="cb59-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-6" tabindex="-1"></a><span class="co"># Calculate minimum lengths of characters for character columns</span></span>
+<span id="cb59-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-7" tabindex="-1"></a>min_char <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb59-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="cf">function</span>(x)<span class="fu">min</span>(<span class="fu">nchar</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb59-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;leng_min&quot;</span>)</span>
+<span id="cb59-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-10" tabindex="-1"></a></span>
+<span id="cb59-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-11" tabindex="-1"></a><span class="co"># Calculate the number of missing values for character columns</span></span>
+<span id="cb59-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-12" tabindex="-1"></a>nas_values_char <span class="ot">&lt;-</span> Base_ugms <span class="sc">%&gt;%</span></span>
+<span id="cb59-13"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-13" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character) , <span class="cf">function</span>(x)<span class="fu">sum</span>(<span class="fu">is.na</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb59-14"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb59-14" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Num_nas_char&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Organizando resultados en una base de datos</li>
+</ul>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-1" tabindex="-1"></a><span class="co"># Combine all results into a single dataframe</span></span>
+<span id="cb60-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-2" tabindex="-1"></a>resumen2 <span class="ot">&lt;-</span> <span class="fu">reduce</span>(</span>
+<span id="cb60-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-3" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb60-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-4" tabindex="-1"></a>    nas_values_char,</span>
+<span id="cb60-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-5" tabindex="-1"></a>    min_char,</span>
+<span id="cb60-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-6" tabindex="-1"></a>    max_char,</span>
+<span id="cb60-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-7" tabindex="-1"></a>    nas_values,</span>
+<span id="cb60-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-8" tabindex="-1"></a>    SD_values,</span>
+<span id="cb60-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-9" tabindex="-1"></a>    mediana_values,</span>
+<span id="cb60-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-10" tabindex="-1"></a>    media_values,</span>
+<span id="cb60-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-11" tabindex="-1"></a>    min_values,</span>
+<span id="cb60-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-12" tabindex="-1"></a>    max_values</span>
+<span id="cb60-13"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-13" tabindex="-1"></a>  ),</span>
+<span id="cb60-14"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-14" tabindex="-1"></a>  full_join,</span>
+<span id="cb60-15"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-15" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">join_by</span>(Nombre_Columna)</span>
+<span id="cb60-16"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-16" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-17"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-17" tabindex="-1"></a>  <span class="fu">full_join</span>(<span class="at">x =</span> resumen,</span>
+<span id="cb60-18"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-18" tabindex="-1"></a>            <span class="at">y =</span> .,</span>
+<span id="cb60-19"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-19" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">join_by</span>(Nombre_Columna))</span>
+<span id="cb60-20"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-20" tabindex="-1"></a></span>
+<span id="cb60-21"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb60-21" tabindex="-1"></a>resumen2 <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Nombre_Columna
+</th>
+<th style="text-align:left;">
+tipo
+</th>
+<th style="text-align:right;">
+Num_nas_char
+</th>
+<th style="text-align:right;">
+leng_min
+</th>
+<th style="text-align:right;">
+leng_max
+</th>
+<th style="text-align:right;">
+Num_nas
+</th>
+<th style="text-align:right;">
+Valor_sd
+</th>
+<th style="text-align:right;">
+Valor_Mediana
+</th>
+<th style="text-align:right;">
+Valor_Media
+</th>
+<th style="text-align:right;">
+Valor_Minimo
+</th>
+<th style="text-align:right;">
+Valor_Maximo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+un_id
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14653.29
+</td>
+<td style="text-align:right;">
+25380.5
+</td>
+<td style="text-align:right;">
+25380.5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+50760
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PROV_ID
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CANT_ID
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DIST_ID
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+UGM_ID
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ugm_viviendas_totales_censo
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ugm_viviendas_ocupadas_censo
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ugm_viviendas_desocupadas_censo
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ugm_peligrosidad
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ugm_problema_de_acceso
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Selección de variables de intrés</li>
+</ul>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-1" tabindex="-1"></a>Nombre_Columna <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb61-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-2" tabindex="-1"></a>  <span class="st">&quot;un_id&quot;</span>,</span>
+<span id="cb61-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-3" tabindex="-1"></a>  <span class="st">&quot;PROV_ID&quot;</span>,</span>
+<span id="cb61-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-4" tabindex="-1"></a>  <span class="st">&quot;CANT_ID&quot;</span>,</span>
+<span id="cb61-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-5" tabindex="-1"></a>  <span class="st">&quot;DIST_ID&quot;</span>,</span>
+<span id="cb61-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-6" tabindex="-1"></a>  <span class="st">&quot;UGM_ID&quot;</span>,</span>
+<span id="cb61-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-7" tabindex="-1"></a>  <span class="st">&quot;ugm_viviendas_totales_censo&quot;</span>,</span>
+<span id="cb61-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-8" tabindex="-1"></a>  <span class="st">&quot;ugm_viviendas_ocupadas_censo&quot;</span>,</span>
+<span id="cb61-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-9" tabindex="-1"></a>  <span class="st">&quot;ugm_viviendas_desocupadas_censo&quot;</span>,</span>
+<span id="cb61-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-10" tabindex="-1"></a>  <span class="st">&quot;ugm_peligrosidad&quot;</span>,</span>
+<span id="cb61-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-11" tabindex="-1"></a>  <span class="st">&quot;ugm_problema_de_acceso&quot;</span>,</span>
+<span id="cb61-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-12" tabindex="-1"></a>  <span class="st">&quot;ugm_riesgos_amenazas&quot;</span>,</span>
+<span id="cb61-13"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-13" tabindex="-1"></a>  <span class="st">&quot;ugm_cobertura_telecomunicaciones&quot;</span>,</span>
+<span id="cb61-14"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-14" tabindex="-1"></a>  <span class="st">&quot;ugm_area_m2&quot;</span>,</span>
+<span id="cb61-15"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-15" tabindex="-1"></a>  <span class="st">&quot;asent&quot;</span>,</span>
+<span id="cb61-16"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-16" tabindex="-1"></a>  <span class="st">&quot;ppp_CRI_v2&quot;</span>,</span>
+<span id="cb61-17"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-17" tabindex="-1"></a>  <span class="st">&quot;elev&quot;</span>,</span>
+<span id="cb61-18"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-18" tabindex="-1"></a>  <span class="st">&quot;indig&quot;</span>,</span>
+<span id="cb61-19"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-19" tabindex="-1"></a>  <span class="st">&quot;aprot&quot;</span>,</span>
+<span id="cb61-20"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-20" tabindex="-1"></a>  <span class="st">&quot;dist_permisos_de_construccion_2011_2022&quot;</span>,</span>
+<span id="cb61-21"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-21" tabindex="-1"></a>  <span class="st">&quot;dist_poblacion_proyeccion_ajustada_2022&quot;</span>,</span>
+<span id="cb61-22"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-22" tabindex="-1"></a>  <span class="st">&quot;dist_poblacion_rup&quot;</span>,</span>
+<span id="cb61-23"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-23" tabindex="-1"></a>  <span class="st">&quot;dist_poblacion_ccss_abril_2023&quot;</span>,</span>
+<span id="cb61-24"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-24" tabindex="-1"></a>  <span class="st">&quot;dist_matricula_educacion_primaria_2021&quot;</span>,</span>
+<span id="cb61-25"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-25" tabindex="-1"></a>  <span class="st">&quot;dist_matricula_educacion_secundaria_2021&quot;</span>,</span>
+<span id="cb61-26"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-26" tabindex="-1"></a>  <span class="st">&quot;dist_codigo_urbanidad&quot;</span>,</span>
+<span id="cb61-27"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-27" tabindex="-1"></a>  <span class="st">&quot;GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI&quot;</span>,</span>
+<span id="cb61-28"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-28" tabindex="-1"></a>  <span class="st">&quot;urban_coverfraction&quot;</span>,</span>
+<span id="cb61-29"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-29" tabindex="-1"></a>  <span class="st">&quot;crops_coverfraction&quot;</span>,</span>
+<span id="cb61-30"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-30" tabindex="-1"></a>  <span class="st">&quot;ebais_tt&quot;</span>,</span>
+<span id="cb61-31"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-31" tabindex="-1"></a>  <span class="st">&quot;escu_tt&quot;</span>,</span>
+<span id="cb61-32"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-32" tabindex="-1"></a>  <span class="st">&quot;igl_tt&quot;</span>,</span>
+<span id="cb61-33"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-33" tabindex="-1"></a>  <span class="st">&quot;prov_nl_mean&quot;</span>,</span>
+<span id="cb61-34"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-34" tabindex="-1"></a>  <span class="st">&quot;cant_nl_mean&quot;</span>,</span>
+<span id="cb61-35"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-35" tabindex="-1"></a>  <span class="st">&quot;dist_nl_mean&quot;</span>,</span>
+<span id="cb61-36"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-36" tabindex="-1"></a>  <span class="st">&quot;wpop_sum&quot;</span>,</span>
+<span id="cb61-37"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb61-37" tabindex="-1"></a>  <span class="st">&quot;ugm_sin_info&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Cambiando la naturaleza de las variables</li>
+</ul>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-1" tabindex="-1"></a>Tipo_actualizar <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb62-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-2" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-3" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-4" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-5" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-6" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-7" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-8" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-9" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-10" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-11" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-12" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-13"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-13" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-14"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-14" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-15"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-15" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-16"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-16" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-17"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-17" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-18"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-18" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-19"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-19" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-20"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-20" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-21"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-21" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-22"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-22" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-23"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-23" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-24"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-24" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-25"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-25" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-26"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-26" tabindex="-1"></a>  as.character,</span>
+<span id="cb62-27"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-27" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-28"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-28" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-29"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-29" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-30"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-30" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-31"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-31" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-32"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-32" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-33"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-33" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-34"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-34" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-35"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-35" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-36"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-36" tabindex="-1"></a>  as.numeric,</span>
+<span id="cb62-37"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb62-37" tabindex="-1"></a>  as.character)</span></code></pre></div>
+<ul>
+<li>Actualizar los tipos de columna basados en <code>Nombre_Columna</code> y <code>Tipo_actualizar</code>.</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb63-1" tabindex="-1"></a>paso <span class="ot">&lt;-</span> <span class="fu">map2</span>(Nombre_Columna, Tipo_actualizar, <span class="cf">function</span>(nom, tipo) {</span>
+<span id="cb63-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb63-2" tabindex="-1"></a>  Base_ugms[[nom]] <span class="ot">&lt;&lt;-</span> <span class="fu">tipo</span>(Base_ugms[[nom]])</span>
+<span id="cb63-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb63-3" tabindex="-1"></a>  <span class="fu">cat</span>(nom, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb63-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb63-4" tabindex="-1"></a>})</span></code></pre></div>
+<pre><code>## un_id 
+## PROV_ID 
+## CANT_ID 
+## DIST_ID 
+## UGM_ID 
+## ugm_viviendas_totales_censo 
+## ugm_viviendas_ocupadas_censo 
+## ugm_viviendas_desocupadas_censo 
+## ugm_peligrosidad 
+## ugm_problema_de_acceso 
+## ugm_riesgos_amenazas 
+## ugm_cobertura_telecomunicaciones 
+## ugm_area_m2 
+## asent 
+## ppp_CRI_v2 
+## elev 
+## indig 
+## aprot 
+## dist_permisos_de_construccion_2011_2022 
+## dist_poblacion_proyeccion_ajustada_2022 
+## dist_poblacion_rup 
+## dist_poblacion_ccss_abril_2023 
+## dist_matricula_educacion_primaria_2021 
+## dist_matricula_educacion_secundaria_2021 
+## dist_codigo_urbanidad 
+## GHS_BUILT_S_E2020_GLOBE_R2023A_5367_CRI 
+## urban_coverfraction 
+## crops_coverfraction 
+## ebais_tt 
+## escu_tt 
+## igl_tt 
+## prov_nl_mean 
+## cant_nl_mean 
+## dist_nl_mean 
+## wpop_sum 
+## ugm_sin_info</code></pre>
+<ul>
+<li>Crear un <code>data.frame</code> resumen con los nombres de las columnas y sus tipos de datos.</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-1" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Nombre_Columna =</span> <span class="fu">names</span>(Base_ugms))</span>
+<span id="cb65-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-2" tabindex="-1"></a>resumen <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">tipo =</span> <span class="fu">map_chr</span>(Nombre_Columna, <span class="cf">function</span>(x) <span class="fu">class</span>(Base_ugms[[x]])))</span>
+<span id="cb65-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-3" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-4" tabindex="-1"></a><span class="co"># Extract character columns</span></span>
+<span id="cb65-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-5" tabindex="-1"></a>tipo_char <span class="ot">&lt;-</span> resumen<span class="sc">$</span>Nombre_Columna[resumen<span class="sc">$</span>tipo <span class="sc">==</span> <span class="st">&quot;character&quot;</span>]</span>
+<span id="cb65-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-6" tabindex="-1"></a></span>
+<span id="cb65-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-7" tabindex="-1"></a><span class="co"># Select and display character columns from Base_ugms</span></span>
+<span id="cb65-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-8" tabindex="-1"></a>Base_ugms[, tipo_char] <span class="sc">%&gt;%</span> </span>
+<span id="cb65-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb65-9" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+un_id
+</th>
+<th style="text-align:left;">
+PROV_ID
+</th>
+<th style="text-align:left;">
+CANT_ID
+</th>
+<th style="text-align:left;">
+DIST_ID
+</th>
+<th style="text-align:left;">
+UGM_ID
+</th>
+<th style="text-align:left;">
+ugm_peligrosidad
+</th>
+<th style="text-align:left;">
+ugm_problema_de_acceso
+</th>
+<th style="text-align:left;">
+ugm_riesgos_amenazas
+</th>
+<th style="text-align:left;">
+ugm_cobertura_telecomunicaciones
+</th>
+<th style="text-align:left;">
+asent
+</th>
+<th style="text-align:left;">
+indig
+</th>
+<th style="text-align:left;">
+aprot
+</th>
+<th style="text-align:left;">
+dist_codigo_urbanidad
+</th>
+<th style="text-align:left;">
+ugm_sin_info
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101001
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101002
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101004
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101005
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101006
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101007
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101008
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101009
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<div id="estandarización-de-variables-y-unión-de-conjuntos-de-datos." class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Estandarización de variables y unión de conjuntos de datos.<a href="valores-descriptivos-de-la-base-de-ugms.html#estandarización-de-variables-y-unión-de-conjuntos-de-datos." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-1" tabindex="-1"></a><span class="co"># Loop through character variables</span></span>
+<span id="cb66-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-2" tabindex="-1"></a><span class="cf">for</span> (ii <span class="cf">in</span> tipo_char) {</span>
+<span id="cb66-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-3" tabindex="-1"></a>  max_char <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">nchar</span>(Base_ugms[[ii]]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb66-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-4" tabindex="-1"></a>  Base_ugms[[ii]] <span class="ot">&lt;-</span> <span class="fu">str_pad</span>(<span class="at">string =</span> Base_ugms[[ii]],</span>
+<span id="cb66-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-5" tabindex="-1"></a>                             <span class="at">width =</span> max_char,</span>
+<span id="cb66-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-6" tabindex="-1"></a>                             <span class="at">pad =</span> <span class="st">&quot;0&quot;</span>)</span>
+<span id="cb66-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-7" tabindex="-1"></a>}</span>
+<span id="cb66-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-8" tabindex="-1"></a>UGM_censo <span class="ot">&lt;-</span> censo1 <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(UGM_ID)</span>
+<span id="cb66-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-9" tabindex="-1"></a><span class="co"># Join the UGM_censo and Base_ugms datasets</span></span>
+<span id="cb66-10"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-10" tabindex="-1"></a>Base_ugms_censo <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(UGM_censo, Base_ugms)</span>
+<span id="cb66-11"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-11" tabindex="-1"></a>Base_ugms_censo[, tipo_char] <span class="sc">%&gt;%</span> </span>
+<span id="cb66-12"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb66-12" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">tba</span>()</span></code></pre></div>
+<table class="table table-striped lightable-classic" style="width: auto !important; margin-left: auto; margin-right: auto; font-family: Arial Narrow; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+un_id
+</th>
+<th style="text-align:left;">
+PROV_ID
+</th>
+<th style="text-align:left;">
+CANT_ID
+</th>
+<th style="text-align:left;">
+DIST_ID
+</th>
+<th style="text-align:left;">
+UGM_ID
+</th>
+<th style="text-align:left;">
+ugm_peligrosidad
+</th>
+<th style="text-align:left;">
+ugm_problema_de_acceso
+</th>
+<th style="text-align:left;">
+ugm_riesgos_amenazas
+</th>
+<th style="text-align:left;">
+ugm_cobertura_telecomunicaciones
+</th>
+<th style="text-align:left;">
+asent
+</th>
+<th style="text-align:left;">
+indig
+</th>
+<th style="text-align:left;">
+aprot
+</th>
+<th style="text-align:left;">
+dist_codigo_urbanidad
+</th>
+<th style="text-align:left;">
+ugm_sin_info
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+00001
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101001
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00002
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101002
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00003
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101003
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00004
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101004
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00006
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101006
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00007
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101007
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00008
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101008
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00009
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101009
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00010
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101010
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+00011
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+101
+</td>
+<td style="text-align:left;">
+10101
+</td>
+<td style="text-align:left;">
+10101011
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Calcular el conteo de valores faltantes.</li>
+</ul>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-1" tabindex="-1"></a><span class="co"># Calculate the counts of missing values for numeric variables</span></span>
+<span id="cb67-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-2" tabindex="-1"></a>nas_values <span class="ot">&lt;-</span> Base_ugms_censo <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">|</span> <span class="fu">where</span>(is.integer), <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb67-4"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-4" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Num_nas&quot;</span>)</span>
+<span id="cb67-5"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-5" tabindex="-1"></a></span>
+<span id="cb67-6"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-6" tabindex="-1"></a><span class="co"># Calculate the counts of missing values for character variables</span></span>
+<span id="cb67-7"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-7" tabindex="-1"></a>nas_values2 <span class="ot">&lt;-</span> Base_ugms_censo <span class="sc">%&gt;%</span></span>
+<span id="cb67-8"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-8" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))) <span class="sc">%&gt;%</span></span>
+<span id="cb67-9"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb67-9" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Nombre_Columna&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Num_nas&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Removiendo columnas adicionales de la base.</li>
+</ul>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb68-1" tabindex="-1"></a>Base_ugms_censo<span class="sc">$</span>dist_poblacion_rup <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb68-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb68-2" tabindex="-1"></a>Base_ugms_censo<span class="sc">$</span>dist_matricula_educacion_secundaria_2021 <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+</div>
+<div id="estandarizar-las-variables-numéricas-utilizando-la-escala-de-puntuación-z-z-score." class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Estandarizar las variables numéricas utilizando la escala de puntuación z (z-score).<a href="valores-descriptivos-de-la-base-de-ugms.html#estandarizar-las-variables-numéricas-utilizando-la-escala-de-puntuación-z-z-score." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb69-1" tabindex="-1"></a>Base_ugms_censo <span class="ot">&lt;-</span> Base_ugms_censo <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb69-2" tabindex="-1"></a>  <span class="fu">mutate_if</span>(is.numeric, <span class="cf">function</span>(x) <span class="fu">as.numeric</span>(<span class="fu">scale</span>(x)))</span></code></pre></div>
+<ul>
+<li>Guardando la base estandarizada.</li>
+</ul>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="valores-descriptivos-de-la-base-de-ugms.html#cb70-1" tabindex="-1"></a><span class="fu">saveRDS</span>(Base_ugms_censo, <span class="st">&quot;Recursos/03_Input_Validation_Cov/Data/Base_ugms_estandarizada.rds&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="preparación-del-entorno-y-carga-de-bibliotecas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelo-binomial-de-unidad-para-viviendas-ocupadas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/psirusteam/2021ASDA/03_Consolidating_ugms_base.qmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.pdf", "Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.epub", "Metodologías de modelo de multinivel para la imputación del recuento de personas en Censos.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"tconfig": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

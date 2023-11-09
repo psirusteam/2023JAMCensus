@@ -1,30 +1,29 @@
 
 
-# Binomial unit model for occupied dwellings
+# Modelo binomial de unidad para viviendas ocupadas
 
-In a first instance, a statistical model was defined to predict the probability of a house being occupied. Due to a significant number of houses in the census that never responded to survey calls, refused to be interviewed, or were simply unreachable, it was necessary to assign an occupancy probability to these houses. The model used was a Bayesian mixed model with a binomial response and random effects for provinces, cantons, and districts, as detailed below:
+En primera instancia, se definió un modelo estadístico para predecir la probabilidad de que una vivienda esté ocupada. Debido a un número significativo de viviendas en el censo que nunca respondieron a las llamadas de encuesta, se negaron a ser entrevistadas o simplemente no fueron localizables, fue necesario asignar una probabilidad de ocupación a estas viviendas. El modelo utilizado fue un modelo mixto bayesiano con una respuesta binomial y efectos aleatorios para provincias, cantones y distritos, como se detalla a continuación:
 
--   $U_{ij}$ is a dichotomous variable indicating the occupancy status of the $i$-th house in the $j$-th geographic area.
+- $U_{ij}$ es una variable dicotómica que indica el estado de ocupación de la $i$-ésima vivienda en la $j$-ésima área geográfica.
 
--   $p_{ij}$ is the probability that the $i$-th house in the $j$-th geographic area is occupied.
--   $x_{ij}^\prime \beta$ represents the fixed effects considered in the model that influence the occupancy probability.
--   $z_{ij}^\prime \gamma$ represents the random effects that also influence the occupancy probability.
--   We used the logit function to relate these probabilities and effects, as per the equation $\text{logit}(p_{ij}) = x_{ij}^\prime \beta + z_{ij}^\prime \gamma$.
+- $p_{ij}$ es la probabilidad de que la $i$-ésima vivienda en la $j$-ésima área geográfica esté ocupada.
 
-To achieve more accurate results, non-informative prior distributions for the parameters of the Bayesian model were implemented. The final outcome provides an estimate of the number of unoccupied houses in different geographical subdivisions of the country.
+- $x_{ij}^\prime \beta$ representa los efectos fijos considerados en el modelo que influyen en la probabilidad de ocupación.
 
+- $z_{ij}^\prime \gamma$ representa los efectos aleatorios que también influyen en la probabilidad de ocupación.
 
+- Utilizamos la función logit para relacionar estas probabilidades y efectos, según la ecuación $\text{logit}(p_{ij}) = x_{ij}^\prime \beta + z_{ij}^\prime \gamma$.
 
-## Preparing the Environment and Data
+Para obtener resultados más precisos, se implementaron distribuciones a priori no informativas para los parámetros del modelo bayesiano. El resultado final proporciona una estimación del número de viviendas desocupadas en diferentes subdivisiones geográficas del país.
 
-In the following code block, we initiate the process by preparing our R environment. This involves clearing the workspace to remove any existing variables and loading the necessary libraries for data manipulation, visualization, and statistical analysis. We use libraries such as 'tidyverse' for data manipulation and visualization, 'data.table' for efficient data manipulation, 'openxlsx' for reading Excel files, 'magrittr' for data manipulation using pipe operators, 'lme4' for fitting linear mixed-effects models, 'rstan' for Bayesian data analysis using Stan, and 'rstanarm' for fitting Bayesian regression models. Additionally, we define the 'select' function from the 'dplyr' package for column selection.
+## Preparación del entorno y los datos
 
-After setting up the environment, we proceed to read the census data. We read the census information from the 'censo_viviendas.rds' file and extract specific columns that are relevant to our analysis, including 'un_ID' and 'Filtros'. Similarly, we read the standardized UGM covariates from the 'Base_ugms_estandarizada.rds' file. These initial steps lay the foundation for our subsequent data analysis and modeling.
+En el siguiente bloque de código, iniciamos el proceso preparando nuestro entorno de R. Esto implica limpiar el espacio de trabajo para eliminar cualquier variable existente y cargar las bibliotecas necesarias para la manipulación de datos, visualización y análisis estadístico. Utilizamos bibliotecas como 'tidyverse' para la manipulación y visualización de datos, 'data.table' para la manipulación eficiente de datos, 'openxlsx' para leer archivos de Excel, 'magrittr' para la manipulación de datos utilizando operadores de tuberías, 'lme4' para ajustar modelos lineales mixtos, 'rstan' para el análisis bayesiano de datos utilizando Stan y 'rstanarm' para ajustar modelos de regresión bayesianos. Además, definimos la función 'select' de la paquetería 'dplyr' para la selección de columnas.
+
+Después de configurar el entorno, procedemos a leer los datos del censo. Leemos la información del censo desde el archivo 'censo_viviendas.rds' y extraemos columnas específicas relevantes para nuestro análisis, incluyendo 'un_ID' y 'Filtros'. De manera similar, leemos los covariables UGM estandarizados del archivo 'Base_ugms_estandarizada.rds'. Estos pasos iniciales sientan las bases para nuestro posterior análisis de datos y modelado.
 
 
 ```r
-# Clear the workspace by removing all variables
-rm(list = ls())
 # Load required libraries
 library(tidyverse)  # For data manipulation and visualization
 library(data.table)  # For efficient data manipulation
@@ -46,9 +45,9 @@ Covariables_UGM <- readRDS("Recursos/04_Model_binomial/Data/Base_ugms_estandariz
 # Read UGM covariates from the 'Base_ugms_estandarizada.rds' file
 ```
 
-## Defining 'Desocupada' Column: Classifying Occupancy Status
+## Definición de la columna 'Desocupada': Clasificación del estado de ocupación
 
-This section focuses on defining the 'Desocupada' column in the census data, which indicates whether a dwelling is unoccupied. The values are determined based on specific conditions derived from the 'greenpoint2' and 'Filtros' columns, as well as the number of individuals living in the dwelling. The classification process is essential for subsequent analysis and modeling.
+Esta sección se centra en definir la columna 'Desocupada' en los datos del censo, la cual indica si una vivienda está desocupada. Los valores se determinan en función de condiciones específicas derivadas de las columnas 'greenpoint2' y 'Filtros', así como del número de individuos que viven en la vivienda. El proceso de clasificación es esencial para análisis y modelado posteriores.
 
 
 ```r
@@ -65,9 +64,9 @@ censo_vivienda %<>% mutate(
 )
 ```
 
-### Counting Combinations of Occupancy Status and Greenpoint Values
+### Conteo de Combinaciones de Estado de Ocupación y Valores de 'Greenpoint'
 
-In this section, we perform a data aggregation to calculate the counts of various combinations of occupancy status and 'greenpoint2' values. By grouping the data based on these variables, we can observe the distribution of dwelling occupancy patterns and the corresponding greenpoint categories. The resulting summary, including the counts, is saved to a file for reference and further analysis.
+En esta sección, realizamos una agregación de datos para calcular el conteo de varias combinaciones de estado de ocupación y valores de 'greenpoint2'. Al agrupar los datos en función de estas variables, podemos observar la distribución de patrones de ocupación de viviendas y las categorías de 'greenpoint' correspondientes. El resumen resultante, que incluye los conteos, se guarda en un archivo para referencia y análisis posterior.
 
 
 
@@ -207,70 +206,10 @@ base_conteo_viviendas
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 2 </td>
   </tr>
-  <tr>
-   <td style="text-align:left;"> 10101012 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 3 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101013 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101018 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101019 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101020 </td>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 9 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101021 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101022 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 34 </td>
-   <td style="text-align:right;"> 122 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101026 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101028 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 1 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 10101036 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 2 </td>
-  </tr>
 </tbody>
 </table>
 
--   Summarize the numeric columns in 'base_conteo_viviendas' and save the results
+-  Resumir las columnas numéricas en 'base_conteo_viviendas' y guardar los resultados
 
 
 ```r
@@ -295,7 +234,7 @@ readRDS("Recursos/04_Model_binomial/RecurseBooks/base_conteo2.rds") %>%
 </tbody>
 </table>
 
--   Inner join the binomial model base dataset with standardized covariates
+-   Realizar una unión del conjunto de datos del modelo binomial con las covariables estandarizadas.
 
 
 ```r
@@ -303,15 +242,15 @@ base_conteo_viviendas <- inner_join(base_conteo_viviendas,
                                     Covariables_UGM, by = "UGM_ID")
 ```
 
-The provided code includes the following options:
+El código proporcionado incluye las siguientes opciones:
 
 1. `options(mc.cores = parallel::detectCores())`:
-   This option sets the number of cores used for parallel computation in Stan models. The `parallel::detectCores()` function automatically detects the number of available CPU cores on your machine. By setting the number of cores, you can leverage parallel processing to speed up the estimation process of the Stan model.
+   Esta opción establece el número de núcleos utilizados para cálculos en paralelo en modelos Stan. La función `parallel::detectCores()` detecta automáticamente el número de núcleos de CPU disponibles en su máquina. Al configurar el número de núcleos, puede aprovechar el procesamiento en paralelo para acelerar el proceso de estimación del modelo Stan.
 
 2. `rstan::rstan_options(auto_write = TRUE)`:
-   This option is related to writing compiled Stan models to disk for caching purposes. When `auto_write` is set to `TRUE`, it indicates that compiled Stan models should be automatically saved to disk to speed up the compilation process in future runs. This can improve the running time of the model, especially if you run the same model multiple times.
+   Esta opción está relacionada con la escritura de modelos Stan compilados en el disco para fines de almacenamiento en caché. Cuando `auto_write` se establece en `TRUE`, indica que los modelos Stan compilados deben guardarse automáticamente en el disco para acelerar el proceso de compilación en ejecuciones futuras. Esto puede mejorar el tiempo de ejecución del modelo, especialmente si ejecuta el mismo modelo varias veces.
 
-Both of these options contribute to improving the efficiency and speed of fitting Stan models by utilizing parallel processing and caching compiled models.
+Ambas opciones contribuyen a mejorar la eficiencia y la velocidad de ajuste de modelos Stan mediante el uso de procesamiento en paralelo y el almacenamiento en caché de modelos compilados.
 
 
 

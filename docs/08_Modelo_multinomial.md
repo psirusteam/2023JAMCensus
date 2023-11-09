@@ -1,25 +1,25 @@
 
 
 
-# Multinomial model for estimating people by age range and sex
+# Modelo multinomial para estimar personas por rango de edad y sexo
 
-In the final step, we model the demographic structure of Small Geographic Units (UGMs) at the province level. This structure consists of 40 subgroups based on the combination of gender and age groups. To estimate the demographics of unobserved households, we make use of conditional prediction based on the outcomes from the previous step.
+En el paso final, modelamos la estructura demográfica de las Unidades Geográficas Pequeñas (UGMs) a nivel de provincia. Esta estructura consta de 40 subgrupos basados en la combinación de género y grupos de edad. Para estimar la demografía de hogares no observados, utilizamos la predicción condicional basada en los resultados del paso anterior.
 
-Given the nature of the phenomenon under study, a multinomial distribution is considered suitable for the count of individuals across the 40 groups. Here's an explanation of the model:
+Dada la naturaleza del fenómeno en estudio, se considera adecuada una distribución multinomial para el recuento de individuos en los 40 grupos. Aquí tienes una explicación del modelo:
 
-- \(G_i\) follows a Multinomial distribution \(Multinomial(p_{G_i})\).
-- The log-odds of \(p_{G_i}\) are modeled by \(x_i^' \beta\).
+- $G_i$ sigue una distribución Multinomial $Multinomial(p_{G_i})$.
 
-In this context, \(G_i\) represents the count for each of the forty demographic groups. \(p_{G_i}\) is a vector of size 40 containing the probabilities that a person classified in each group resides in a household.
+- Las log-odds de $p_{G_i}$ están modeladas por $x_i^T\beta$.
+
+En este contexto, $G_i$ representa el recuento de cada uno de los cuarenta grupos demográficos. $p_{G_i}$ es un vector de tamaño 40 que contiene las probabilidades de que una persona clasificada en cada grupo resida en un hogar.
 
 
--   Cleaning R environment
-The code removes all objects from the current R environment, ensuring a clean slate for the subsequent operations.
+- Limpieza del entorno de R
+
+El código elimina todos los objetos del entorno de R actual, asegurando un punto de partida limpio para las operaciones posteriores.
 
 
 ```r
-# Clearing the R environment by removing all variables from memory.
-rm(list = ls())
 # Loading necessary libraries for data analysis.
 library(tidyverse)   # Data manipulation and visualization
 library(data.table)  # Fast data manipulation
@@ -32,7 +32,7 @@ cat("\f")  # Clears console output
 
 
 
--   Data Reading
+-   Leyendo datos
 
 
 ```r
@@ -46,9 +46,10 @@ censo_vivienda_age_gender <- censo_vivienda %>%
   dplyr::select(PROV_ID, HOMBRES_GRUPO1_sum:MUJERES_GRUPO20_sum)
 ```
 
--   Data Preparation:
+-   Preparación de datos:
 
-    The code creates a new dataset censo_vivienda_edad_sexo by filtering out specific entries from censo_vivienda. It selects columns related to age and gender groups and provinces. This filtered dataset is then aggregated at the PROV_ID level using the summarise_if function.
+    El código crea un nuevo conjunto de datos, censo_vivienda_edad_sexo, filtrando entradas específicas de censo_vivienda. Se seleccionan columnas relacionadas con grupos de edad y género y provincias. Luego, este conjunto de datos filtrado se agrega a nivel de PROV_ID utilizando la función summarise_if.
+    
 
 
 ```r
@@ -58,9 +59,9 @@ censo_personas <- censo_vivienda_age_gender %>%
   summarise_if(is.numeric, sum)
 ```
 
--   Multinomial Model:
+-   Modelo Multinomial:
 
-    A multinomial model is created using the `multinom` function. It predicts the distribution of age and gender groups within households based on the province (`PROV_ID`). The model is stored in the variable `model`.
+    Se crea un modelo multinomial utilizando la función `multinom`. Este modelo predice la distribución de grupos de edad y género dentro de los hogares según la provincia (`PROV_ID`). El modelo se almacena en la variable `model`.
 
 
 ```r
@@ -86,18 +87,19 @@ model <- multinom( censo_personas[,-1] %>% as.matrix() ~ censo_personas$PROV_ID)
 ## stopped after 100 iterations
 ```
 
--   Model Prediction
+- Predicción del Modelo:
 
-    The `predict` function is used to predict the distribution probabilities for the multinomial model. The prediction results are not displayed here but can be obtained using the `predict` function.
+    La función `predict` se utiliza para predecir las probabilidades de distribución para el modelo multinomial. Los resultados de la predicción no se muestran aquí, pero se pueden obtener utilizando la función `predict`.
+    
 
 
 ```r
 # Predicting the distribution probabilities using the fitted model.
 predict(model,type = "probs")
 ```
--   Saving Model
+- Guardar el Modelo
 
-    The trained multinomial model is saved as an RDS file ("Recursos/06_Model_Multinomial/Data/Modelo_multinomial.rds") using the `saveRDS` function.
+    El modelo multinomial entrenado se guarda como un archivo RDS ("Recursos/06_Model_Multinomial/Data/Multinomial_model.rds") utilizando la función `saveRDS`.
 
 
 ```r
