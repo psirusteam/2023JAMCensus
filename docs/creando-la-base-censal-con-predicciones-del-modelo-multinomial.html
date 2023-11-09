@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workshop on Capacity Building Installation</a></li>
+<li><a href="./">Modelos multinivel para el conteno de personas</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
@@ -229,13 +229,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
 <ul>
-<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
-<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.0.1" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#leyendo-la-base-del-censo"><i class="fa fa-check"></i><b>11.0.1</b> Leyendo la base del censo</a></li>
+<li class="chapter" data-level="11.1" data-path="predicción-del-porcentaje-de-viviendas-desocupadas.html"><a href="predicción-del-porcentaje-de-viviendas-desocupadas.html"><i class="fa fa-check"></i><b>11.1</b> Predicción del porcentaje de viviendas desocupadas</a></li>
 <li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
 <li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a Workshop on Capacity Building Installation </a></li>
+<li><a Modelos multinivel para el conteno de personas </a></li>
 
 </ul>
 
@@ -268,8 +268,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb110-10"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html#cb110-10" tabindex="-1"></a><span class="fu">library</span>(lme4)        <span class="co"># Linear mixed-effects models</span></span>
 <span id="cb110-11"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html#cb110-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\f</span><span class="st">&quot;</span>)             <span class="co"># Page break in R console</span></span></code></pre></div>
 <ul>
-<li>Reading the census data.</li>
+<li>Leer datos del censo.</li>
 </ul>
+<p>Este fragmento de código realiza las siguientes acciones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Lectura de Datos del Censo</strong>: Lee los datos del censo de viviendas y personas desde un archivo en formato RDS llamado “02_censo_vivienda_personas.rds”.</p></li>
+<li><p><strong>Lectura del Modelo Multinomial Previamente Creado</strong>: Lee el modelo multinomial previamente creado desde un archivo en formato RDS llamado “Multinomial_model.rds”.</p></li>
+<li><p><strong>Cálculo de Probabilidades</strong>: Calcula las probabilidades de pertenecer a cada categoría de resultado utilizando el modelo multinomial. Estas probabilidades se almacenan en un nuevo DataFrame llamado “probabilidad”.</p></li>
+<li><p><strong>Copia de los Datos del Censo</strong>: Crea una copia de los datos del censo de viviendas y personas en un nuevo DataFrame llamado “censo_vivienda_pred”. Esto se hace para trabajar con una copia de los datos originales sin alterar los datos originales.</p></li>
+<li><p><strong>Cálculo de la Suma de Recuentos Predichos</strong>: Calcula la suma de los recuentos predichos de personas en el censo y la muestra. Este cálculo utiliza la columna “pred_conteos” en el DataFrame “censo_vivienda_pred”.</p></li>
+<li><p><strong>Identificación de Nombres de Columnas de Grupos de Edad</strong>: Identifica las columnas en el DataFrame “censo_vivienda_pred” que corresponden a los grupos de edad. Estas columnas se almacenan en la variable “var_grupo” para su posterior uso.</p></li>
+</ol>
 <div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html#cb111-1" tabindex="-1"></a>censo_vivienda <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Recursos/06_Model_Multinomial/Data/02_censo_vivienda_personas.rds&quot;</span>) </span>
 <span id="cb111-2"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html#cb111-2" tabindex="-1"></a></span>
 <span id="cb111-3"><a href="creando-la-base-censal-con-predicciones-del-modelo-multinomial.html#cb111-3" tabindex="-1"></a><span class="co"># Reading the previously created multinomial model.</span></span>

@@ -1,5 +1,5 @@
 --- 
-Title: "Modelo de multinivel para la imputación del recuento de personas en Censos"
+Title: "Modelo multinivel para la imputación del recuento de personas en Censos"
 Author: "Andrés Gutiérrez^[Experto Regional en Estadísticas Sociales - Comisión Económica para América Latina y el Caribe (CEPAL) - andres.gutierrez@cepal.org], Stalyn Guerrero^[Consultor - Comisión Económica para América Latina y el Caribe (CEPAL) - guerrerostalyn@gmail.com]"
 date: "2023-11-09"
 documentclass: book

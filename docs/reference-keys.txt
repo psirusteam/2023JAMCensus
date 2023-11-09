@@ -50,6 +50,7 @@ modelo-multinomial-para-estimar-personas-por-rango-de-edad-y-sexo
 creando-la-base-censal-con-predicciones-del-modelo-multinomial
 resultados-por-provincias
 estimaciones-agregadas
-prediction-of-the-unoccupied-household-rate
+leyendo-la-base-del-censo
+predicción-del-porcentaje-de-viviendas-desocupadas
 predicción-del-total-de-personas
 predicción-del-total-de-personas-por-rango-de-edad-y-sexo

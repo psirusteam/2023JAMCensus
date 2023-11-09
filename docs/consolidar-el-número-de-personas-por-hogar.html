@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workshop on Capacity Building Installation</a></li>
+<li><a href="./">Modelos multinivel para el conteno de personas</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
@@ -229,13 +229,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
 <ul>
-<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
-<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.0.1" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#leyendo-la-base-del-censo"><i class="fa fa-check"></i><b>11.0.1</b> Leyendo la base del censo</a></li>
+<li class="chapter" data-level="11.1" data-path="predicción-del-porcentaje-de-viviendas-desocupadas.html"><a href="predicción-del-porcentaje-de-viviendas-desocupadas.html"><i class="fa fa-check"></i><b>11.1</b> Predicción del porcentaje de viviendas desocupadas</a></li>
 <li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
 <li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a Workshop on Capacity Building Installation </a></li>
+<li><a Modelos multinivel para el conteno de personas </a></li>
 
 </ul>
 
@@ -282,6 +282,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Hacer predicciones utilizando los modelos.</li>
 </ul>
+<ol style="list-style-type: decimal">
+<li><p><strong>Predicciones de Modelos Multinomiales</strong>: Utiliza dos modelos multinomiales, <code>modelo_todas</code> y <code>modelo_ocupadas</code>, para hacer predicciones sobre los datos en <code>Base_ugms</code>. Las predicciones se almacenan en los archivos “pred_todas.rds” y “pred_ocupadas.rds”. Estos archivos contienen las predicciones y errores estándar de las predicciones para los dos modelos.</p></li>
+<li><p><strong>Lectura de Predicciones desde Archivos RDS</strong>: Lee las predicciones de los archivos RDS recién creados, “pred_todas.rds” y “pred_ocupadas.rds”, y almacena las predicciones y errores estándar nuevamente en las columnas correspondientes de <code>Base_ugms</code>. Estas columnas se llaman “pred_todas” y “pred_todas_se” para las predicciones del modelo “modelo_todas”, y “pred_ocupadas” y “pred_ocupadas_se” para las predicciones del modelo “modelo_ocupadas”.</p></li>
+<li><p><strong>Histogramas de Predicciones</strong>: Genera histogramas de las predicciones de ambos modelos. Estos histogramas muestran la distribución de las predicciones.</p></li>
+<li><p><strong>Resúmenes de Predicciones</strong>: Calcula resúmenes estadísticos de las predicciones, incluyendo estadísticas de resumen como la media, mediana, mínimo, máximo y otros.</p></li>
+</ol>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="consolidar-el-número-de-personas-por-hogar.html#cb99-1" tabindex="-1"></a>pred_todas <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_todas,</span>
 <span id="cb99-2"><a href="consolidar-el-número-de-personas-por-hogar.html#cb99-2" tabindex="-1"></a>                      <span class="at">newdata =</span>  Base_ugms,</span>
 <span id="cb99-3"><a href="consolidar-el-número-de-personas-por-hogar.html#cb99-3" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">&quot;response&quot;</span>,</span>
@@ -315,6 +321,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Fusionar información del censo con predicciones.</li>
 </ul>
+<ol style="list-style-type: decimal">
+<li><p><strong>Unión de Datos</strong>: Combina dos conjuntos de datos, <code>censo_vivienda</code> y <code>Base_ugms</code>, mediante un <code>full_join</code>. La unión se basa en una columna común, posiblemente “UGM_ID”, y se agrupan los datos por esta columna.</p></li>
+<li><p><strong>Cálculo de Predicciones</strong>: Dentro de cada grupo definido por “UGM_ID”, se calculan las predicciones para el número de ocupantes de viviendas. Estos cálculos se basan en la columna “greenpoint2” y se realizan mediante una serie de condiciones (usando <code>case_when</code>):</p>
+<ul>
+<li><p>Si “greenpoint2” es igual a “Sin informacion pero n&gt;0”, se usa la predicción del modelo “pred_ocupadas”.</p></li>
+<li><p>Si “greenpoint2” es igual a “Sin informacion pero n&gt;=0”, se usa la predicción del modelo “pred_todas”.</p></li>
+<li><p>De lo contrario, se utiliza el valor de “H01A_TOTAL_PERSONAS” existente en los datos.</p></li>
+</ul></li>
+<li><p><strong>Cálculo de Límites Inferiores y Superiores</strong>: También se calculan límites inferiores (“MEInf_pred_conteos”) y superiores (“MESup_pred_conteos”) para las predicciones de acuerdo a las mismas condiciones y teniendo en cuenta los errores estándar de las predicciones. Se utiliza un valor de 1.96 (correspondiente al percentil 97.5 de una distribución normal estándar) para calcular estos límites en el caso de “Sin informacion pero n&gt;0” o “Sin informacion pero n&gt;=0”.</p></li>
+</ol>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="consolidar-el-número-de-personas-por-hogar.html#cb100-1" tabindex="-1"></a>censo_temp <span class="ot">&lt;-</span> censo_vivienda <span class="sc">%&gt;%</span></span>
 <span id="cb100-2"><a href="consolidar-el-número-de-personas-por-hogar.html#cb100-2" tabindex="-1"></a>  <span class="fu">full_join</span>(Base_ugms) <span class="sc">%&gt;%</span></span>
 <span id="cb100-3"><a href="consolidar-el-número-de-personas-por-hogar.html#cb100-3" tabindex="-1"></a>  <span class="fu">group_by</span>(UGM_ID) <span class="sc">%&gt;%</span></span>

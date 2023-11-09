@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workshop on Capacity Building Installation</a></li>
+<li><a href="./">Modelos multinivel para el conteno de personas</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
@@ -229,13 +229,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
 <ul>
-<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
-<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.0.1" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#leyendo-la-base-del-censo"><i class="fa fa-check"></i><b>11.0.1</b> Leyendo la base del censo</a></li>
+<li class="chapter" data-level="11.1" data-path="predicción-del-porcentaje-de-viviendas-desocupadas.html"><a href="predicción-del-porcentaje-de-viviendas-desocupadas.html"><i class="fa fa-check"></i><b>11.1</b> Predicción del porcentaje de viviendas desocupadas</a></li>
 <li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
 <li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a Workshop on Capacity Building Installation </a></li>
+<li><a Modelos multinivel para el conteno de personas </a></li>
 
 </ul>
 
@@ -256,6 +256,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="resultados-por-provincias" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">10.1</span> Resultados por Provincias<a href="resultados-por-provincias.html#resultados-por-provincias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este fragmento de código realiza las siguientes acciones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Filtrado de Datos del Censo para PROV_ID = 1 y Categorías Específicas de ‘greenpoint2’</strong>: Filtra los datos del censo para aquellas observaciones donde el valor de la columna “PROV_ID” es igual a “1” y la columna “greenpoint2” tiene uno de los siguientes valores: “Sin informacion pero n&gt;=0” o “Sin informacion pero n&gt;0”. Los resultados de este filtro se almacenan en un nuevo DataFrame llamado “PROV_1”.</p></li>
+<li><p><strong>Cálculo de Recuentos Predichos para Grupos de Edad en PROV_1</strong>: Calcula los recuentos predichos para cada grupo de edad en “PROV_1”. Utiliza la matriz de recuentos predichos “pred_conteos” en “PROV_1” y multiplica esta matriz por la matriz de probabilidades de pertenecer a cada grupo de edad específico en la provincia 1. Los resultados se almacenan en las columnas correspondientes a grupos de edad.</p></li>
+<li><p><strong>Cálculo del Límite Inferior de Recuentos Predichos para Grupos de Edad en PROV_1</strong>: Calcula el límite inferior de los recuentos predichos para cada grupo de edad en “PROV_1”. Utiliza la matriz de límites inferiores “MEInf_pred_conteos” en “PROV_1” y realiza una operación similar a la anterior para obtener los recuentos inferiores para cada grupo de edad.</p></li>
+<li><p><strong>Cálculo del Límite Superior de Recuentos Predichos para Grupos de Edad en PROV_1</strong>: Calcula el límite superior de los recuentos predichos para cada grupo de edad en “PROV_1”. Utiliza la matriz de límites superiores “MESup_pred_conteos” en “PROV_1” y realiza una operación similar a la anterior para obtener los recuentos superiores para cada grupo de edad.</p></li>
+<li><p><strong>Cálculo de la Suma de Recuentos Predichos para Grupos de Edad en PROV_1</strong>: Calcula la suma de los recuentos predichos para cada grupo de edad en “PROV_1”. Esto se realiza mediante la función <code>rowSums</code>, que suma los valores de cada fila en las columnas correspondientes a grupos de edad.</p></li>
+<li><p><strong>Cálculo de la Suma de Recuentos Predichos en PROV_1</strong>: Calcula la suma de los recuentos predichos en “PROV_1” sumando la columna “pred_conteos”.</p></li>
+<li><p><strong>Cálculo de la Suma de Límites Inferiores de Recuentos Predichos en PROV_1</strong>: Calcula la suma de los límites inferiores de los recuentos predichos en “PROV_1” sumando la columna “MEInf_pred_conteos”.</p></li>
+<li><p><strong>Cálculo de la Suma de Límites Superiores de Recuentos Predichos en PROV_1</strong>: Calcula la suma de los límites superiores de los recuentos predichos en “PROV_1” sumando la columna “MESup_pred_conteos”.</p></li>
+</ol>
+<p>Ten en cuenta que el código está etiquetado se repite para cada una delas provincias.</p>
 <ul>
 <li>PROV_ID = 1</li>
 </ul>
@@ -532,6 +544,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Algunas validaciones</li>
 </ul>
+<p>Este fragmento de código lleva a cabo las siguientes acciones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Filtrado y Recopilación de Datos para Todas las Provincias con Información Faltante (Missing Information)</strong>: Filtra los datos de censo para todas las provincias donde el valor de la columna “greenpoint2” corresponde a uno de los siguientes: “Sin informacion pero n&gt;=0” o “Sin informacion pero n&gt;0”. Los resultados se almacenan en un nuevo DataFrame llamado “PROV_todas”.</p></li>
+<li><p><strong>Cálculo de Sumas por Fila y Suma Total de Recuentos Predichos para Provincias con Información Faltante</strong>: Utiliza la función <code>rowSums</code> para calcular las sumas por fila de los valores en las columnas correspondientes a grupos de edad en “PROV_todas”. Luego, calcula la suma total de los recuentos predichos sumando la columna “pred_conteos” en “PROV_todas”.</p></li>
+<li><p><strong>Filtrado de Datos para Provincias con Información del Censo Completa (Censada)</strong>: Filtra los datos de censo para todas las provincias donde el valor de la columna “greenpoint2” no corresponde a “Sin informacion pero n&gt;=0” ni “Sin informacion pero n&gt;0”. Los resultados se almacenan en un nuevo DataFrame llamado “PROV_censada”.</p></li>
+</ol>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="resultados-por-provincias.html#cb120-1" tabindex="-1"></a><span class="co"># Filter and gather data for all provinces with missing information</span></span>
 <span id="cb120-2"><a href="resultados-por-provincias.html#cb120-2" tabindex="-1"></a>PROV_todas <span class="ot">&lt;-</span></span>
 <span id="cb120-3"><a href="resultados-por-provincias.html#cb120-3" tabindex="-1"></a>  censo_vivienda_pred <span class="sc">%&gt;%</span> <span class="fu">filter</span>(greenpoint2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Sin informacion pero n&gt;=0&quot;</span>,</span>
@@ -549,6 +567,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Inicializar columnas para los límites inferior y superior de los recuentos previstos</li>
 </ul>
+<p>Este fragmento de código realiza las siguientes acciones:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Inicialización de Columnas para Límites Inferiores y Superiores de Recuentos Predichos en Provincias con Censo Completo</strong>: Asigna valores iniciales de cero a las columnas correspondientes a los límites inferiores (MEInf) y superiores (MESup) de los recuentos predichos en el DataFrame “PROV_censada”. Estas columnas se inicializan con ceros.</p></li>
+<li><p><strong>Combinación de DataFrames para Grupos de Edad</strong>: Combina los DataFrames de “PROV_censada” (provincias con censos completos) y “prov_sin_informacion” (provincias con información faltante) para cada grupo de edad. Los resultados se almacenan en un nuevo DataFrame llamado “censo_vivienda_grupo_edad”. Este nuevo DataFrame incluye las columnas “un_ID” (identificador único de vivienda), “var_grupo” (grupo de edad) y las columnas “var_grupo_MEInf” y “var_grupo_MESup” que representan los límites inferior y superior de los recuentos predichos.</p></li>
+<li><p><strong>Unión Interna de Datos del Censo con Datos Agrupados por Grupos de Edad</strong>: Realiza una unión interna (inner join) entre los datos de censo originales (almacenados en un archivo RDS) y los datos del DataFrame “censo_vivienda_grupo_edad”. Esto agrega la información de los límites inferiores y superiores de los recuentos predichos al conjunto de datos del censo original. El resultado de esta unión se almacena en un nuevo archivo RDS llamado “05_censo_vivienda_personas_grupo_edad.rds”.</p></li>
+</ol>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="resultados-por-provincias.html#cb121-1" tabindex="-1"></a><span class="co"># in provinces with complete census</span></span>
 <span id="cb121-2"><a href="resultados-por-provincias.html#cb121-2" tabindex="-1"></a>PROV_censada[,<span class="fu">paste0</span>(var_grupo, <span class="st">&quot;_MEInf&quot;</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb121-3"><a href="resultados-por-provincias.html#cb121-3" tabindex="-1"></a>PROV_censada[,<span class="fu">paste0</span>(var_grupo, <span class="st">&quot;_MESup&quot;</span>)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>

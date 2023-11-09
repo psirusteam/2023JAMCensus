@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="resultados-por-provincias.html"/>
-<link rel="next" href="prediction-of-the-unoccupied-household-rate.html"/>
+<link rel="next" href="predicción-del-porcentaje-de-viviendas-desocupadas.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Workshop on Capacity Building Installation</a></li>
+<li><a href="./">Modelos multinivel para el conteno de personas</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Material del taller</a></li>
@@ -229,13 +229,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html"><i class="fa fa-check"></i><b>11</b> Estimaciones Agregadas</a>
 <ul>
-<li class="chapter" data-level="" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#reading-the-census-data."><i class="fa fa-check"></i>Reading the census data.</a></li>
-<li class="chapter" data-level="11.1" data-path="prediction-of-the-unoccupied-household-rate.html"><a href="prediction-of-the-unoccupied-household-rate.html"><i class="fa fa-check"></i><b>11.1</b> Prediction of the unoccupied household rate</a></li>
+<li class="chapter" data-level="11.0.1" data-path="estimaciones-agregadas.html"><a href="estimaciones-agregadas.html#leyendo-la-base-del-censo"><i class="fa fa-check"></i><b>11.0.1</b> Leyendo la base del censo</a></li>
+<li class="chapter" data-level="11.1" data-path="predicción-del-porcentaje-de-viviendas-desocupadas.html"><a href="predicción-del-porcentaje-de-viviendas-desocupadas.html"><i class="fa fa-check"></i><b>11.1</b> Predicción del porcentaje de viviendas desocupadas</a></li>
 <li class="chapter" data-level="11.2" data-path="predicción-del-total-de-personas.html"><a href="predicción-del-total-de-personas.html"><i class="fa fa-check"></i><b>11.2</b> Predicción del total de personas</a></li>
 <li class="chapter" data-level="11.3" data-path="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><a href="predicción-del-total-de-personas-por-rango-de-edad-y-sexo.html"><i class="fa fa-check"></i><b>11.3</b> Predicción del total de personas por rango de edad y sexo</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a Workshop on Capacity Building Installation </a></li>
+<li><a Modelos multinivel para el conteno de personas </a></li>
 
 </ul>
 
@@ -270,15 +270,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="page-break-after: always;"></div>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="estimaciones-agregadas.html#cb123-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\f</span><span class="st">&quot;</span>)</span></code></pre></div>
 <p>
-- <strong>plot_densidad</strong>: Esta función grafica la densidad de una distribución normal con una media y desviación estándar especificadas. Además, resalta un intervalo específico de la distribución con un área sombreada y segmentos en el gráfico.</p>
+- <strong>plot_densidad</strong>: Esta función gráfica la densidad de una distribución normal con una media y desviación estándar especificadas. Además, resalta un intervalo específico de la distribución con un área sombreada y segmentos en el gráfico.</p>
 <ul>
 <li><p><strong>Pred_desocupado</strong>: Esta función realiza cálculos y visualizaciones relacionados con los datos de desempleo en un censo.</p></li>
 <li><p><strong>Pred_totPob</strong>: Esta función realiza cálculos y visualizaciones relacionados con los datos de población total en un censo.</p></li>
 <li><p><strong>plot_piramide_pob</strong>: Genera un gráfico de pirámide de población con barras e intervalos de confianza.</p></li>
 <li><p><strong>piramide_pob</strong>: Calcula y visualiza la pirámide de población a partir de los datos del censo.</p></li>
 </ul>
-<div id="reading-the-census-data." class="section level3 unnumbered hasAnchor">
-<h3>Reading the census data.<a href="estimaciones-agregadas.html#reading-the-census-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="leyendo-la-base-del-censo" class="section level3 hasAnchor" number="11.0.1">
+<h3><span class="header-section-number">11.0.1</span> Leyendo la base del censo<a href="estimaciones-agregadas.html#leyendo-la-base-del-censo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="estimaciones-agregadas.html#cb124-1" tabindex="-1"></a>censo_vivienda <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;Recursos/07_Resultados/Data/05_censo_vivienda_personas_grupo_edad.rds&quot;</span>)</span></code></pre></div>
 </div>
 </div>
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="resultados-por-provincias.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="prediction-of-the-unoccupied-household-rate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="predicción-del-porcentaje-de-viviendas-desocupadas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
