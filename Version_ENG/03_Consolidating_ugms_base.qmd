@@ -8,8 +8,6 @@ library(kableExtra)
 library(tidyverse)
 library(magrittr)
 rstan::rstan_options(auto_write = TRUE) # speed up running time 
-# Clear the workspace by removing all variables
-rm(list = ls())
 tba <- function(dat, cap = NA){
   kable(dat,
       format = "html", digits =  4,
@@ -20,16 +18,18 @@ tba <- function(dat, cap = NA){
 ```
 
 
-# Estandarización y validación de covariables
+# Standardization and validation of covariates                    
 
-De manera similar a cómo las variables del censo se sometieron a un proceso de validación, el conjunto de covariables se somete a un procedimiento similar. Esto implica asegurar la uniformidad en la longitud de los identificadores, como UGM, cantones, regiones, etc. Además, se realiza una validación para identificar valores faltantes (NAs) en el conjunto de datos. A continuación, se realiza un análisis descriptivo de los datos.
+Similarly, just as the census variables underwent a validation process, the covariates dataset is subject to a similar procedure. This involves ensuring uniformity in the length of identifiers such as UGM, Cantos, regions, etc. Additionally, a validation is conducted to identify any missing values (NAs) in the dataset. Following this, a descriptive analysis is performed on the data.
 
-## Preparación del entorno y carga de bibliotecas
 
-Este código es responsable de revisar y mejorar los datos que tenemos. Primero, borra cualquier cosa que tengamos en la memoria. Luego, carga algunas herramientas especiales que vamos a utilizar. Después, lee información sobre el censo y las áreas geográficas.
+## Environment Preparation and Library Loading
 
+This code is responsible for reviewing and improving the data we have. First, it clears anything we have in memory. Then, it loads some special tools that we are going to use. After that, it reads information about the census and geographic areas.
 
 ```{r}
+# Clear the workspace by removing all variables
+rm(list = ls())
 
 #################
 ### Libraries ###
@@ -59,9 +59,10 @@ n_distinct(Base_ugms$UGM_ID) # Not all UGMs have houses
 #50760
 ```
 
-## Valores descriptivos de la base de UGMs
 
-Comenzamos creando un marco de datos resumen que incluye los nombres de las columnas y sus tipos de datos correspondientes. Posteriormente, mejoramos este resumen agregando una columna que indica el tipo de dato de cada columna, lo que se logra mediante el uso de la función map_chr en los nombres de las columnas y sus datos correspondientes.
+## Descriptive values of the UGMS base
+
+We begin by creating a summary dataframe that includes the column names and their corresponding data types. Subsequently, we enhance this summary by adding a column indicating the data type of each column, achieved through the use of the map_chr function on the column names and their corresponding data.
 
 ```{r, eval=TRUE}
 # Create a summary dataframe with column names and their data types
@@ -69,7 +70,7 @@ resumen <- data.frame(Nombre_Columna = names(Base_ugms))
 resumen %<>% mutate(tipo = map_chr(Nombre_Columna, function(x)class(Base_ugms[[x]])))
 ```
 
--   Variables numéricas 
+-   Numeric Variables 
 
 ```{r, eval=TRUE}
 # Calculate maximum values for numeric and integer columns
@@ -103,7 +104,7 @@ nas_values <- Base_ugms %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 ```
 
--   Variables tipo carácter
+-   Character Variables
 
 ```{r, eval=TRUE}
 # Calculate maximum lengths of characters for character columns
@@ -122,7 +123,7 @@ nas_values_char <- Base_ugms %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas_char")
 ```
 
--  Organizando resultados en una base de datos
+-   Organizing results in a database.
 
 ```{r, eval=TRUE}
 # Combine all results into a single dataframe
@@ -149,7 +150,7 @@ resumen2 %>% head(10) %>% tba()
 
 ```
 
--  Selección de variables de intrés
+-   Variables of interest
 
 ```{r, eval=TRUE}
 Nombre_Columna <- c(
@@ -191,7 +192,7 @@ Nombre_Columna <- c(
   "ugm_sin_info")
 ```
 
--   Cambiando la naturaleza de las variables 
+-   Changing the type of variables
 
 ```{r, eval=TRUE}
 Tipo_actualizar <- c(
@@ -233,7 +234,7 @@ Tipo_actualizar <- c(
   as.character)
 ```
 
--   Actualizar los tipos de columna basados en `Nombre_Columna` y `Tipo_actualizar`.
+-   Update column types based on Nombre_Columna and Tipo_actualizar
 
 ```{r, eval=TRUE}
 paso <- map2(Nombre_Columna, Tipo_actualizar, function(nom, tipo) {
@@ -242,7 +243,7 @@ paso <- map2(Nombre_Columna, Tipo_actualizar, function(nom, tipo) {
 })
 ```
 
--   Crear un `data.frame` resumen con los nombres de las columnas y sus tipos de datos.
+-   Create a summary dataframe with column names and their data types
 
 ```{r, eval=TRUE}
 resumen <- data.frame(Nombre_Columna = names(Base_ugms))
@@ -256,7 +257,7 @@ Base_ugms[, tipo_char] %>%
   head(10) %>% tba()
 ```
 
-### Estandarización de variables y unión de conjuntos de datos.
+### Standardizing Variables and Joining Datasets
 
 ```{r, eval=TRUE}
 # Loop through character variables
@@ -273,7 +274,7 @@ Base_ugms_censo[, tipo_char] %>%
   head(10) %>% tba()
 ```
 
--   Calcular el conteo de valores faltantes.
+-   Calculate the counts of missing 
 
 ```{r, eval=TRUE}
 # Calculate the counts of missing values for numeric variables
@@ -287,21 +288,21 @@ nas_values2 <- Base_ugms_censo %>%
   pivot_longer(everything(), names_to = "Nombre_Columna", values_to = "Num_nas")
 ```
 
--   Removiendo columnas adicionales de la base. 
+-   Remove specific columns from the dataset
 
 ```{r, eval=TRUE}
 Base_ugms_censo$dist_poblacion_rup <- NULL
 Base_ugms_censo$dist_matricula_educacion_secundaria_2021 <- NULL
 ```
 
-### Estandarizar las variables numéricas utilizando la escala de puntuación z (z-score).
+### Standardize numeric variables using z-score scaling
 
 ```{r, eval=TRUE}
 Base_ugms_censo <- Base_ugms_censo %>% 
   mutate_if(is.numeric, function(x) as.numeric(scale(x)))
 ```
 
--   Guardando la base estandarizada. 
+-   Save the standardized dataset  
 
 ```{r, eval=FALSE}
 saveRDS(Base_ugms_censo, "Recursos/03_Input_Validation_Cov/Data/Base_ugms_estandarizada.rds")

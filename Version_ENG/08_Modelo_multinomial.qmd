@@ -1,0 +1,99 @@
+```{r setup, include=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  cache = TRUE)
+library(kableExtra)
+library(tidyverse)
+library(magrittr)
+rstan::rstan_options(auto_write = TRUE) # speed up running time 
+tba <- function(dat, cap = NA){
+  kable(dat,
+      format = "html", digits =  4,
+      caption = cap) %>% 
+     kable_styling(bootstrap_options = "striped", full_width = F)%>%
+         kable_classic(full_width = F, html_font = "Arial Narrow")
+}
+```
+
+
+# Multinomial model for estimating people by age range and sex
+
+In the final step, we model the demographic structure of Small Geographic Units (UGMs) at the province level. This structure consists of 40 subgroups based on the combination of gender and age groups. To estimate the demographics of unobserved households, we make use of conditional prediction based on the outcomes from the previous step.
+
+Given the nature of the phenomenon under study, a multinomial distribution is considered suitable for the count of individuals across the 40 groups. Here's an explanation of the model:
+
+- \(G_i\) follows a Multinomial distribution \(Multinomial(p_{G_i})\).
+- The log-odds of \(p_{G_i}\) are modeled by \(x_i^' \beta\).
+
+In this context, \(G_i\) represents the count for each of the forty demographic groups. \(p_{G_i}\) is a vector of size 40 containing the probabilities that a person classified in each group resides in a household.
+
+
+-   Cleaning R environment
+The code removes all objects from the current R environment, ensuring a clean slate for the subsequent operations.
+
+```{r}
+# Clearing the R environment by removing all variables from memory.
+rm(list = ls())
+# Loading necessary libraries for data analysis.
+library(tidyverse)   # Data manipulation and visualization
+library(data.table)  # Fast data manipulation
+library(openxlsx)    # Reading Excel files
+library(magrittr)    # Pipe operator
+library(lme4)        # For fitting linear mixed-effects models
+library(nnet)        # For fitting neural networks
+cat("\f")  # Clears console output
+```
+
+-   Data Reading
+
+```{r}
+# Reading the preprocessed census data file containing information about households.
+censo_vivienda <- readRDS("Recursos/06_Model_Multinomial/Data/02_censo_vivienda_personas.rds") 
+
+# Filtering the census data to retain relevant columns for age and gender analysis.
+censo_vivienda_age_gender <- censo_vivienda %>% 
+  filter( !greenpoint2 %in% c("Sin informacion pero  n>0", 
+                              "Sin informacion pero n>=0")) %>% 
+  dplyr::select(PROV_ID, HOMBRES_GRUPO1_sum:MUJERES_GRUPO20_sum)
+```
+
+-   Data Preparation:
+
+    The code creates a new dataset censo_vivienda_edad_sexo by filtering out specific entries from censo_vivienda. It selects columns related to age and gender groups and provinces. This filtered dataset is then aggregated at the PROV_ID level using the summarise_if function.
+
+```{r}
+# Summarizing the age and gender data by grouping it based on province (PROV_ID).
+censo_personas <- censo_vivienda_age_gender %>% 
+  group_by(PROV_ID) %>% 
+  summarise_if(is.numeric, sum)
+```
+
+-   Multinomial Model:
+
+    A multinomial model is created using the `multinom` function. It predicts the distribution of age and gender groups within households based on the province (`PROV_ID`). The model is stored in the variable `model`.
+
+```{r}
+# Fitting a multinomial model to estimate the distribution of age and gender within households,
+# using province as the predictor.
+model <- multinom( censo_personas[,-1] %>% as.matrix() ~ censo_personas$PROV_ID)
+```
+
+-   Model Prediction
+
+    The `predict` function is used to predict the distribution probabilities for the multinomial model. The prediction results are not displayed here but can be obtained using the `predict` function.
+
+```{r, eval=FALSE}
+# Predicting the distribution probabilities using the fitted model.
+predict(model,type = "probs")
+```
+-   Saving Model
+
+    The trained multinomial model is saved as an RDS file ("Recursos/06_Model_Multinomial/Data/Modelo_multinomial.rds") using the `saveRDS` function.
+
+```{r, eval=FALSE}
+# Saving the fitted multinomial model to a file.
+saveRDS(model, "Recursos/06_Model_Multinomial/Data/Multinomial_model.rds")
+```
+

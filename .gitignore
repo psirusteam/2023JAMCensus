@@ -2,3 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
+.git/objects/06/824f69e91385d60cd98eca753f336cc8657556
+.git/objects/27/647e3987cd4e994705f23c2f46344a1d6eb2b2
+.git/objects/d7/100c99645aad0c51d3d4aec2a4a095271eadab
+.git/objects/e9/360138f111751b8ca257a5bde02af917524570
+.git/objects/fa/f38d9ab0e9be2f4a5931f8ab30c649d5be3806
+Recursos/04_Model_binomial/Data/pred_unoccupied.rds
+Recursos/05_Model_for_people/Data/fit_poisson_ocupadas.rds
+Recursos/05_Model_for_people/Data/fit_poisson_todas.rds
+Recursos/06_Model_Multinomial/Data/05_censo_vivienda_personas_grupo_edad.rds
+Recursos/07_Resultados/Data/05_censo_vivienda_personas_grupo_edad.rds
+_bookdown_files/10.Demographic_analysis_cache/html/unnamed-chunk-2_5dbd7fdf52e53d00b057e85cde2fd389.rdb

@@ -7,8 +7,6 @@ knitr::opts_chunk$set(
 library(kableExtra)
 library(tidyverse)
 library(magrittr)
-### Cleaning R environment ###
-rm(list = ls())
 rstan::rstan_options(auto_write = TRUE) # speed up running time 
 tba <- function(dat, cap = NA){
   kable(dat,
@@ -21,13 +19,13 @@ tba <- function(dat, cap = NA){
 
 
 
-# Estimaciones Agregadas
+# Aggregated Estimations
 
-En esta sección, ilustramos la metodología empleada para obtener estimaciones en varios niveles de agregación, utilizando un conjunto de funciones personalizadas adaptadas a este conjunto de datos específico. Estas funciones facilitan el proceso de generar predicciones y visualizaciones, lo que nos permite analizar de manera efectiva las estimaciones de población.
-
+In this section, we illustrate the methodology employed to derive estimations for various aggregation levels, utilizing a set of custom functions tailored to this specific dataset. These functions facilitate the process of generating predictions and visualizations, allowing us to effectively analyze population estimates.
 
 ```{r}
-
+### Cleaning R environment ###
+rm(list = ls())
 
 ### Libraries ###
 
@@ -41,15 +39,17 @@ library(rstanarm)
 source("Recursos/07_Resultados/Rcodes/01_Agregados.R")
 cat("\f")
 ```
-- **plot_densidad**: Esta función grafica la densidad de una distribución normal con una media y desviación estándar especificadas. Además, resalta un intervalo específico de la distribución con un área sombreada y segmentos en el gráfico.
 
-- **Pred_desocupado**: Esta función realiza cálculos y visualizaciones relacionados con los datos de desempleo en un censo.
+-   **plot_densidad**: This function plots the density of a normal distribution with specified mean and standard deviation.
+#' Additionally, it highlights a specific interval of the distribution with shaded area and segments in the plot.
 
-- **Pred_totPob**: Esta función realiza cálculos y visualizaciones relacionados con los datos de población total en un censo.
+-   **Pred_desocupado**:  This function performs calculations and visualizations related to unemployment data in a census.
 
-- **plot_piramide_pob**: Genera un gráfico de pirámide de población con barras e intervalos de confianza.
+-   **Pred_totPob**:  This function performs calculations and visualizations related to total population data in a census.
 
-- **piramide_pob**: Calcula y visualiza la pirámide de población a partir de los datos del censo.
+-   **plot_piramide_pob**: Generates a population pyramid plot with bars and confidence intervals.
+
+-   **piramide_pob**:  Calculates and visualizes the population pyramid from census data.
 
 
 ### Reading the census data.{-}
@@ -94,7 +94,7 @@ p1 <- Pred_desocupado(censo_vivienda,
 tba(p1)
 ```
 
-## Predicción del total de personas
+## Total Population Prediction
 
 ```{r}
 ## National level result
@@ -147,7 +147,7 @@ p1 <- Pred_totPob(censo_vivienda,
 tba(p1)
 ```
 
-## Predicción del total de personas por rango de edad y sexo
+## Prediction of Total Population by Age and Gender
 
 ```{r}
 piramide_pob(

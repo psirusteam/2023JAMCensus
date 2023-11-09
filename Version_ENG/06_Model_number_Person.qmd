@@ -8,8 +8,6 @@ library(kableExtra)
 library(tidyverse)
 library(magrittr)
 rstan::rstan_options(auto_write = TRUE) # speed up running time 
-# Clear the workspace by removing all variables
-rm(list = ls())
 tba <- function(dat, cap = NA){
   kable(dat,
       format = "html", digits =  4,
@@ -20,10 +18,14 @@ tba <- function(dat, cap = NA){
 ```
 
 
-# Estimación del número de personas por hogar
+# Estimation of the number of people per household
 
 
 ```{r,eval = FALSE}
+### Cleaning R environment ###
+# Clear the workspace by removing all variables
+rm(list = ls())
+
 ### Libraries ###
 # Load required libraries
 library(tidyverse)  # For data manipulation and visualization
@@ -37,7 +39,7 @@ cat("\f")  # Clear the console
 
 ```
 
-## Lectura de los datos del censo.
+## Reading the census data.
 
 ```{r,eval = FALSE}
 # Read census data from the 'censo_viviendas.rds' file
@@ -46,7 +48,7 @@ censo_vivienda <- readRDS("Recursos/05_Model_for_people/Data/censo_viviendas.rds
 Base_ugms <- readRDS("Recursos/05_Model_for_people/Data/Base_ugms_estandarizada.rds")
 ```
 
-## Preparando datos para el Modelo 1
+## Preparing data for Model 1 
 
 
 ```{r,eval = FALSE}
@@ -69,7 +71,7 @@ base_ugm_estima_todas <-
 nrow(base_ugm_estima_todas)
 ```
 
-- Ajustar un modelo Stan GLM para estimar las medias de la población total
+-   Fit a Stan GLM model to estimate total population means
 
 ```{r,eval = FALSE}
 # Estimated time of 2 to 3 hours
@@ -110,7 +112,7 @@ saveRDS(modelo_todas,
         "Recursos/05_Model_for_people/Data/fit_poisson_todas.rds")
 ```
 
-## Preparando datos para el Modelo 2
+## Preparing data for Model 2 
 
 ```{r,eval = FALSE}
 # Calculate the mean of total persons per UGM for occupied households
@@ -132,7 +134,7 @@ base_ugm_estima_ocupadas <-
 nrow(base_ugm_estima_ocupadas)
 ```
 
-- Instalar un modelo Stan GLM para viviendas ocupadas.
+-   Fit a Stan GLM model for occupied households
 
 ```{r,eval = FALSE}
 modelo_ocupadas  <- glm(

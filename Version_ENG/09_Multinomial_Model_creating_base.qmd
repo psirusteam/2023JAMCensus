@@ -1,4 +1,4 @@
-# Creando la base censal con predicciones del modelo multinomial
+# Creating the census base with predictions from the multinomial model 
 
 ```{r, eval=FALSE}
 ### Cleaning R environment ###
@@ -39,7 +39,7 @@ sum(censo_vivienda_pred$pred_conteos)
 var_grupo <- grep(x = names(censo_vivienda_pred), pattern = "*_GRUPO\\d{,2}_sum$", value = TRUE)
 ```
 
-## Resultados por Provincias
+## Results by Provinces
 
 -    PROV_ID = 1
 
@@ -316,7 +316,7 @@ sum(PROV_7[, paste0(var_grupo, "_MESup")])
 sum(PROV_7$MESup_pred_conteos)
 ```
 
-- Combinar los resultados de las provincias con información faltante.
+-   Combine data frames of provinces with missing information
 
 ```{r, eval=FALSE}
 prov_sin_informacion <-
@@ -330,7 +330,7 @@ prov_sin_informacion <-
     PROV_7) %>% bind_rows()
 ```
 
-- Algunas validaciones
+-   some validations
 
 ```{r, eval=FALSE}
 # Filter and gather data for all provinces with missing information
@@ -349,7 +349,7 @@ PROV_censada <-
                                                      "Sin informacion pero  n>0"))
 ```
 
-- Inicializar columnas para los límites inferior y superior de los recuentos previstos
+-   Initialize columns for lower and upper bounds of predicted counts
 
 ```{r, eval=FALSE}
 # in provinces with complete census

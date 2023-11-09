@@ -9,8 +9,6 @@ library(kableExtra)
 library(tidyverse)
 library(magrittr)
 rstan::rstan_options(auto_write = TRUE) # speed up running time 
-### Cleaning R environment ###
-rm(list = ls())
 tba <- function(dat, cap = NA){
   kable(dat,
       format = "html", digits =  4,
@@ -20,9 +18,12 @@ tba <- function(dat, cap = NA){
 }
 ```
 
-# Consolidar el número de personas por hogar
+# consolidating the number of people per household
 
 ```{r, eval=FALSE}
+### Cleaning R environment ###
+rm(list = ls())
+
 #################
 ### Libraries ###
 #################
@@ -37,7 +38,7 @@ library(merTools)
 cat("\f")
 ```
 
-- Leer datos y modelos censales.
+-   Read census data and models. 
 
 ```{r, eval=FALSE}
 censo_vivienda <-
@@ -50,7 +51,7 @@ modelo_ocupadas <-
   readRDS("Recursos/05_Model_for_people/Data/fit_poisson_ocupadas.rds")
 ```
 
-- Hacer predicciones utilizando los modelos.
+-   Make predictions using the models
 
 ```{r, eval=FALSE}
 pred_todas <- predict(modelo_todas,
@@ -85,7 +86,7 @@ summary(Base_ugms$pred_todas)
 summary(Base_ugms$pred_ocupadas)
 ```
 
-- Fusionar información del censo con predicciones.
+-   Merge census information with predictions
 
 ```{r, eval=FALSE}
 censo_temp <- censo_vivienda %>%
@@ -110,7 +111,7 @@ censo_temp <- censo_vivienda %>%
   )
 ```
 
-- Calcular la suma de las predicciones.
+-   Calculate sum of predictions
 
 ```{r, eval=FALSE}
 sum(censo_temp$pred_conteos)
@@ -130,7 +131,7 @@ censo_temp %>% filter(greenpoint2  == "Sin informacion pero n>=0" ) %>%
   View()
 ```
 
-- Guardar información consolidada en un archivo.
+-   Save consolidated information to a file
 
 ```{r, eval=FALSE}
 saveRDS(censo_temp, 

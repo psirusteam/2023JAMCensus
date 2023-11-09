@@ -1,0 +1,42 @@
+book_filename: "Area Model Methodologies for Census Person Count Imputation"
+delete_merged_file: true
+output_dir: "docs"
+new_session: yes
+
+rmd_files: [
+  "index.Rmd",
+  "00_Installing_rstan.qmd",
+  "01_Standardizing_the_Census.qmd",
+  "02_Housing_Census_Filters.qmd",
+  "03_Consolidating_ugms_base.qmd",
+  "04_Binomial_Housing_Model.qmd",
+  "05_Consolidating_the_vacant_housing_census.qmd",
+  "06_Model_number_Person.qmd",
+  "07_Consolidated_Person_Number.qmd",
+  "08_Modelo_multinomial.qmd",
+  "09_Multinomial_Model_creating_base.qmd",
+  "10.Demographic_analysis.qmd"
+]
+
+language:
+  label:
+    fig: 'Figura '
+    tab: 'Tabla '
+    eq: 'Equación '
+    thm: 'Teorema '
+    lem: 'Lema '
+    cor: 'Corolario '
+    prp: 'Resultado '
+    cnj: 'Conjectura '
+    def: 'Definición '
+    exm: 'Ejemplo '
+    exr: 'Ejercicio '
+    hyp: 'Hipótesis '
+    proof: 'Prueba. '
+    remark: 'Comentario. '
+    solution: 'Solución. '
+  ui:
+    edit: Edit
+    chapter_name: 'Chapter '
+    appendix_name: 'Apéndice '
+    refs_names: 'Referencias '
