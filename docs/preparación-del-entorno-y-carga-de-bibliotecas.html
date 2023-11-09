@@ -257,20 +257,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preparación-del-entorno-y-carga-de-bibliotecas" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Preparación del entorno y carga de bibliotecas<a href="preparación-del-entorno-y-carga-de-bibliotecas.html#preparación-del-entorno-y-carga-de-bibliotecas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Este código es responsable de revisar y mejorar los datos que tenemos. Primero, borra cualquier cosa que tengamos en la memoria. Luego, carga algunas herramientas especiales que vamos a utilizar. Después, lee información sobre el censo y las áreas geográficas.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-1" tabindex="-1"></a><span class="co"># Clear the workspace by removing all variables</span></span>
-<span id="cb51-2"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb51-3"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-3" tabindex="-1"></a></span>
-<span id="cb51-4"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-4" tabindex="-1"></a><span class="do">#################</span></span>
-<span id="cb51-5"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-5" tabindex="-1"></a><span class="do">### Libraries </span><span class="al">###</span></span>
-<span id="cb51-6"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-6" tabindex="-1"></a><span class="do">#################</span></span>
-<span id="cb51-7"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-7" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb51-8"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-8" tabindex="-1"></a><span class="fu">library</span>(tidyverse)      <span class="co"># For data manipulation and visualization</span></span>
-<span id="cb51-9"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-9" tabindex="-1"></a><span class="fu">library</span>(data.table)     <span class="co"># For efficient data manipulation</span></span>
-<span id="cb51-10"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-10" tabindex="-1"></a><span class="fu">library</span>(openxlsx)       <span class="co"># For reading Excel files</span></span>
-<span id="cb51-11"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-11" tabindex="-1"></a><span class="fu">library</span>(magrittr)       <span class="co"># For data handling operations</span></span>
-<span id="cb51-12"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-12" tabindex="-1"></a></span>
-<span id="cb51-13"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-13" tabindex="-1"></a><span class="co"># Clear the console</span></span>
-<span id="cb51-14"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-14" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\f</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-1" tabindex="-1"></a><span class="do">#################</span></span>
+<span id="cb51-2"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-2" tabindex="-1"></a><span class="do">### Libraries </span><span class="al">###</span></span>
+<span id="cb51-3"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-3" tabindex="-1"></a><span class="do">#################</span></span>
+<span id="cb51-4"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-4" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb51-5"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-5" tabindex="-1"></a><span class="fu">library</span>(tidyverse)      <span class="co"># For data manipulation and visualization</span></span>
+<span id="cb51-6"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-6" tabindex="-1"></a><span class="fu">library</span>(data.table)     <span class="co"># For efficient data manipulation</span></span>
+<span id="cb51-7"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-7" tabindex="-1"></a><span class="fu">library</span>(openxlsx)       <span class="co"># For reading Excel files</span></span>
+<span id="cb51-8"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-8" tabindex="-1"></a><span class="fu">library</span>(magrittr)       <span class="co"># For data handling operations</span></span>
+<span id="cb51-9"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-9" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-10" tabindex="-1"></a><span class="co"># Clear the console</span></span>
+<span id="cb51-11"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb51-11" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\f</span><span class="st">&quot;</span>)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb52-1" tabindex="-1"></a><span class="do">## Reading census data.</span></span>
 <span id="cb52-2"><a href="preparación-del-entorno-y-carga-de-bibliotecas.html#cb52-2" tabindex="-1"></a><span class="co"># Load the &#39;censo_viviendas.rds&#39; file containing census data</span></span>

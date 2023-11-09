@@ -12,9 +12,6 @@ Este código es responsable de revisar y mejorar los datos que tenemos. Primero,
 
 
 ```r
-# Clear the workspace by removing all variables
-rm(list = ls())
-
 #################
 ### Libraries ###
 #################

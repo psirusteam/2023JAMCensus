@@ -257,19 +257,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="estimaciones-agregadas" class="section level1 hasAnchor" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Estimaciones Agregadas<a href="estimaciones-agregadas.html#estimaciones-agregadas" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>En esta sección, ilustramos la metodología empleada para obtener estimaciones en varios niveles de agregación, utilizando un conjunto de funciones personalizadas adaptadas a este conjunto de datos específico. Estas funciones facilitan el proceso de generar predicciones y visualizaciones, lo que nos permite analizar de manera efectiva las estimaciones de población.</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="estimaciones-agregadas.html#cb122-1" tabindex="-1"></a><span class="do">### Cleaning R environment </span><span class="al">###</span></span>
-<span id="cb122-2"><a href="estimaciones-agregadas.html#cb122-2" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb122-3"><a href="estimaciones-agregadas.html#cb122-3" tabindex="-1"></a></span>
-<span id="cb122-4"><a href="estimaciones-agregadas.html#cb122-4" tabindex="-1"></a><span class="do">### Libraries </span><span class="al">###</span></span>
-<span id="cb122-5"><a href="estimaciones-agregadas.html#cb122-5" tabindex="-1"></a></span>
-<span id="cb122-6"><a href="estimaciones-agregadas.html#cb122-6" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb122-7"><a href="estimaciones-agregadas.html#cb122-7" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb122-8"><a href="estimaciones-agregadas.html#cb122-8" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb122-9"><a href="estimaciones-agregadas.html#cb122-9" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb122-10"><a href="estimaciones-agregadas.html#cb122-10" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb122-11"><a href="estimaciones-agregadas.html#cb122-11" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
-<span id="cb122-12"><a href="estimaciones-agregadas.html#cb122-12" tabindex="-1"></a><span class="fu">library</span>(rstanarm)</span>
-<span id="cb122-13"><a href="estimaciones-agregadas.html#cb122-13" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Recursos/07_Resultados/Rcodes/01_Agregados.R&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="estimaciones-agregadas.html#cb122-1" tabindex="-1"></a><span class="do">### Libraries </span><span class="al">###</span></span>
+<span id="cb122-2"><a href="estimaciones-agregadas.html#cb122-2" tabindex="-1"></a></span>
+<span id="cb122-3"><a href="estimaciones-agregadas.html#cb122-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb122-4"><a href="estimaciones-agregadas.html#cb122-4" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb122-5"><a href="estimaciones-agregadas.html#cb122-5" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb122-6"><a href="estimaciones-agregadas.html#cb122-6" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb122-7"><a href="estimaciones-agregadas.html#cb122-7" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb122-8"><a href="estimaciones-agregadas.html#cb122-8" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
+<span id="cb122-9"><a href="estimaciones-agregadas.html#cb122-9" tabindex="-1"></a><span class="fu">library</span>(rstanarm)</span>
+<span id="cb122-10"><a href="estimaciones-agregadas.html#cb122-10" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;Recursos/07_Resultados/Rcodes/01_Agregados.R&quot;</span>)</span></code></pre></div>
 <div style="page-break-after: always;"></div>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="estimaciones-agregadas.html#cb123-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\f</span><span class="st">&quot;</span>)</span></code></pre></div>
 <p>

@@ -1849,6 +1849,20 @@ summary1 <- censo4 %>%
    <td style="text-align:right;"> 776478 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> Papel n=0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1334 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Papel n&gt;0 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3500 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 23344 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
@@ -1891,7 +1905,7 @@ summary2 <- censo4 %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Censado con informacion n=0 </td>
-   <td style="text-align:left;"> Entrevista igual a 1 y Número de personas igual a 0 </td>
+   <td style="text-align:left;"> Censado con informacion n=0 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
@@ -1899,15 +1913,31 @@ summary2 <- censo4 %>%
   </tr>
   <tr>
    <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
-   <td style="text-align:left;"> Número de personas mayor a 0 </td>
+   <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 261 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 776478 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> Papel n=0 </td>
+   <td style="text-align:left;"> Censado en papel </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 1334 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Papel n&gt;0 </td>
+   <td style="text-align:left;"> Censado en papel </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 3500 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 23344 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
-   <td style="text-align:left;"> Entrevista  es 3 o 4 </td>
+   <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
    <td style="text-align:right;"> 0 </td>
@@ -1915,27 +1945,11 @@ summary2 <- censo4 %>%
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Criterio WorldPop </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 135370 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Fuera de periodo(20 días) </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 151354 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Sin conteo de personas </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 218308 </td>
-   <td style="text-align:right;"> 218308 </td>
+   <td style="text-align:right;"> 505032 </td>
   </tr>
 </tbody>
 </table>
@@ -1964,38 +1978,38 @@ summary3 <- censo4 %>%
 <tbody>
   <tr>
    <td style="text-align:left;"> Censado con informacion n=0 </td>
-   <td style="text-align:left;"> Entrevista igual a 1 y Número de personas igual a 0 </td>
+   <td style="text-align:left;"> Censado con informacion n=0 </td>
    <td style="text-align:right;"> 175921 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
-   <td style="text-align:left;"> Número de personas mayor a 0 </td>
+   <td style="text-align:left;"> Censado con informacion n&gt;0 </td>
    <td style="text-align:right;"> 776478 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> Papel n=0 </td>
+   <td style="text-align:left;"> Censado en papel </td>
+   <td style="text-align:right;"> 1334 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Papel n&gt;0 </td>
+   <td style="text-align:left;"> Censado en papel </td>
+   <td style="text-align:right;"> 23344 </td>
+   <td style="text-align:right;"> 0 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
-   <td style="text-align:left;"> Entrevista  es 3 o 4 </td>
+   <td style="text-align:left;"> Sin informacion pero  n&gt;0 </td>
    <td style="text-align:right;"> 285810 </td>
    <td style="text-align:right;"> 0 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Criterio WorldPop </td>
-   <td style="text-align:right;"> 135370 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
    <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Fuera de periodo(20 días) </td>
-   <td style="text-align:right;"> 151354 </td>
-   <td style="text-align:right;"> 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> Sin informacion pero n&gt;=0 </td>
-   <td style="text-align:left;"> Sin conteo de personas </td>
-   <td style="text-align:right;"> 218308 </td>
+   <td style="text-align:right;"> 505032 </td>
    <td style="text-align:right;"> 218308 </td>
   </tr>
 </tbody>
